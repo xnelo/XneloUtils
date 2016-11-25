@@ -35,18 +35,18 @@
 
 #include "Testing/OutStreamGenerator.hpp"
 
-#include "Testing/TestSuite.hpp"
+#include <iostream>
 
 namespace XNELO
 {
 	namespace TESTING
 	{
-		OutStreamGenerator::OutStreamGenerator() : IReportGenerator()
+		OutStreamGenerator::OutStreamGenerator() : IReportGenerator(&std::cout), _indent("")
 		{
 			return;
 		}
 
-		OutStreamGenerator::OutStreamGenerator(std::ostream * stream) : IReportGenerator(stream)
+		OutStreamGenerator::OutStreamGenerator(std::ostream * stream) : IReportGenerator(stream), _indent("")
 		{
 			return;
 		}
@@ -56,47 +56,47 @@ namespace XNELO
 			return;
 		}
 
-		void OutStreamGenerator::EndTest()
+		void OutStreamGenerator::StartTestCase(Test * test)
 		{
-			(*_stream) << std::endl;
+			(*_stream) << std::endl << test->GetTestName() << std::endl;
+			(*_stream) << std::string(20, '-') << std::endl;
+			_indent += "   ";
 		}
 
-		void OutStreamGenerator::EndTestSuite()
+		void OutStreamGenerator::EndTestCase(Test * test)
 		{
-			(*_stream) << std::endl;
+			//print test results
+			///*
+			(*_stream) << std::string(20, '-') << std::endl;
+
+			(*_stream) << "Success: " << test->GetNumSuccess() << std::endl <<
+				"Failed:  " << test->GetNumFailed() << std::endl <<
+				"RESULT: " << (test->GetNumFailed() > 0 ? "[FAILED]" : "[PASSED]") << std::endl << std::endl;
+				//*/
+			_indent = _indent.substr(0, _indent.size()-3);
 		}
 
-		void OutStreamGenerator::PrintReportTitle(const char * title)
+		void OutStreamGenerator::FinalizeTestRun(int runNumberSuccess, int runNumberFailures)
 		{
-			(*_stream) << title << std::endl;
+			(*_stream) << std::endl << std::string(20, '=') << std::endl << 
+				"Success: " << runNumberSuccess << std::endl <<
+				"Failed: " << runNumberFailures << std::endl <<
+				"All Tests: " << (runNumberFailures > 0 ? "[FAILED]" : "[PASSED]") << std::endl << std::endl;
+
+
 		}
 
-		void OutStreamGenerator::PrintSuiteStatistics(TestSuite * suite)
+		void OutStreamGenerator::PrintAdditionalString(const char * to_print)
 		{
-			(*_stream) << suite->GetName() << " Statistics\nTests Passed: " << suite->GetPassed()
-				<< "\nTests Failed: " << suite->GetFailed() << "\nTests Total: "
-				<< suite->GetTotalTests() << std::endl;
+			(*_stream) << _indent << to_print << std::endl;
 		}
 
-		void OutStreamGenerator::PrintTestResult(TEST_RESULT * result)
+		void OutStreamGenerator::PrintTestResult(TestResult * result)
 		{
-			(*_stream) << result->name << ": " << (result->passed ? "[PASSED]" : "[FAILED]") << std::endl;
-		}
+			if (result == NULL)
+				return;
 
-		void OutStreamGenerator::PrintTestStatistics(Test * test)
-		{
-			(*_stream) << "Passed: " << test->GetPassed() << "\nFailed: " << test->GetFailed() <<
-				"\nTotal: " << test->GetNumResults() << std::endl;
-		}
-
-		void OutStreamGenerator::StartTest(const char * testName)
-		{
-			(*_stream) << testName << std::endl;
-		}
-
-		void OutStreamGenerator::StartTestSuite(const char * suiteTitle)
-		{
-			(*_stream) << suiteTitle << std::endl;
+			(*_stream) << _indent << result->name << ": " << (result->passed ? "[PASSED]" : "[FAILED]") << std::endl;
 		}
 	}//end namespace TESTING
 }//end namespace XNELO

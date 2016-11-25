@@ -37,12 +37,11 @@
 #ifndef ___XNELO_TESTING_Test_H__2014___
 #define ___XNELO_TESTING_Test_H__2014___
 
-#include "../Config.hpp"
-
-#include "Test_Result.hpp"
-
-#include <vector>
+#include "Config.hpp"
+#include "Testing/TestResult.hpp"
+#include "Testing/IReportGenerator.hpp"
 #include <string>
+#include <vector>
 
 namespace XNELO
 {
@@ -54,190 +53,117 @@ namespace XNELO
 		class Test
 		{
 		private:
-			/**Have all the tests been successful.*/
-			bool _success;
-			/**All the results of the unit tests.*/
-			std::vector<TEST_RESULT*> _results;
-			/**Whether or not to print results immediatly.*/
-			bool _immediateToCOUT;
-			/**Output only failed tests.*/
-			bool _printOnlyFailed;
-
-			/**Number of tests that passed.*/
-			int _passed;
-			/**Number of tests that failed.*/
+			std::string _test_name;
+			std::vector<TestResult*> _test_results;
+			int _success;
 			int _failed;
-
-			/**The name of this test.*/
-			std::string _testName;
-
 		public:
-			/**
-			* Default constructor.
-			*/
-			XNELO_API Test();
-
-			/**
-			* Constructor
-			*
-			* @param name The name of this Test.
-			*/
-			XNELO_API Test(std::string name);
-
-			/**
-			* Constructor
-			*
-			* @param name The name of this Test.
-			* @param PrintImmediatlyToCOUT Print the results immediatly to standard output stream.
-			* @param printOnlyFailed Print results only if the test failed.
-			*/
-			XNELO_API Test(std::string name, bool PrintImmediatlyToCOUT, bool printOnlyFailed);
-
-			/**
-			* Destructor
-			*/
+			XNELO_API Test(std::string test_name);
+			XNELO_API Test(const char * test_name);
 			XNELO_API ~Test();
+			
+			template<typename T>
+			XNELO_API bool AssertEqual(T expression1, T expression2, const char * description = NULL);
+			template<typename T>
+			XNELO_API bool AssertEqual(T expression1, T expression2, std::string description);
 
-			/**
-			* Analyze all the tests and create the statistics.
-			*/
-			XNELO_API void Analyze();
+			template<typename T>
+			XNELO_API bool AssertNotEqual(T expression1, T expression2, const char * description = NULL);
+			template<typename T>
+			XNELO_API bool AssertNotEqual(T expression1, T expression2, std::string description);
 
-			/**
-			* Clear all the statistics.
-			*/
-			XNELO_API void Clear();
+			XNELO_API bool AssertFalse(bool booleanValue, const char * description = NULL);
+			XNELO_API bool AssertFalse(bool booleanValue, std::string description);
+			XNELO_API bool AssertTrue(bool booleanValue, const char * description = NULL);
+			XNELO_API bool AssertTrue(bool booleanValue, std::string description);
 
-			/**
-			* Get the number of failed tests.
-			*
-			* @return Returns an integer of the number of Failed tests.
-			*/
-			XNELO_API int GetFailed();
+			XNELO_API int GetNumFailed();
+			XNELO_API int GetNumSuccess();
+			XNELO_API int GetNumTestResults();
+			XNELO_API std::string GetTestName();
+			XNELO_API TestResult * GetTestResult(unsigned int index);
 
-			/**
-			* Get the name of this test.
-			*
-			* @return Returns a string with the name of this test.
-			*/
-			XNELO_API std::string GetName();
+			XNELO_API virtual void Run() = 0;
 
-			/**
-			* Get the number of tests run.
-			*
-			* @return Returns an integer representing the number of tests run.
-			*/
-			XNELO_API int GetNumResults();
-
-			/**
-			* Get the number of passed tests.
-			*
-			* @return Returns an integer of the number of Passed tests.
-			*/
-			XNELO_API int GetPassed();
-
-			/**
-			* Get if all the tests were successful.
-			*
-			* @return Returns a bool. If all the tests passed then true is
-			*			returned and false if even one of the tests failed.
-			*/
-			XNELO_API bool GetSuccess();
-
-			/**
-			* Get a specific test result. The index must be between 0 and the
-			* value of 'GetNumResults'.
-			*
-			* @param index The index of the result needed.
-			*
-			* @return Returns a pointer to a 'TEST_RESULT' object.
-			*/
-			XNELO_API TEST_RESULT* GetTestResult(int index);
-
-			/**
-			* Set the name of this test.
-			*
-			* @param name A C-String with the name of this test.
-			*/
-			XNELO_API void SetName(const char * name);
-
-			/**
-			* Set the name of this test
-			*
-			* @param name a string with the name of this test.
-			*/
-			XNELO_API void SetName(std::string name);
-
-			/**
-			* Unit test. Tests if the condition is true and records the results.
-			*
-			* @param condition A boolean test that executes out to true or false.
-			* @param testName The name of this unit test.
-			*
-			* @return Returns true if the test passed.
-			*/
-			XNELO_API bool UnitTest(bool condition, std::string& testName);
-
-			/**
-			* Unit test. Tests if the condition is true and records the results.
-			*
-			* @param condition A boolean test that executes out to true or false.
-			* @param testName The name of this unit test.
-			*
-			* @return Returns true if the test passed.
-			*/
-			XNELO_API bool UnitTest(bool condition, const char *testName);
-
-			/**
-			* Unit test. Tests if the actual decimal value is within the tolerance of the expected value.
-			*
-			* @param actual The actual value of the test.
-			* @param expected The expected value of the test.
-			* @param tolerance The tolerance the test needs to be within.
-			* @param testName The name of this unit test.
-			*
-			* @return Returns true if the test passed.
-			*/
-			XNELO_API bool UnitTest(double actual, double expected, double tolerance, const char *testName);
-
-			/**
-			* Unit test. Tests if the actual decimal value is within the tolerance of the expected value.
-			*
-			* @param actual The actual value of the test.
-			* @param expected The expected value of the test.
-			* @param tolerance The tolerance the test needs to be within.
-			* @param testName The name of this unit test.
-			*
-			* @return Returns true if the test passed.
-			*/
-			XNELO_API bool UnitTest(double actual, double expected, double tolerance, std::string& testName);
-
-			/**
-			* Unit test. Tests if the actual decimal value is within the tolerance of the expected value.
-			*
-			* @param actual The actual value of the test.
-			* @param expected The expected value of the test.
-			* @param tolerance The tolerance the test needs to be within.
-			* @param testName The name of this unit test.
-			*
-			* @return Returns true if the test passed.
-			*/
-			XNELO_API bool UnitTest(float actual, float expected, float tolerance, const char *testName);
-
-			/**
-			* Unit test. Tests if the actual decimal value is within the tolerance of the expected value.
-			*
-			* @param actual The actual value of the test.
-			* @param expected The expected value of the test.
-			* @param tolerance The tolerance the test needs to be within.
-			* @param testName The name of this unit test.
-			*
-			* @return Returns true if the test passed.
-			*/
-			XNELO_API bool UnitTest(float actual, float expected, float tolerance, std::string& testName);
-
+			//XNELO_API bool UnitTest(bool condition, bool expected, const char * description=NULL);
+			//XNELO_API bool UnitTest(bool condition, bool expected, std::string description);
 		};
 	}//end namespace TESTING
 }//end namespace XNELO
+
+inline int XNELO::TESTING::Test::GetNumFailed()
+{
+	return _failed;
+}
+
+inline int XNELO::TESTING::Test::GetNumSuccess()
+{
+	return _success;
+}
+
+inline std::string XNELO::TESTING::Test::GetTestName()
+{
+	return _test_name;
+}
+
+inline int XNELO::TESTING::Test::GetNumTestResults()
+{
+	return (int)_test_results.size();
+}
+
+inline XNELO::TESTING::TestResult * XNELO::TESTING::Test::GetTestResult(unsigned int index)
+{
+	if (index > _test_results.size())
+		return NULL;
+
+	return _test_results[index];
+}
+
+template<typename T>
+inline bool XNELO::TESTING::Test::AssertEqual(T condition, T expected, std::string description)
+{
+	return AssertEqual<T>(condition, expected, description.c_str());
+}
+
+template<typename T>
+inline bool XNELO::TESTING::Test::AssertEqual(T condition, T expected, const char * description)
+{
+
+	XNELO::TESTING::TestResult * result = XNELO::TESTING::TestMaster::CheckEqual<T>(condition, expected, description);
+
+	if (result->passed)
+		++_success;
+	else
+		++_failed;
+
+	_test_results.push_back(result);
+
+	XNELO::TESTING::TestMaster::GetInstance()->GetReportGenerator()->PrintTestResult(result);
+
+	return result->passed;
+}
+
+template<typename T>
+inline bool XNELO::TESTING::Test::AssertNotEqual(T expression1, T expression2, std::string description)
+{
+	return AssertNotEqual<T>(expression1, expression2, description.c_str());
+}
+
+template<typename T>
+inline bool XNELO::TESTING::Test::AssertNotEqual(T expression1, T expression2, const char * description)
+{
+	XNELO::TESTING::TestResult * result = XNELO::TESTING::TestMaster::CheckNotEqual<T>(expression1, expression2, description);
+
+	if (result->passed)
+		++_success;
+	else
+		++_failed;
+
+	_test_results.push_back(result);
+
+	XNELO::TESTING::TestMaster::GetInstance()->GetReportGenerator()->PrintTestResult(result);
+
+	return result->passed;
+}
 
 #endif //___XNELO_TESTING_Test_H__2014___

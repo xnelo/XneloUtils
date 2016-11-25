@@ -38,11 +38,104 @@
 #ifndef ___XNELO_TESTING_Testing_H__2014___
 #define ___XNELO_TESTING_Testing_H__2014___
 
-#include "../Config.hpp"
-#include "IReportGenerator.hpp"
-#include "OutStreamGenerator.hpp"
-#include "Test.hpp"
-#include "Test_Result.hpp"
-#include "TestSuite.hpp"
+#include "Config.hpp"
+#include "Testing/TestMaster.hpp"
+#include "Testing/IReportGenerator.hpp"
+#include "Testing/OutStreamGenerator.hpp"
+#include "Testing/Test.hpp"
+#include "Testing/TestResult.hpp"
+//#include "TestSuite.hpp"
+
+#include <string>
+#include <sstream>
+
+template<typename T>
+inline bool AssertEqual(T condition, T expected, std::string description)
+{
+	return AssertEqual(condition, expected, description.c_str());
+}
+
+template<typename T>
+inline bool AssertEqual(T condition, T expected, const char * description)
+{
+	XNELO::TESTING::TestResult * result;
+	result = XNELO::TESTING::TestMaster::CheckEqual<T>(condition, expected, description);
+
+	XNELO::TESTING::TestMaster::GetInstance()->GetReportGenerator()->PrintTestResult(result);
+
+	return result->passed;
+}
+
+template<typename T>
+inline bool AssertNotEqual(T expression1, T expression2, std::string description)
+{
+	return AssertNotEqual(expression1, expression2, description.c_str());
+}
+
+template<typename T>
+inline bool AssertNotEqual(T expression1, T expression2, const char * description)
+{
+	XNELO::TESTING::TestResult * result;
+	result = XNELO::TESTING::TestMaster::CheckNotEqual<T>(expression1, expression2, description);
+
+	XNELO::TESTING::TestMaster::GetInstance()->GetReportGenerator()->PrintTestResult(result);
+
+	return result->passed;
+}
+
+inline bool AssertFalse(bool booleanValue, const char * description)
+{
+	return AssertEqual<bool>(booleanValue, false, description);
+}
+
+inline bool AssertFalse(bool booleanValue, std::string description)
+{
+	return AssertFalse(booleanValue, description.c_str());
+}
+
+inline bool AssertTrue(bool booleanValue, const char * description)
+{
+	return AssertEqual<bool>(booleanValue, true, description);
+}
+
+inline bool AssertTrue(bool booleanValue, std::string description)
+{
+	return AssertTrue(booleanValue, description.c_str());
+}
+
+//Define the macros for this library
+#define XNELO_TEST_ASSERT_EQUAL(condition, expected, description) \
+if (!AssertEqual(condition, expected, description)) \
+{\
+	std::ostringstream oss; \
+	oss << __FILE__ << "(Line: " << __LINE__ << ")"; \
+	XNELO::TESTING::TestMaster::GetInstance()->GetReportGenerator()->PrintAdditionalString(oss.str().c_str()); \
+}
+
+#define XNELO_TEST_ASSERT_NOT_EQUAL(condition, expected, description) \
+if (!AssertNotEqual(condition, expected, description)) \
+{\
+	std::ostringstream oss; \
+	oss << __FILE__ << "(Line: " << __LINE__ << ")"; \
+	XNELO::TESTING::TestMaster::GetInstance()->GetReportGenerator()->PrintAdditionalString(oss.str().c_str()); \
+}
+
+#define XNELO_TEST_ASSERT_TRUE(booleanValue, description) XNELO_TEST_ASSERT_EQUAL(booleanValue, true, description)
+#define XNELO_TEST_ASSERT_FALSE(booleanValue, description) XNELO_TEST_ASSERT_EQUAL(booleanValue, false, description)
+
+#define XNELO_CREATE_TESTCASE_CLASS_NAME(test_case_name) TestCase_Name_##test_case_name##_Class
+
+#define XNELO_TEST_CASE(testCaseName, testName)\
+  class XNELO_CREATE_TESTCASE_CLASS_NAME(testName) : public XNELO::TESTING::Test \
+	{ \
+	public: \
+		XNELO_CREATE_TESTCASE_CLASS_NAME(testName)() : XNELO::TESTING::Test (#testCaseName) \
+		{ \
+			XNELO::TESTING::TestMaster::GetInstance()->AddTest(this); \
+		} \
+        void Run(); \
+	} \
+    XNELO_CREATE_TESTCASE_CLASS_NAME(testName)Instance; \
+	void XNELO_CREATE_TESTCASE_CLASS_NAME(testName)::Run ()
 
 #endif //___XNELO_TESTING_Testing_H__2014___

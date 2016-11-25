@@ -37,9 +37,9 @@
 #ifndef ___XNELO_TESTING_OutStreamGenerator_H__2014___
 #define ___XNELO_TESTING_OutStreamGenerator_H__2014___
 
-#include "../Config.hpp"
+#include "Config.hpp"
 
-#include "IReportGenerator.hpp"
+#include "Testing/IReportGenerator.hpp"
 
 namespace XNELO
 {
@@ -51,6 +51,8 @@ namespace XNELO
 		*/
 		class OutStreamGenerator : public IReportGenerator
 		{
+		private:
+			std::string _indent;
 		public:
 			/**
 			* Default Constructor
@@ -69,30 +71,13 @@ namespace XNELO
 			*/
 			XNELO_API virtual ~OutStreamGenerator();
 
-			/**
-			* End the Test we are currently printing.
-			*/
-			XNELO_API virtual void EndTest();
+			virtual void StartTestCase(Test * test);
 
-			/**
-			* End the current test suite that we are printing/working on.
-			*/
-			XNELO_API virtual void EndTestSuite();
+			virtual void EndTestCase(Test * test);
 
-			/**
-			* Print the report title.
-			*
-			* @param title A C-string representation of the title.
-			*/
-			XNELO_API virtual void PrintReportTitle(const char * title);
+			virtual void FinalizeTestRun(int runNumberSuccess, int runNumberFailures);
 
-			/**
-			* Print the statistics of the suite.
-			*
-			* @param suite A pointer to a TestSuite object that we will get the
-			*			statistics from.
-			*/
-			XNELO_API virtual void PrintSuiteStatistics(TestSuite * suite);
+			virtual void PrintAdditionalString(const char * to_print);
 
 			/**
 			* Print the result of the test.
@@ -100,28 +85,7 @@ namespace XNELO
 			* @param result A pointer to a TEST_RESULT object that contains the test
 			*			name and the result of the test.
 			*/
-			XNELO_API virtual void PrintTestResult(TEST_RESULT * result);
-
-			/**
-			* Print the statistics of the passed in test.
-			*
-			* @param test A pointer to a Test where we will print the statistics from.
-			*/
-			XNELO_API virtual void PrintTestStatistics(Test * test);
-
-			/**
-			* Start printing a test.
-			*
-			* @param testName A C-String that contains the title of the test.
-			*/
-			XNELO_API virtual void StartTest(const char * testName);
-
-			/**
-			* Start Printing a test suite.
-			*
-			* @param suiteTitle A C-string representation of the suite title we are starting.
-			*/
-			XNELO_API virtual void StartTestSuite(const char * suiteTitle);
+			XNELO_API virtual void PrintTestResult(TestResult * result);
 		};
 	}//end namespace TESTING
 }//end namespace XNELO

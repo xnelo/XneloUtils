@@ -34,8 +34,26 @@
 */
 #include <iostream>
 
+#include "Network/Network.hpp"
+#include "Testing/Testing.hpp"
+#include "Network/XneloSocket.hpp"
+
+#include "Logging/Logging.hpp"
+
+#include <vld.h>
+
 int main(int argc, char * argv[])
 {
-	std::cout << "Testing" << std::endl;
+	if (!XNELO::NETWORK::InitializeNetworking())
+	{
+		std::cout << "Networking not initialized. Some Networking tests will fail." << std::endl;
+	}
+
+	XNELO::TESTING::TestMaster * tst = XNELO::TESTING::TestMaster::GetInstance();
+
+	tst->RunAllTest();
+
+	XNELO::NETWORK::ShutdownNetworking();
+
 	return 0;
 }

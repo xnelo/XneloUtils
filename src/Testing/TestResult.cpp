@@ -34,7 +34,7 @@
 * This liscense can also be found at: http://opensource.org/licenses/Zlib
 */
 
-#include "Testing/Test_Result.hpp"
+#include "Testing/TestResult.hpp"
 
 #include <cstring>
 
@@ -42,17 +42,17 @@ namespace XNELO
 {
 	namespace TESTING
 	{
-		TEST_RESULT::TEST_RESULT() : passed(true), name(NULL)
+		TestResult::TestResult() : passed(true), name(NULL)
 		{
 			return;
 		}
 
-		TEST_RESULT::TEST_RESULT(const TEST_RESULT & other) : passed(true), name(NULL)
+		TestResult::TestResult(const TestResult & other) : passed(true), name(NULL)
 		{
 			deepCopy(other);
 		}
 
-		TEST_RESULT & TEST_RESULT::operator=(const TEST_RESULT & other)
+		TestResult & TestResult::operator=(const TestResult & other)
 		{
 			if (this != &other)
 			{
@@ -61,7 +61,7 @@ namespace XNELO
 			return *this;
 		}
 
-		TEST_RESULT::~TEST_RESULT()
+		TestResult::~TestResult()
 		{
 			if (name)
 			{
@@ -70,7 +70,7 @@ namespace XNELO
 			}
 		}
 
-		void TEST_RESULT::deepCopy(const TEST_RESULT & other)
+		void TestResult::deepCopy(const TestResult & other)
 		{
 			passed = other.passed;
 			name = NULL;

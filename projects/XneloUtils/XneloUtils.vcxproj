@@ -102,6 +102,7 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>$(SolutionDir)..\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Static Lib Debug|x64'">
@@ -110,6 +111,7 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>$(SolutionDir)..\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Static Lib Release|Win32'">
@@ -120,6 +122,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>$(SolutionDir)..\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
@@ -134,6 +137,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>$(SolutionDir)..\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
@@ -142,18 +146,34 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="..\..\include\Config.hpp" />
+    <ClInclude Include="..\..\include\Core\BasicTypes.hpp" />
+    <ClInclude Include="..\..\include\Core\Errors.hpp" />
+    <ClInclude Include="..\..\include\Core\Fallible.hpp" />
+    <ClInclude Include="..\..\include\Logging\Logging.hpp" />
+    <ClInclude Include="..\..\include\Network\Address.hpp" />
+    <ClInclude Include="..\..\include\Network\Network.hpp" />
+    <ClInclude Include="..\..\include\Network\XneloSocket.hpp" />
+    <ClInclude Include="..\..\include\Network\UDPSocket.hpp" />
     <ClInclude Include="..\..\include\Testing\IReportGenerator.hpp" />
     <ClInclude Include="..\..\include\Testing\OutStreamGenerator.hpp" />
     <ClInclude Include="..\..\include\Testing\Test.hpp" />
     <ClInclude Include="..\..\include\Testing\Testing.hpp" />
+    <ClInclude Include="..\..\include\Testing\TestMaster.hpp" />
+    <ClInclude Include="..\..\include\Testing\TestResult.hpp" />
     <ClInclude Include="..\..\include\Testing\TestSuite.hpp" />
-    <ClInclude Include="..\..\include\Testing\Test_Result.hpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\src\Core\Fallible.cpp" />
+    <ClCompile Include="..\..\src\Logging\Logging.cpp" />
+    <ClCompile Include="..\..\src\Network\Address.cpp" />
+    <ClCompile Include="..\..\src\Network\Network.cpp" />
+    <ClCompile Include="..\..\src\Network\XneloSocket.cpp" />
+    <ClCompile Include="..\..\src\Network\UDPSocket.cpp" />
     <ClCompile Include="..\..\src\Testing\OutStreamGenerator.cpp" />
     <ClCompile Include="..\..\src\Testing\Test.cpp" />
+    <ClCompile Include="..\..\src\Testing\TestMaster.cpp" />
+    <ClCompile Include="..\..\src\Testing\TestResult.cpp" />
     <ClCompile Include="..\..\src\Testing\TestSuite.cpp" />
-    <ClCompile Include="..\..\src\Testing\Test_Result.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

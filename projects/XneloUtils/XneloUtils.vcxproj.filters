@@ -19,6 +19,24 @@
     <Filter Include="Source Files\Testing">
       <UniqueIdentifier>{0996bec0-d7e3-486c-b5e2-f5a718f994a1}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Network">
+      <UniqueIdentifier>{18d983b5-f4d7-4ece-86a3-98270be7b489}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Network">
+      <UniqueIdentifier>{d2c477c7-cb03-4542-b678-0efcb116a606}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Core">
+      <UniqueIdentifier>{d159cd72-6c67-4f7a-8877-ffeca86f4307}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Core">
+      <UniqueIdentifier>{0bb1de5c-7e17-41f1-b267-caa8b17a142a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Logging">
+      <UniqueIdentifier>{5c5f6585-f695-4cfb-88a5-d8dec09f71e9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Logging">
+      <UniqueIdentifier>{846ba02f-8b5e-4899-91bb-a339be584522}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\include\Config.hpp">
@@ -27,34 +45,82 @@
     <ClInclude Include="..\..\include\Testing\IReportGenerator.hpp">
       <Filter>Header Files\Testing</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\Testing\OutStreamGenerator.hpp">
-      <Filter>Header Files\Testing</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\include\Testing\Test.hpp">
-      <Filter>Header Files\Testing</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\include\Testing\Test_Result.hpp">
       <Filter>Header Files\Testing</Filter>
     </ClInclude>
     <ClInclude Include="..\..\include\Testing\Testing.hpp">
       <Filter>Header Files\Testing</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\include\Network\Address.hpp">
+      <Filter>Header Files\Network</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\Testing\TestMaster.hpp">
+      <Filter>Header Files\Testing</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\Testing\TestResult.hpp">
+      <Filter>Header Files\Testing</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\Testing\OutStreamGenerator.hpp">
+      <Filter>Header Files\Testing</Filter>
+    </ClInclude>
     <ClInclude Include="..\..\include\Testing\TestSuite.hpp">
       <Filter>Header Files\Testing</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\include\Core\BasicTypes.hpp">
+      <Filter>Header Files\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\Network\UDPSocket.hpp">
+      <Filter>Header Files\Network</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\Network\Network.hpp">
+      <Filter>Header Files\Network</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\Network\XneloSocket.hpp">
+      <Filter>Header Files\Network</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\Logging\Logging.hpp">
+      <Filter>Header Files\Logging</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\Core\Fallible.hpp">
+      <Filter>Header Files\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\Core\Errors.hpp">
+      <Filter>Header Files\Core</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\src\Testing\OutStreamGenerator.cpp">
-      <Filter>Source Files\Testing</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\src\Testing\Test.cpp">
       <Filter>Source Files\Testing</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\src\Testing\Test_Result.cpp">
+    <ClCompile Include="..\..\src\Testing\TestMaster.cpp">
+      <Filter>Source Files\Testing</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\Testing\TestResult.cpp">
+      <Filter>Source Files\Testing</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\Testing\OutStreamGenerator.cpp">
       <Filter>Source Files\Testing</Filter>
     </ClCompile>
     <ClCompile Include="..\..\src\Testing\TestSuite.cpp">
       <Filter>Source Files\Testing</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\Network\Address.cpp">
+      <Filter>Source Files\Network</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\Network\UDPSocket.cpp">
+      <Filter>Source Files\Network</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\Network\Network.cpp">
+      <Filter>Source Files\Network</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\Network\XneloSocket.cpp">
+      <Filter>Source Files\Network</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\Logging\Logging.cpp">
+      <Filter>Source Files\Logging</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\Core\Fallible.cpp">
+      <Filter>Source Files\Core</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

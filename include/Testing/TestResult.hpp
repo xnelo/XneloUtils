@@ -38,7 +38,7 @@
 #define ___XNELO_TESTING_Test_Result_H__2014___
 
 
-#include "../Config.hpp"
+#include "Config.hpp"
 
 namespace XNELO
 {
@@ -47,7 +47,7 @@ namespace XNELO
 		/**
 		* A class with the results of a test.
 		*/
-		class TEST_RESULT
+		class TestResult
 		{
 		public:
 			/**If the test passed or falied. True if it passed false if not.*/
@@ -58,29 +58,29 @@ namespace XNELO
 			/**
 			* Default Constructor.
 			*/
-			XNELO_API TEST_RESULT();
+			XNELO_API TestResult();
 
 			/**
 			* Copy Constructor.
 			*/
-			XNELO_API TEST_RESULT(const TEST_RESULT & other);
+			XNELO_API TestResult(const TestResult & other);
 
 			/**
 			* Destructor.
 			*/
-			XNELO_API ~TEST_RESULT();
+			XNELO_API ~TestResult();
 
 			/**
 			* Assignment operator.
 			*/
-			XNELO_API TEST_RESULT& operator = (const TEST_RESULT & other);
+			XNELO_API TestResult& operator = (const TestResult & other);
 		private:
 			/**
 			* Deep copy of the class.
 			*
 			* @param other The object to copy.
 			*/
-			XNELO_API void deepCopy(const TEST_RESULT & other);
+			XNELO_API void deepCopy(const TestResult & other);
 		};
 	}//end namespace TESTING
 }//end namespace XNELO
