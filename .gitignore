@@ -3,3 +3,5 @@ projects/.vs
 *.sdf
 *.opendb
 obj/
+bin/
+lib/
