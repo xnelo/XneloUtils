@@ -33,8 +33,8 @@
 * This liscense can also be found at: http://opensource.org/licenses/Zlib
 */
 
-#include "Testing/Test.hpp"
-#include "Testing/TestMaster.hpp"
+#include "XneloUtils/Testing/Test.hpp"
+#include "XneloUtils/Testing/TestMaster.hpp"
 
 #include <iostream>
 

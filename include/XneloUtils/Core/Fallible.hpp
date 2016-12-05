@@ -3,8 +3,8 @@
 #ifndef ___XNELO_CORE_FALLIBLE__HPP__11_11_2016___
 #define ___XNELO_CORE_FALLIBLE__HPP__11_11_2016___
 
-#include "Config.hpp"
-#include "Core/Errors.hpp"
+#include "../Config.hpp"
+#include "Errors.hpp"
 #include <string>
 
 namespace XNELO

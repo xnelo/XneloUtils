@@ -1,5 +1,5 @@
-#include "Testing/Testing.hpp"
-#include "Core/Fallible.hpp"
+#include "XneloUtils/Testing/Testing.hpp"
+#include "XneloUtils/Core/Fallible.hpp"
 
 XNELO_TEST_CASE(FallibleTest, TestFallibleConstructor)
 {

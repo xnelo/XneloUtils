@@ -1,5 +1,5 @@
-#include "Testing/Testing.hpp"
-#include "Network/Address.hpp"
+#include "XneloUtils/Testing/Testing.hpp"
+#include "XneloUtils/Network/Address.hpp"
 #include <iostream>
 
 XNELO_TEST_CASE(AddressTest, TestAddressDefaultConstructor)

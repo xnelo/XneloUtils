@@ -37,9 +37,9 @@
 #ifndef ___XNELO_TESTING_Test_H__2014___
 #define ___XNELO_TESTING_Test_H__2014___
 
-#include "Config.hpp"
-#include "Testing/TestResult.hpp"
-#include "Testing/IReportGenerator.hpp"
+#include "../Config.hpp"
+#include "TestResult.hpp"
+#include "IReportGenerator.hpp"
 #include <string>
 #include <vector>
 

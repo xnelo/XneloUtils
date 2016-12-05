@@ -39,56 +39,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\include\Config.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\include\Testing\IReportGenerator.hpp">
-      <Filter>Header Files\Testing</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\include\Testing\Test.hpp">
-      <Filter>Header Files\Testing</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\include\Testing\Testing.hpp">
-      <Filter>Header Files\Testing</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\include\Network\Address.hpp">
-      <Filter>Header Files\Network</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\include\Testing\TestMaster.hpp">
-      <Filter>Header Files\Testing</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\include\Testing\TestResult.hpp">
-      <Filter>Header Files\Testing</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\include\Testing\OutStreamGenerator.hpp">
-      <Filter>Header Files\Testing</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\include\Testing\TestSuite.hpp">
-      <Filter>Header Files\Testing</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\include\Core\BasicTypes.hpp">
-      <Filter>Header Files\Core</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\include\Network\UDPSocket.hpp">
-      <Filter>Header Files\Network</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\include\Network\Network.hpp">
-      <Filter>Header Files\Network</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\include\Network\XneloSocket.hpp">
-      <Filter>Header Files\Network</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\include\Logging\Logging.hpp">
-      <Filter>Header Files\Logging</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\include\Core\Fallible.hpp">
-      <Filter>Header Files\Core</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\include\Core\Errors.hpp">
-      <Filter>Header Files\Core</Filter>
-    </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
     <ClCompile Include="..\..\src\Testing\Test.cpp">
       <Filter>Source Files\Testing</Filter>
     </ClCompile>
@@ -122,5 +72,55 @@
     <ClCompile Include="..\..\src\Core\Fallible.cpp">
       <Filter>Source Files\Core</Filter>
     </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\include\XneloUtils\Config.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\XneloUtils\Core\BasicTypes.hpp">
+      <Filter>Header Files\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\XneloUtils\Core\Errors.hpp">
+      <Filter>Header Files\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\XneloUtils\Core\Fallible.hpp">
+      <Filter>Header Files\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\XneloUtils\Logging\Logging.hpp">
+      <Filter>Header Files\Logging</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\XneloUtils\Network\Address.hpp">
+      <Filter>Header Files\Network</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\XneloUtils\Network\Network.hpp">
+      <Filter>Header Files\Network</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\XneloUtils\Network\UDPSocket.hpp">
+      <Filter>Header Files\Network</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\XneloUtils\Network\XneloSocket.hpp">
+      <Filter>Header Files\Network</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\XneloUtils\Testing\IReportGenerator.hpp">
+      <Filter>Header Files\Testing</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\XneloUtils\Testing\OutStreamGenerator.hpp">
+      <Filter>Header Files\Testing</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\XneloUtils\Testing\Test.hpp">
+      <Filter>Header Files\Testing</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\XneloUtils\Testing\Testing.hpp">
+      <Filter>Header Files\Testing</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\XneloUtils\Testing\TestMaster.hpp">
+      <Filter>Header Files\Testing</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\XneloUtils\Testing\TestResult.hpp">
+      <Filter>Header Files\Testing</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\XneloUtils\Testing\TestSuite.hpp">
+      <Filter>Header Files\Testing</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

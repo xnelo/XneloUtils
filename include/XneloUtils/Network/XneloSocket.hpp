@@ -1,9 +1,9 @@
 #ifndef ___XNELO_NETWORK_SOCKET__HPP__11_10_2016___
 #define ___XNELO_NETWORK_SOCKET__HPP__11_10_2016___
 
-#include "Network/Network.hpp"
-#include "Network/Address.hpp"
-#include "Core/Fallible.hpp"
+#include "Network.hpp"
+#include "Address.hpp"
+#include "../Core/Fallible.hpp"
 
 namespace XNELO
 {

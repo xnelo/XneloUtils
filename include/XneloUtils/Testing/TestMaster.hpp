@@ -1,9 +1,9 @@
 #ifndef ___XNELO_TESTING_TESTMASTER__HPP__10_06_2016___
 #define ___XNELO_TESTING_TESTMASTER__HPP__10_06_2016___
 
-#include "Config.hpp"
-#include "Testing/IReportGenerator.hpp"
-#include "Testing/Test.hpp"
+#include "../Config.hpp"
+#include "IReportGenerator.hpp"
+#include "Test.hpp"
 #include <string>
 #include <vector>
 

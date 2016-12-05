@@ -1,5 +1,5 @@
-#include "Network/XneloSocket.hpp"
-#include "Logging/Logging.hpp"
+#include "XneloUtils/Network/XneloSocket.hpp"
+#include "XneloUtils/Logging/Logging.hpp"
 
 namespace XNELO
 {

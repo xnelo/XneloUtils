@@ -1,6 +1,6 @@
 /**
 */
-#include "Network/Network.hpp"
+#include "XneloUtils/Network/Network.hpp"
 
 namespace XNELO
 {

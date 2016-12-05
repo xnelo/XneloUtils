@@ -3,8 +3,8 @@
 #ifndef ___XNELO_NETWORK_ADDRESS__HPP__10_5_2016___
 #define ___XNELO_NETWORK_ADDRESS__HPP__10_5_2016___
 
-#include "Network/Network.hpp"
-#include "Core/BasicTypes.hpp"
+#include "Network.hpp"
+#include "../Core/BasicTypes.hpp"
 
 namespace XNELO
 {

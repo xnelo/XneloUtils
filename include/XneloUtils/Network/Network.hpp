@@ -4,7 +4,7 @@
 #ifndef ___XNELO_NETWORK_INCLUDES__HPP__11_5_2016___
 #define ___XNELO_NETWORK_INCLUDES__HPP__11_5_2016___
 
-#include "Config.hpp"
+#include "../Config.hpp"
 
 #if PLATFORM == XNELO_PLATFORM_WINDOWS
 

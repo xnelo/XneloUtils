@@ -37,10 +37,10 @@
 #ifndef ___XNELO_TESTING_IReportGenerator_H__2014___
 #define ___XNELO_TESTING_IReportGenerator_H__2014___
 
-#include "Config.hpp"
+#include "../Config.hpp"
 
-#include "Testing/TestResult.hpp"
-#include "Testing/Test.hpp"
+#include "TestResult.hpp"
+#include "Test.hpp"
 
 #include <ostream>
 

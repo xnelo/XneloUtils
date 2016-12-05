@@ -34,7 +34,7 @@
 * This liscense can also be found at: http://opensource.org/licenses/Zlib
 */
 
-#include "Testing/TestResult.hpp"
+#include "XneloUtils/Testing/TestResult.hpp"
 
 #include <cstring>
 

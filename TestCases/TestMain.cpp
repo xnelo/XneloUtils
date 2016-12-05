@@ -34,11 +34,11 @@
 */
 #include <iostream>
 
-#include "Network/Network.hpp"
-#include "Testing/Testing.hpp"
-#include "Network/XneloSocket.hpp"
+#include "XneloUtils/Network/Network.hpp"
+#include "XneloUtils/Testing/Testing.hpp"
+#include "XneloUtils/Network/XneloSocket.hpp"
 
-#include "Logging/Logging.hpp"
+#include "XneloUtils/Logging/Logging.hpp"
 
 #include <vld.h>
 

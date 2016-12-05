@@ -1,5 +1,5 @@
-#include "Testing/Testing.hpp"
-#include "Network/XneloSocket.hpp"
+#include "XneloUtils/Testing/Testing.hpp"
+#include "XneloUtils/Network/XneloSocket.hpp"
 
 class XneloSocketTestImpl: public XNELO::NETWORK::XneloSocket
 {

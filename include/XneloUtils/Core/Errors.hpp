@@ -3,7 +3,7 @@
 #ifndef ___XNELO_CORE_ERRORS__HPP__11_12_2016___
 #define ___XNELO_CORE_ERRORS__HPP__11_12_2016___
 
-#include "Core/BasicTypes.hpp"
+#include "BasicTypes.hpp"
 
 namespace XNELO
 {

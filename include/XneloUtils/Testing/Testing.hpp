@@ -38,12 +38,12 @@
 #ifndef ___XNELO_TESTING_Testing_H__2014___
 #define ___XNELO_TESTING_Testing_H__2014___
 
-#include "Config.hpp"
-#include "Testing/TestMaster.hpp"
-#include "Testing/IReportGenerator.hpp"
-#include "Testing/OutStreamGenerator.hpp"
-#include "Testing/Test.hpp"
-#include "Testing/TestResult.hpp"
+#include "../Config.hpp"
+#include "TestMaster.hpp"
+#include "IReportGenerator.hpp"
+#include "OutStreamGenerator.hpp"
+#include "Test.hpp"
+#include "TestResult.hpp"
 //#include "TestSuite.hpp"
 
 #include <string>

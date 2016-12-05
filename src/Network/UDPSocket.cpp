@@ -1,5 +1,5 @@
-#include "Network/UDPSocket.hpp"
-#include "Logging/Logging.hpp"
+#include "XneloUtils/Network/UDPSocket.hpp"
+#include "XneloUtils/Logging/Logging.hpp"
 
 namespace XNELO
 {

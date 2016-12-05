@@ -1,5 +1,5 @@
-#include "Testing/Testing.hpp"
-#include "Network/UDPSocket.hpp"
+#include "XneloUtils/Testing/Testing.hpp"
+#include "XneloUtils/Network/UDPSocket.hpp"
 
 XNELO_TEST_CASE(UDPSocketTests, UDPSocket_Constructor)
 {

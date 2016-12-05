@@ -37,9 +37,9 @@
 #ifndef ___XNELO_TESTING_OutStreamGenerator_H__2014___
 #define ___XNELO_TESTING_OutStreamGenerator_H__2014___
 
-#include "Config.hpp"
+#include "../Config.hpp"
 
-#include "Testing/IReportGenerator.hpp"
+#include "IReportGenerator.hpp"
 
 namespace XNELO
 {

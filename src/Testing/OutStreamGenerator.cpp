@@ -33,7 +33,7 @@
 * This liscense can also be found at: http://opensource.org/licenses/Zlib
 */
 
-#include "Testing/OutStreamGenerator.hpp"
+#include "XneloUtils/Testing/OutStreamGenerator.hpp"
 
 #include <iostream>
 

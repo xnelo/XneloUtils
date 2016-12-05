@@ -1,5 +1,5 @@
-#include "Testing/TestMaster.hpp"
-#include "Testing/OutStreamGenerator.hpp"
+#include "XneloUtils/Testing/TestMaster.hpp"
+#include "XneloUtils/Testing/OutStreamGenerator.hpp"
 
 #include <cstdlib>
 #include <iostream>

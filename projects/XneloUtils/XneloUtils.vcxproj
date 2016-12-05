@@ -145,24 +145,6 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\include\Config.hpp" />
-    <ClInclude Include="..\..\include\Core\BasicTypes.hpp" />
-    <ClInclude Include="..\..\include\Core\Errors.hpp" />
-    <ClInclude Include="..\..\include\Core\Fallible.hpp" />
-    <ClInclude Include="..\..\include\Logging\Logging.hpp" />
-    <ClInclude Include="..\..\include\Network\Address.hpp" />
-    <ClInclude Include="..\..\include\Network\Network.hpp" />
-    <ClInclude Include="..\..\include\Network\XneloSocket.hpp" />
-    <ClInclude Include="..\..\include\Network\UDPSocket.hpp" />
-    <ClInclude Include="..\..\include\Testing\IReportGenerator.hpp" />
-    <ClInclude Include="..\..\include\Testing\OutStreamGenerator.hpp" />
-    <ClInclude Include="..\..\include\Testing\Test.hpp" />
-    <ClInclude Include="..\..\include\Testing\Testing.hpp" />
-    <ClInclude Include="..\..\include\Testing\TestMaster.hpp" />
-    <ClInclude Include="..\..\include\Testing\TestResult.hpp" />
-    <ClInclude Include="..\..\include\Testing\TestSuite.hpp" />
-  </ItemGroup>
-  <ItemGroup>
     <ClCompile Include="..\..\src\Core\Fallible.cpp" />
     <ClCompile Include="..\..\src\Logging\Logging.cpp" />
     <ClCompile Include="..\..\src\Network\Address.cpp" />
@@ -174,6 +156,24 @@
     <ClCompile Include="..\..\src\Testing\TestMaster.cpp" />
     <ClCompile Include="..\..\src\Testing\TestResult.cpp" />
     <ClCompile Include="..\..\src\Testing\TestSuite.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\include\XneloUtils\Config.hpp" />
+    <ClInclude Include="..\..\include\XneloUtils\Core\BasicTypes.hpp" />
+    <ClInclude Include="..\..\include\XneloUtils\Core\Errors.hpp" />
+    <ClInclude Include="..\..\include\XneloUtils\Core\Fallible.hpp" />
+    <ClInclude Include="..\..\include\XneloUtils\Logging\Logging.hpp" />
+    <ClInclude Include="..\..\include\XneloUtils\Network\Address.hpp" />
+    <ClInclude Include="..\..\include\XneloUtils\Network\Network.hpp" />
+    <ClInclude Include="..\..\include\XneloUtils\Network\UDPSocket.hpp" />
+    <ClInclude Include="..\..\include\XneloUtils\Network\XneloSocket.hpp" />
+    <ClInclude Include="..\..\include\XneloUtils\Testing\IReportGenerator.hpp" />
+    <ClInclude Include="..\..\include\XneloUtils\Testing\OutStreamGenerator.hpp" />
+    <ClInclude Include="..\..\include\XneloUtils\Testing\Test.hpp" />
+    <ClInclude Include="..\..\include\XneloUtils\Testing\Testing.hpp" />
+    <ClInclude Include="..\..\include\XneloUtils\Testing\TestMaster.hpp" />
+    <ClInclude Include="..\..\include\XneloUtils\Testing\TestResult.hpp" />
+    <ClInclude Include="..\..\include\XneloUtils\Testing\TestSuite.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -33,7 +33,7 @@
 * This liscense can also be found at: http://opensource.org/licenses/Zlib
 */
 
-#include "Testing/TestSuite.hpp"
+#include "XneloUtils/Testing/TestSuite.hpp"
 
 namespace XNELO
 {
