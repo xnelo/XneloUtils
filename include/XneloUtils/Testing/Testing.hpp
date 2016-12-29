@@ -2,7 +2,7 @@
 * @file Testing.hpp
 * @author Spencer Hoffa
 *
-* @copyright 2014 Spencer Hoffa
+* @copyright 2016 Spencer Hoffa
 *
 * This file includes all the header files needed to use the Xnelo Testing 
 * library. For ease just include this file and you have access to the entire
@@ -11,7 +11,7 @@
 /*
 * The zlib/libpng License
 *
-* Copyright (c) 2014 Spencer Hoffa
+* Copyright (c) 2016 Spencer Hoffa
 *
 * This software is provided 'as-is', without any express or implied warranty.
 * In no event will the authors be held liable for any damages arising from the
@@ -123,19 +123,19 @@ if (!AssertNotEqual(condition, expected, description)) \
 #define XNELO_TEST_ASSERT_TRUE(booleanValue, description) XNELO_TEST_ASSERT_EQUAL(booleanValue, true, description)
 #define XNELO_TEST_ASSERT_FALSE(booleanValue, description) XNELO_TEST_ASSERT_EQUAL(booleanValue, false, description)
 
-#define XNELO_CREATE_TESTCASE_CLASS_NAME(test_case_name) TestCase_Name_##test_case_name##_Class
+#define XNELO_CREATE_TESTCASE_CLASS_NAME(test_group, test_case_name) TestCase_Name_##test_group##_##test_case_name##_Class
 
 #define XNELO_TEST_CASE(testCaseName, testName)\
-  class XNELO_CREATE_TESTCASE_CLASS_NAME(testName) : public XNELO::TESTING::Test \
+  class XNELO_CREATE_TESTCASE_CLASS_NAME(testCaseName, testName) : public XNELO::TESTING::Test \
 	{ \
 	public: \
-		XNELO_CREATE_TESTCASE_CLASS_NAME(testName)() : XNELO::TESTING::Test (#testCaseName) \
+		XNELO_CREATE_TESTCASE_CLASS_NAME(testCaseName, testName)() : XNELO::TESTING::Test (#testCaseName) \
 		{ \
 			XNELO::TESTING::TestMaster::GetInstance()->AddTest(this); \
 		} \
         void Run(); \
 	} \
-    XNELO_CREATE_TESTCASE_CLASS_NAME(testName)Instance; \
-	void XNELO_CREATE_TESTCASE_CLASS_NAME(testName)::Run ()
+    XNELO_CREATE_TESTCASE_CLASS_NAME(testCaseName, testName)Instance; \
+	void XNELO_CREATE_TESTCASE_CLASS_NAME(testCaseName, testName)::Run ()
 
 #endif //___XNELO_TESTING_Testing_H__2014___

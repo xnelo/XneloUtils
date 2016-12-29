@@ -2,14 +2,14 @@
 * @file Test.cpp
 * @author Spencer Hoffa
 *
-* @copyright 2014 Spencer Hoffa
+* @copyright 2016 Spencer Hoffa
 *
 * Implementation of the Test class.
 */
 /*
 * The zlib/libpng License
 *
-* Copyright (c) 2014 Spencer Hoffa
+* Copyright (c) 2016 Spencer Hoffa
 *
 * This software is provided 'as-is', without any express or implied warranty.
 * In no event will the authors be held liable for any damages arising from the

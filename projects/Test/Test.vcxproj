@@ -23,6 +23,10 @@
     <ClCompile Include="..\..\TestCases\Network\Address.cpp" />
     <ClCompile Include="..\..\TestCases\Network\UDPSocket.cpp" />
     <ClCompile Include="..\..\TestCases\Network\XneloSocket.cpp" />
+    <ClCompile Include="..\..\TestCases\Stream\BufferStreamReader.cpp" />
+    <ClCompile Include="..\..\TestCases\Stream\BufferStreamWriter.cpp" />
+    <ClCompile Include="..\..\TestCases\Stream\IStreamReader.cpp" />
+    <ClCompile Include="..\..\TestCases\Stream\IStreamWriter.cpp" />
     <ClCompile Include="..\..\TestCases\TestMain.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

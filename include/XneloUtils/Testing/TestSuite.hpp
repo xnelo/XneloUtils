@@ -2,7 +2,7 @@
 * @file TestSuite.hpp
 * @author Spencer Hoffa
 *
-* @copyright 2014 Spencer Hoffa
+* @copyright 2016 Spencer Hoffa
 *
 * A Test suite is a file that holds all the tests and test classes that need to
 * be run. A Test suite can also hold another test suite so you can stack them
@@ -11,7 +11,7 @@
 /*
 * The zlib/libpng License
 *
-* Copyright (c) 2014 Spencer Hoffa
+* Copyright (c) 2016 Spencer Hoffa
 *
 * This software is provided 'as-is', without any express or implied warranty.
 * In no event will the authors be held liable for any damages arising from the

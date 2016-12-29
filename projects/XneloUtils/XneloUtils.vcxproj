@@ -151,6 +151,10 @@
     <ClCompile Include="..\..\src\Network\Network.cpp" />
     <ClCompile Include="..\..\src\Network\XneloSocket.cpp" />
     <ClCompile Include="..\..\src\Network\UDPSocket.cpp" />
+    <ClCompile Include="..\..\src\Stream\BufferStreamReader.cpp" />
+    <ClCompile Include="..\..\src\Stream\BufferStreamWriter.cpp" />
+    <ClCompile Include="..\..\src\Stream\IBufferStreamReader.cpp" />
+    <ClCompile Include="..\..\src\Stream\IBufferStreamWriter.cpp" />
     <ClCompile Include="..\..\src\Testing\OutStreamGenerator.cpp" />
     <ClCompile Include="..\..\src\Testing\Test.cpp" />
     <ClCompile Include="..\..\src\Testing\TestMaster.cpp" />
@@ -167,6 +171,11 @@
     <ClInclude Include="..\..\include\XneloUtils\Network\Network.hpp" />
     <ClInclude Include="..\..\include\XneloUtils\Network\UDPSocket.hpp" />
     <ClInclude Include="..\..\include\XneloUtils\Network\XneloSocket.hpp" />
+    <ClInclude Include="..\..\include\XneloUtils\Stream\BufferStreamReader.hpp" />
+    <ClInclude Include="..\..\include\XneloUtils\Stream\BufferStreamWriter.hpp" />
+    <ClInclude Include="..\..\include\XneloUtils\Stream\IBufferStream.hpp" />
+    <ClInclude Include="..\..\include\XneloUtils\Stream\IBufferStreamReader.hpp" />
+    <ClInclude Include="..\..\include\XneloUtils\Stream\IBufferStreamWriter.hpp" />
     <ClInclude Include="..\..\include\XneloUtils\Testing\IReportGenerator.hpp" />
     <ClInclude Include="..\..\include\XneloUtils\Testing\OutStreamGenerator.hpp" />
     <ClInclude Include="..\..\include\XneloUtils\Testing\Test.hpp" />

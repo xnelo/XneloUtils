@@ -1,10 +1,10 @@
 /**
-* @file Network.cpp
+* @file IStreamWriter.cpp
 * @author Spencer Hoffa
 *
 * @copyright 2016 Spencer Hoffa
 *
-* Implementation of network functions.
+* Test cases for the IStreamWriter class.
 */
 /*
 * The zlib/libpng License
@@ -33,43 +33,46 @@
 * This liscense can also be found at: http://opensource.org/licenses/Zlib
 */
 
-#include "XneloUtils/Network/Network.hpp"
+#include "XneloUtils/Testing/Testing.hpp"
+#include "XneloUtils/Stream/IBufferStreamWriter.hpp"
 
-namespace XNELO
+class IBufferStreamWriterTestImpl : public XNELO::STREAM::IBufferStreamWriter
 {
-	namespace NETWORK
+public:
+	IBufferStreamWriterTestImpl() : IBufferStreamWriter()
+	{}
+
+	virtual char * GetBuffer()
 	{
-		bool networking_initialized = false;
+		return NULL;
+	}
 
-		bool InitializeNetworking()
-		{
-			if (networking_initialized)
-				return true;
+	virtual XNELO::CORE::uint32 GetSize()
+	{
+		return 0;
+	}
 
-		#if PLATFORM == XNELO_PLATFORM_WINDOWS
-			WSADATA WsaData;
+	int Write(const void * toWrite, int sizeInBytes)
+	{
+		return 0;
+	}
+};
 
-			if (WSAStartup(MAKEWORD(2, 2), &WsaData) != NO_ERROR)
-			{
-				networking_initialized = false;
-				return false;
-			}
+XNELO_TEST_CASE(IBufferStreamWritersTests, Constructor)
+{
+	XNELO::STREAM::IBufferStream * test = new IBufferStreamWriterTestImpl();
 
-			networking_initialized = true;
-		#else
-			networking_initialized = true;
-		#endif
+	XNELO_TEST_ASSERT_FALSE(test == NULL, "Constructor successful");
 
-			return networking_initialized;
-		}
+	delete test;
+}
 
-		void ShutdownNetworking()
-		{
-		#if PLATFORM == XNELO_PLATFORM_WINDOWS
-			WSACleanup();
-		#endif
+XNELO_TEST_CASE(IBufferStreamWritersTests, IsReadingValue)
+{
+	XNELO_TEST_ASSERT_FALSE(IBufferStreamWriterTestImpl::IsReading, "Make sure writer IsReading value is false");
+}
 
-			networking_initialized = false;
-		}
-	}//end namespace network
-}//end namespace xnelo
+XNELO_TEST_CASE(IBufferStreamWritersTests, IsWritingValue)
+{
+	XNELO_TEST_ASSERT_TRUE(IBufferStreamWriterTestImpl::IsWriting, "Make sure writer IsWriting value is true");
+}

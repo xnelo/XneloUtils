@@ -37,6 +37,12 @@
     <Filter Include="Source Files\Logging">
       <UniqueIdentifier>{846ba02f-8b5e-4899-91bb-a339be584522}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Stream">
+      <UniqueIdentifier>{0ecbef7b-31eb-4477-bade-16a7d4a5f982}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Stream">
+      <UniqueIdentifier>{5b475bf8-7782-4529-a60d-2bfdeae63132}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\src\Testing\Test.cpp">
@@ -71,6 +77,18 @@
     </ClCompile>
     <ClCompile Include="..\..\src\Core\Fallible.cpp">
       <Filter>Source Files\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\Stream\BufferStreamWriter.cpp">
+      <Filter>Source Files\Stream</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\Stream\IBufferStreamReader.cpp">
+      <Filter>Source Files\Stream</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\Stream\IBufferStreamWriter.cpp">
+      <Filter>Source Files\Stream</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\Stream\BufferStreamReader.cpp">
+      <Filter>Source Files\Stream</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -121,6 +139,21 @@
     </ClInclude>
     <ClInclude Include="..\..\include\XneloUtils\Testing\TestSuite.hpp">
       <Filter>Header Files\Testing</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\XneloUtils\Stream\IBufferStream.hpp">
+      <Filter>Header Files\Stream</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\XneloUtils\Stream\IBufferStreamReader.hpp">
+      <Filter>Header Files\Stream</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\XneloUtils\Stream\IBufferStreamWriter.hpp">
+      <Filter>Header Files\Stream</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\XneloUtils\Stream\BufferStreamWriter.hpp">
+      <Filter>Header Files\Stream</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\XneloUtils\Stream\BufferStreamReader.hpp">
+      <Filter>Header Files\Stream</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

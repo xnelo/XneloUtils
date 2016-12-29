@@ -1,10 +1,10 @@
 /**
-* @file Network.cpp
+* @file IBufferStreamWriter.hpp
 * @author Spencer Hoffa
 *
 * @copyright 2016 Spencer Hoffa
 *
-* Implementation of network functions.
+* Define an interface for a buffered stream writer.
 */
 /*
 * The zlib/libpng License
@@ -33,43 +33,28 @@
 * This liscense can also be found at: http://opensource.org/licenses/Zlib
 */
 
-#include "XneloUtils/Network/Network.hpp"
+#ifndef ___XNELOUTILS_STREAM_IBUFFERSTREAMWRITER__HPP__12_8_2016___
+#define ___XNELOUTILS_STREAM_IBUFFERSTREAMWRITER__HPP__12_8_2016___
+
+#include "IBufferStream.hpp"
 
 namespace XNELO
 {
-	namespace NETWORK
+	namespace STREAM
 	{
-		bool networking_initialized = false;
-
-		bool InitializeNetworking()
+		class IBufferStreamWriter : public IBufferStream
 		{
-			if (networking_initialized)
-				return true;
+		public:
+			static const bool IsWriting = true;
+			static const bool IsReading = false;
 
-		#if PLATFORM == XNELO_PLATFORM_WINDOWS
-			WSADATA WsaData;
+			XNELO_API IBufferStreamWriter();
+			XNELO_API virtual ~IBufferStreamWriter();
+			virtual char * GetBuffer() = 0;
+			virtual XNELO::CORE::uint32 GetSize() = 0;
+			virtual int Write(const void * toWrite, int sizeInBytes) = 0;
+		};
+	} //end namespace STREAM
+} //end namespace XNELO
 
-			if (WSAStartup(MAKEWORD(2, 2), &WsaData) != NO_ERROR)
-			{
-				networking_initialized = false;
-				return false;
-			}
-
-			networking_initialized = true;
-		#else
-			networking_initialized = true;
-		#endif
-
-			return networking_initialized;
-		}
-
-		void ShutdownNetworking()
-		{
-		#if PLATFORM == XNELO_PLATFORM_WINDOWS
-			WSACleanup();
-		#endif
-
-			networking_initialized = false;
-		}
-	}//end namespace network
-}//end namespace xnelo
+#endif // ___XNELOUTILS_STREAM_ISTREAMWRITER__HPP__12_8_2016___

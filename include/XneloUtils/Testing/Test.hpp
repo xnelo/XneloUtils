@@ -2,7 +2,7 @@
 * @file Test.hpp
 * @author Spencer Hoffa
 *
-* @copyright 2014 Spencer Hoffa
+* @copyright 2016 Spencer Hoffa
 *
 * A class that handles all of the testing. This class will keep track of each 
 * individual tests and whether they wer a success or failure.
@@ -10,7 +10,7 @@
 /*
 * The zlib/libpng License
 *
-* Copyright (c) 2014 Spencer Hoffa
+* Copyright (c) 2016 Spencer Hoffa
 *
 * This software is provided 'as-is', without any express or implied warranty.
 * In no event will the authors be held liable for any damages arising from the

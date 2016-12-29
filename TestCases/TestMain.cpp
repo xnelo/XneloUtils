@@ -2,14 +2,14 @@
 * @file TestMain.cpp
 * @author Spencer Hoffa
 *
-* @copyright 2014 Spencer Hoffa
+* @copyright 2016 Spencer Hoffa
 *
-* This is a program that will run all unit tests for the XneloUtils library.
+* Main file to run all the test cases for the XneloUtils library.
 */
 /*
 * The zlib/libpng License
 *
-* Copyright (c) 2014 Spencer Hoffa
+* Copyright (c) 2016 Spencer Hoffa
 *
 * This software is provided 'as-is', without any express or implied warranty.
 * In no event will the authors be held liable for any damages arising from the
@@ -32,6 +32,7 @@
 *
 * This liscense can also be found at: http://opensource.org/licenses/Zlib
 */
+
 #include <iostream>
 
 #include "XneloUtils/Network/Network.hpp"

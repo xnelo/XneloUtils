@@ -1,10 +1,10 @@
 /**
-* @file Network.cpp
+* @file BufferStreamReader.hpp
 * @author Spencer Hoffa
 *
 * @copyright 2016 Spencer Hoffa
 *
-* Implementation of network functions.
+* Defines a stream that you can read x number of bytes at a time.
 */
 /*
 * The zlib/libpng License
@@ -33,43 +33,34 @@
 * This liscense can also be found at: http://opensource.org/licenses/Zlib
 */
 
-#include "XneloUtils/Network/Network.hpp"
+#ifndef ___XNELOUTILS_STREAM_BUFFERSTREAMREADER_HPP__12_18_2016___
+#define ___XNELOUTILS_STREAM_BUFFERSTREAMREADER_HPP__12_18_2016___
+
+#include "IBufferStreamReader.hpp"
+#include "XneloUtils\Core\Fallible.hpp"
 
 namespace XNELO
 {
-	namespace NETWORK
+	namespace STREAM
 	{
-		bool networking_initialized = false;
-
-		bool InitializeNetworking()
+		class BufferStreamReader : public XNELO::CORE::Fallible, IBufferStreamReader
 		{
-			if (networking_initialized)
-				return true;
+		private:
+			char * _buffer;
+			XNELO::CORE::uint32 _index;
+			XNELO::CORE::uint32 _bufferSize;
+		public:
+			XNELO_API BufferStreamReader();
+			XNELO_API BufferStreamReader(const char * buffer, int bufferSize);
+			XNELO_API virtual ~BufferStreamReader();
+			XNELO_API virtual bool AddDataToBuffer(const char * buffer, int bufferSize);
+			XNELO_API virtual int AmountLeft();
+			XNELO_API virtual int Read(void * buffer, int readAmount);
 
-		#if PLATFORM == XNELO_PLATFORM_WINDOWS
-			WSADATA WsaData;
+			XNELO_API virtual char * GetBuffer();
+			XNELO_API virtual XNELO::CORE::uint32 GetSize();
+		};
+	}//end namespace STEAM
+}//end namespace XNELO
 
-			if (WSAStartup(MAKEWORD(2, 2), &WsaData) != NO_ERROR)
-			{
-				networking_initialized = false;
-				return false;
-			}
-
-			networking_initialized = true;
-		#else
-			networking_initialized = true;
-		#endif
-
-			return networking_initialized;
-		}
-
-		void ShutdownNetworking()
-		{
-		#if PLATFORM == XNELO_PLATFORM_WINDOWS
-			WSACleanup();
-		#endif
-
-			networking_initialized = false;
-		}
-	}//end namespace network
-}//end namespace xnelo
+#endif // !___XNELOUTILS_STREAM_BUFFERSTREAMREADER_HPP__12_18_2016___

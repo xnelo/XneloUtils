@@ -2,7 +2,7 @@
 * @file OutStreamGenerator.hpp
 * @author Spencer Hoffa
 *
-* @copyright 2014 Spencer Hoffa
+* @copyright 2016 Spencer Hoffa
 *
 * A basic Report Generator that outputs the report information as a basic 
 * string. This class inherits from XNELO::TESTING::IReportGenerator.
@@ -10,7 +10,7 @@
 /*
 * The zlib/libpng License
 *
-* Copyright (c) 2014 Spencer Hoffa
+* Copyright (c) 2016 Spencer Hoffa
 *
 * This software is provided 'as-is', without any express or implied warranty.
 * In no event will the authors be held liable for any damages arising from the

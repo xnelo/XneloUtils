@@ -1,10 +1,10 @@
 /**
-* @file Network.cpp
+* @file IBufferStreamReader.cpp
 * @author Spencer Hoffa
 *
 * @copyright 2016 Spencer Hoffa
 *
-* Implementation of network functions.
+* Implementation of the BufferStreamReader interface base functions.
 */
 /*
 * The zlib/libpng License
@@ -33,43 +33,16 @@
 * This liscense can also be found at: http://opensource.org/licenses/Zlib
 */
 
-#include "XneloUtils/Network/Network.hpp"
+#include "XneloUtils\Stream\IBufferStreamReader.hpp"
 
 namespace XNELO
 {
-	namespace NETWORK
+	namespace STREAM
 	{
-		bool networking_initialized = false;
+		IBufferStreamReader::IBufferStreamReader() : IBufferStream()
+		{}
 
-		bool InitializeNetworking()
-		{
-			if (networking_initialized)
-				return true;
-
-		#if PLATFORM == XNELO_PLATFORM_WINDOWS
-			WSADATA WsaData;
-
-			if (WSAStartup(MAKEWORD(2, 2), &WsaData) != NO_ERROR)
-			{
-				networking_initialized = false;
-				return false;
-			}
-
-			networking_initialized = true;
-		#else
-			networking_initialized = true;
-		#endif
-
-			return networking_initialized;
-		}
-
-		void ShutdownNetworking()
-		{
-		#if PLATFORM == XNELO_PLATFORM_WINDOWS
-			WSACleanup();
-		#endif
-
-			networking_initialized = false;
-		}
-	}//end namespace network
-}//end namespace xnelo
+		IBufferStreamReader::~IBufferStreamReader()
+		{}
+	}//end namespace STREAM
+}//end namespace XNELO

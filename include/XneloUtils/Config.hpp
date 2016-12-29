@@ -2,14 +2,14 @@
 * @file Config.hpp
 * @author Spencer Hoffa
 *
-* @copyright 2014 Spencer Hoffa
+* @copyright 2016 Spencer Hoffa
 *
 * A file to determine environment and configurations.
 */
 /*
 * The zlib/libpng License
 *
-* Copyright (c) 2014 Spencer Hoffa
+* Copyright (c) 2016 Spencer Hoffa
 *
 * This software is provided 'as-is', without any express or implied warranty.
 * In no event will the authors be held liable for any damages arising from the
@@ -77,6 +77,16 @@
 	//Static library (DEFAULT)
 	#define XNELO_API
 #endif
+
+//Define NULL if it's not defined.
+#ifndef NULL
+	#ifdef __cplusplus
+		#define NULL 0
+	#else
+		#define NULL ((void *)0)
+	#endif
+#endif //!NULL
+
 
 
 #endif //___XNELO_CONFIG__HPP___10_2016___
