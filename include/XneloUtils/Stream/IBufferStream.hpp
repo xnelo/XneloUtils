@@ -49,10 +49,28 @@ namespace XNELO
 			//static const bool IsWriting; //<-+-- Subclasses should define these variables
 			//static const bool IsReading; //<-+
 
+			/**
+			* Constructor
+			*/
 			IBufferStream();
+
+			/**
+			* Destructor
+			*/
 			virtual ~IBufferStream();
 
+			/**
+			* Get the internal buffer of data that this stream buffer contains.
+			*
+			* @return A pointer to the beginning of the data stored in this buffer.
+			*/
 			virtual char * GetBuffer() = 0;
+
+			/**
+			* Get the amount of data in bytes in the buffer of this class.
+			*
+			* @return A uint32 integer with the amount of data in the buffer.
+			*/
 			virtual XNELO::CORE::uint32 GetSize() = 0;
 		};
 	} //end namespace STREAM

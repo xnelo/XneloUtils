@@ -50,13 +50,60 @@ namespace XNELO
 			XNELO::ERRORS::Error _error;
 			std::string _errorMessage;
 		public:
+			/**
+			* Constructor
+			*/
 			XNELO_API Fallible();
+
+			/**
+			* Destructor
+			*/
 			XNELO_API virtual ~Fallible();
+
+			/**
+			* Get this classes current error code.
+			*
+			* @return An Error type with the error code of this class. The error type is a 
+			* redefinition of an integer so that the error can be simplified into a number.
+			*/
 			XNELO_API XNELO::ERRORS::Error GetErrorCode();
+
+			/**
+			* Get the message with the error code.
+			*
+			* @return A string with the error message describing the current error. This should be
+			* set to "OK" if there is no error.
+			*/
 			XNELO_API std::string GetErrorMessage();
+
+			/**
+			* Check to see if the class is OK, or there is no error.
+			*
+			* @return A boolean value that will be true if the error code is set to OK.
+			*/
 			XNELO_API bool IsOK();
+
+			/**
+			* Set the error code and message of the class. This should be used when an error occurs
+			* to indicate that the class had an error occur. This is a method that combines setting 
+			* the code and message into one function.
+			*
+			* @param error An Error type with the code for the error. The Error type is an integer
+			* type so every error code should be associated with a number.
+			* @param message A string describing the error that occured.
+			*/
 			XNELO_API void SetError(XNELO::ERRORS::Error error, std::string message);
+
+			/**
+			* The the error code for the class.
+			*
+			* @param error An error type that holds the number with the code.
+			*/
 			XNELO_API void SetErrorCode(XNELO::ERRORS::Error error);
+
+			/**
+			*
+			*/
 			XNELO_API void SetErrorMessage(std::string messge);
 		};
 	}//end namespace XNELO

@@ -57,7 +57,16 @@ namespace XNELO
 {
 	namespace NETWORK
 	{
+		/**
+		* Any initialization code to execute before any networking sockets are created.
+		*
+		* @return A boolean value, true if initialization succeded and false if an error occured.
+		*/
 		bool InitializeNetworking();
+
+		/**
+		* Shutdown any networking.
+		*/
 		void ShutdownNetworking();
 	}//end namespace network
 }//end namespace xnelo

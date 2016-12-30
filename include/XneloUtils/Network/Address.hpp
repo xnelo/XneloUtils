@@ -49,29 +49,118 @@ namespace XNELO
 			XNELO::CORE::uint32 _address;
 			XNELO::CORE::uint16 _port;
 		public:
+			/**
+			* Constructor
+			*/
 			XNELO_API Address();
+
+			/**
+			* Constructor. This one will set the IP address. The parameters corrospond to the parts
+			* of the ip address (format: a.b.c.d).
+			*
+			* @param a An unsigned integer with 8 bits that define the first part of an IPv4 
+			* address.
+			* @param b An unsigned integer with 8 bits that define the second part of an IPv4
+			* address.
+			* @param c An unsigned integer with 8 bits that define the third part of an IPv4
+			* address.
+			* @param d An unsigned integer with 8 bits that define the fourth part of an IPv4
+			* address.
+			* @param port An unsigned integer with 16 bits that define the port of an IPv4 address.
+			*/
 			XNELO_API Address(XNELO::CORE::uint8 a, 
 							  XNELO::CORE::uint8 b, 
 							  XNELO::CORE::uint8 c, 
 				              XNELO::CORE::uint8 d,
 							  XNELO::CORE::uint16 port);
+
+			/**
+			* Copy Constructor.
+			*/
 			XNELO_API Address(const Address & other);
+
+			/**
+			* Destructor.
+			*/
 			XNELO_API ~Address();
 
+			/**
+			* Assignment operator.
+			*/
 			XNELO_API Address & operator=(const Address & other);
 
+			/**
+			* Get the 32 bit unsigned integer version of the address.
+			*
+			* @return An 32 bit unsigned integer with the address stored in it.
+			*/
 			XNELO_API XNELO::CORE::uint32 GetAddress();
+
+			/**
+			* Get the first part of the IPv4 address.
+			*
+			* @return An integer with the first part of the ip address.
+			*/
 			XNELO_API int GetA();
+
+			/**
+			* Get the second part of the IPv4 address.
+			*
+			* @return An integer with the second part of the ip address.
+			*/
 			XNELO_API int GetB();
+
+			/**
+			* Get the third part of the IPv4 address.
+			*
+			* @return An integer with the thrid part of the ip address.
+			*/
 			XNELO_API int GetC();
+
+			/**
+			* Get the fourth part of the IPv4 address.
+			*
+			* @return An integer with the fourth part of the ip address.
+			*/
 			XNELO_API int GetD();
+
+			/**
+			* Get the first part of the IPv4 address.
+			*
+			* @return An integer with the first part of the ip address.
+			*/
 			XNELO_API XNELO::CORE::uint16 GetPort();
 
+			/**
+			* Set the IPv4 address for this class.
+			*
+			* @param a An unsigned integer with 8 bits that define the first part of an IPv4 
+			* address.
+			* @param b An unsigned integer with 8 bits that define the second part of an IPv4
+			* address.
+			* @param c An unsigned integer with 8 bits that define the third part of an IPv4
+			* address.
+			* @param d An unsigned integer with 8 bits that define the fourth part of an IPv4
+			* address.
+			* @param port An unsigned integer with 16 bits that define the port of an IPv4 address.
+			*/
 			XNELO_API void SetAddress(XNELO::CORE::uint8 a,
 									  XNELO::CORE::uint8 b,
 									  XNELO::CORE::uint8 c,
 									  XNELO::CORE::uint8 d);
+
+			/**
+			* Set the IPv4 address using the uint32 format.
+			*
+			* @param address An unsigned integer 32bit with an IPv4 address.
+			*/
 			XNELO_API void SetAddress(XNELO::CORE::uint32 address);
+
+			/**
+			* Set the port number of the address.
+			*
+			* @param port An unsigned integer 16bit with the port number.
+			*/
 			XNELO_API void SetAddressPort(XNELO::CORE::uint16 port);
 		private:
 			XNELO_API int _GetAddressPart(XNELO::CORE::uint8 bitsToShift);

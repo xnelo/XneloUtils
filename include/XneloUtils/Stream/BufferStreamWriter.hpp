@@ -52,11 +52,46 @@ namespace XNELO
 			XNELO::CORE::uint32 _bufferIndex;
 			bool _autoExpand;
 		public:
+			/**
+			* Constructor
+			*/
 			XNELO_API BufferStreamWriter();
+
+			/**
+			* Constructor with an initial buffersize.
+			*
+			* @param bufferSize A uint32 variable with the size of internal buffer to initially
+			* create.
+			*/
 			XNELO_API BufferStreamWriter(XNELO::CORE::uint32 bufferSize);
+
+			/**
+			* Destructor
+			*/
 			XNELO_API ~BufferStreamWriter();
+
+			/**
+			* Get the internal buffer of data that has been written to this class so far.
+			*
+			* @return A pointer to the beginning of the data stored in this buffer.
+			*/
 			XNELO_API virtual char * GetBuffer();
+
+			/**
+			* Get the amount of data that has been written to this class.
+			*
+			* @return A uint32 variable with the number of bytes of data that has been written.
+			*/
 			XNELO_API virtual XNELO::CORE::uint32 GetSize();
+
+			/**
+			* Write data to this class' buffer. 
+			*
+			* @param toWrite A void pointer to data to be written to this class.
+			* @param sizeInBytes An integer with the number of bytes of data in the buffer to copy.
+			*
+			* @return An integer with the number of bytes of data that were actually copied.
+			*/
 			XNELO_API virtual int Write(const void * toWrite, int sizeInBytes);
 		private:
 			XNELO_API void ExpandBuffer();

@@ -42,6 +42,7 @@ namespace XNELO
 {
 	namespace ERRORS
 	{
+		/**Define an error type.*/
 		typedef XNELO::CORE::uint16 Error;
 		
 		const Error OK = 0;
