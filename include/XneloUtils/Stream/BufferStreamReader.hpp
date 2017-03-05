@@ -43,7 +43,7 @@ namespace XNELO
 {
 	namespace STREAM
 	{
-		class BufferStreamReader : public XNELO::CORE::Fallible, IBufferStreamReader
+		class BufferStreamReader : public XNELO::CORE::Fallible, public IBufferStreamReader
 		{
 		private:
 			char * _buffer;

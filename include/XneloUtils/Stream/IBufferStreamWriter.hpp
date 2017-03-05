@@ -72,6 +72,8 @@ namespace XNELO
 			*/
 			virtual XNELO::CORE::uint32 GetSize() = 0;
 
+			int Serialize(void * data, XNELO::CORE::uint32 dataSize);
+
 			/**
 			* Write data to this class' buffer.
 			*
@@ -84,5 +86,10 @@ namespace XNELO
 		};
 	} //end namespace STREAM
 } //end namespace XNELO
+
+inline int XNELO::STREAM::IBufferStreamWriter::Serialize(void * data, XNELO::CORE::uint32 dataSize)
+{
+	return Write(data, dataSize);
+}
 
 #endif // ___XNELOUTILS_STREAM_ISTREAMWRITER__HPP__12_8_2016___

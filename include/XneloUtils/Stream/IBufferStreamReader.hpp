@@ -87,9 +87,16 @@ namespace XNELO
 			* value less than 0 is an error, and a return of 0 means no data was read/copied.
 			*/
 			virtual int Read(void * buffer, int readAmount) = 0;
+
+			int Serialize(void * data, XNELO::CORE::uint32 dataSize);
 		};
 	}//end namespace STREAM
 }//end namespace XNELO
+
+inline int XNELO::STREAM::IBufferStreamReader::Serialize(void * data, XNELO::CORE::uint32 dataSize)
+{
+	return Read(data, dataSize);
+}
 
 #endif // !___XNELO_STREAM_ISTREAMREADER_HPP__12_8_2016___
 

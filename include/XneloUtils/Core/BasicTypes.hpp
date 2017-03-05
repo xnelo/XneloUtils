@@ -79,6 +79,15 @@ namespace XNELO
 		const uint8 bit6 = 32;				//0010 0000
 		const uint8 bit7 = 64;				//0100 0000
 		const uint8 bit8 = 128;				//1000 0000
+
+		const uint16 bit9 = 256;			//0000 0001 0000 0000
+		const uint16 bit10 = 512;			//0000 0010 0000 0000
+		const uint16 bit11 = 1024;			//0000 0100 0000 0000
+		const uint16 bit12 = 2048;			//0000 1000 0000 0000
+		const uint16 bit13 = 4096;			//0001 0000 0000 0000
+		const uint16 bit14 = 8192;			//0010 0000 0000 0000
+		const uint16 bit15 = 16384;			//0100 0000 0000 0000
+		const uint16 bit16 = 32768;			//1000 0000 0000 0000
 	} //end namespace CORE
 } //end namespace XNELO
 

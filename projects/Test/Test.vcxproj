@@ -19,8 +19,10 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\TestCases\Core\BitwiseOperators.cpp" />
     <ClCompile Include="..\..\TestCases\Core\Fallible.cpp" />
     <ClCompile Include="..\..\TestCases\Network\Address.cpp" />
+    <ClCompile Include="..\..\TestCases\Network\PacketManager.cpp" />
     <ClCompile Include="..\..\TestCases\Network\UDPSocket.cpp" />
     <ClCompile Include="..\..\TestCases\Network\XneloSocket.cpp" />
     <ClCompile Include="..\..\TestCases\Stream\BufferStreamReader.cpp" />

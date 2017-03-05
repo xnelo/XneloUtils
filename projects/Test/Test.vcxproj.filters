@@ -51,5 +51,11 @@
     <ClCompile Include="..\..\TestCases\Stream\BufferStreamReader.cpp">
       <Filter>Source Files\Stream</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\TestCases\Network\PacketManager.cpp">
+      <Filter>Source Files\Network</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\TestCases\Core\BitwiseOperators.cpp">
+      <Filter>Source Files\Core</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

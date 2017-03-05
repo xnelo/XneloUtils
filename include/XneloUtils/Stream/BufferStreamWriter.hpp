@@ -44,7 +44,7 @@ namespace XNELO
 {
 	namespace STREAM
 	{
-		class BufferStreamWriter : public XNELO::CORE::Fallible, IBufferStreamWriter
+		class BufferStreamWriter : public XNELO::CORE::Fallible, public IBufferStreamWriter
 		{
 		private:
 			char * _buffer;
@@ -85,6 +85,18 @@ namespace XNELO
 			XNELO_API virtual XNELO::CORE::uint32 GetSize();
 
 			/**
+			* Reset the class so that writing will begin at the beginning of the internal buffer;
+			*/
+			XNELO_API void Reset();
+
+			/**
+			* Reset the class so that writing will begin at the index specified by the parameter.
+			*
+			*@param index An unsigned integer of the index to reset the writer to.
+			*/
+			XNELO_API void Reset(XNELO::CORE::uint32 index);
+
+			/**
 			* Write data to this class' buffer. 
 			*
 			* @param toWrite A void pointer to data to be written to this class.
@@ -102,5 +114,20 @@ namespace XNELO
 		};
 	}//end namespace STREAM
 }// end namespace XNELO
+
+inline void XNELO::STREAM::BufferStreamWriter::Reset()
+{
+	_bufferIndex = 0;
+	SetError(XNELO::ERRORS::OK, "OK");
+}
+
+inline void XNELO::STREAM::BufferStreamWriter::Reset(XNELO::CORE::uint32 index)
+{
+	if (index >= _bufferSize)
+		return;
+
+	_bufferIndex = index;
+	SetError(XNELO::ERRORS::OK, "OK");
+}
 
 #endif //___XNELO_STREAM_BUFFERSTREAMWRITER_HPP__12_10_2016___

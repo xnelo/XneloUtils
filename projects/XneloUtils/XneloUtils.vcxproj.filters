@@ -90,6 +90,9 @@
     <ClCompile Include="..\..\src\Stream\BufferStreamReader.cpp">
       <Filter>Source Files\Stream</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\src\Network\PacketManager.cpp">
+      <Filter>Source Files\Network</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\include\XneloUtils\Config.hpp">
@@ -154,6 +157,15 @@
     </ClInclude>
     <ClInclude Include="..\..\include\XneloUtils\Stream\BufferStreamReader.hpp">
       <Filter>Header Files\Stream</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\XneloUtils\Network\PacketManager.hpp">
+      <Filter>Header Files\Network</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\XneloUtils\Core\BitwiseOperators.hpp">
+      <Filter>Header Files\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\XneloUtils\Network\XneloPacket.hpp">
+      <Filter>Header Files\Network</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

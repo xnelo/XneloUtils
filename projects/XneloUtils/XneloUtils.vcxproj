@@ -103,6 +103,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>$(ProjectDir)..\..\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Static Lib Debug|x64'">
@@ -112,6 +113,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>$(ProjectDir)..\..\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Static Lib Release|Win32'">
@@ -123,6 +125,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>$(ProjectDir)..\..\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
@@ -138,6 +141,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>$(ProjectDir)..\..\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
@@ -149,6 +153,7 @@
     <ClCompile Include="..\..\src\Logging\Logging.cpp" />
     <ClCompile Include="..\..\src\Network\Address.cpp" />
     <ClCompile Include="..\..\src\Network\Network.cpp" />
+    <ClCompile Include="..\..\src\Network\PacketManager.cpp" />
     <ClCompile Include="..\..\src\Network\XneloSocket.cpp" />
     <ClCompile Include="..\..\src\Network\UDPSocket.cpp" />
     <ClCompile Include="..\..\src\Stream\BufferStreamReader.cpp" />
@@ -164,12 +169,15 @@
   <ItemGroup>
     <ClInclude Include="..\..\include\XneloUtils\Config.hpp" />
     <ClInclude Include="..\..\include\XneloUtils\Core\BasicTypes.hpp" />
+    <ClInclude Include="..\..\include\XneloUtils\Core\BitwiseOperators.hpp" />
     <ClInclude Include="..\..\include\XneloUtils\Core\Errors.hpp" />
     <ClInclude Include="..\..\include\XneloUtils\Core\Fallible.hpp" />
     <ClInclude Include="..\..\include\XneloUtils\Logging\Logging.hpp" />
     <ClInclude Include="..\..\include\XneloUtils\Network\Address.hpp" />
     <ClInclude Include="..\..\include\XneloUtils\Network\Network.hpp" />
+    <ClInclude Include="..\..\include\XneloUtils\Network\PacketManager.hpp" />
     <ClInclude Include="..\..\include\XneloUtils\Network\UDPSocket.hpp" />
+    <ClInclude Include="..\..\include\XneloUtils\Network\XneloPacket.hpp" />
     <ClInclude Include="..\..\include\XneloUtils\Network\XneloSocket.hpp" />
     <ClInclude Include="..\..\include\XneloUtils\Stream\BufferStreamReader.hpp" />
     <ClInclude Include="..\..\include\XneloUtils\Stream\BufferStreamWriter.hpp" />
