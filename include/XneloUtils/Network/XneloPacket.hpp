@@ -38,6 +38,10 @@
 
 #include "Network.hpp"
 #include "../Core/BasicTypes.hpp"
+#include "../Core/Errors.hpp"
+#include "../Stream/IBufferStreamReader.hpp"
+#include "../Stream/IBufferStreamWriter.hpp"
+#include <string>
 
 namespace XNELO
 {

@@ -49,6 +49,8 @@ namespace XNELO
 			XNELO::CORE::uint32 _address;
 			XNELO::CORE::uint16 _port;
 		public:
+			XNELO_API static Address GetCurrentIPAddress();
+
 			/**
 			* Constructor
 			*/
@@ -94,7 +96,7 @@ namespace XNELO
 			*
 			* @return An 32 bit unsigned integer with the address stored in it.
 			*/
-			XNELO_API XNELO::CORE::uint32 GetAddress();
+			XNELO_API XNELO::CORE::uint32 GetAddress() const;
 
 			/**
 			* Get the first part of the IPv4 address.
@@ -129,7 +131,7 @@ namespace XNELO
 			*
 			* @return An integer with the first part of the ip address.
 			*/
-			XNELO_API XNELO::CORE::uint16 GetPort();
+			XNELO_API XNELO::CORE::uint16 GetPort() const;
 
 			/**
 			* Set the IPv4 address for this class.
@@ -199,12 +201,12 @@ inline XNELO::NETWORK::Address & XNELO::NETWORK::Address::operator=(const Addres
 	return *this;
 }
 
-inline XNELO::CORE::uint32 XNELO::NETWORK::Address::GetAddress()
+inline XNELO::CORE::uint32 XNELO::NETWORK::Address::GetAddress() const
 {
 	return _address;
 }
 
-inline XNELO::CORE::uint16 XNELO::NETWORK::Address::GetPort()
+inline XNELO::CORE::uint16 XNELO::NETWORK::Address::GetPort() const
 {
 	return _port;
 }
@@ -232,6 +234,16 @@ inline void XNELO::NETWORK::Address::_CopyData(const XNELO::NETWORK::Address & o
 		_address = other._address;
 		_port = other._port;
 	}
+}
+
+inline bool operator==(const XNELO::NETWORK::Address & lhs, const XNELO::NETWORK::Address & rhs)
+{
+	return ((lhs.GetAddress() == rhs.GetAddress()) && (lhs.GetPort() == rhs.GetPort()));
+}
+
+inline bool operator!=(const XNELO::NETWORK::Address & lhs, const XNELO::NETWORK::Address & rhs)
+{
+	return !(lhs == rhs);
 }
 
 #endif //___XNELO_NETWORK_ADDRESS__HPP__10_5_2016___

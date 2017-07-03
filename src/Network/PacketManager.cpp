@@ -38,7 +38,7 @@ namespace XNELO
 {
 	namespace NETWORK
 	{
-		PacketManager::PacketManager(): Fallible(), _sentPackets(), _receivedPackets(), _sequence(0), _remoteSequence(0)
+		PacketManager::PacketManager(XNELO::CORE::uint32 protocolID): Fallible(), _sentPackets(), _receivedPackets(), _sequence(0), _remoteSequence(0), _protocolID(protocolID)
 		{
 			SetError(XNELO::ERRORS::OK, "OK");
 		}
@@ -91,7 +91,7 @@ namespace XNELO
 
 		void PacketManager::WritePacket(XNELO::STREAM::IBufferStreamWriter * writer, XneloPacket * packet)//, void* data, XNELO::CORE::uint32 dataSize)
 		{
-			writer->Write((void*)&(PacketManager::PROTOCOL_ID), sizeof(PacketManager::PROTOCOL_ID));
+			writer->Write((void*)&(_protocolID), sizeof(_protocolID));
 
 			writer->Write((void*)&_sequence, sizeof(_sequence));
 
@@ -130,7 +130,7 @@ namespace XNELO
 				return NULL;
 			}
 
-			if (protocolNumber != PacketManager::PROTOCOL_ID)
+			if (protocolNumber != _protocolID)
 			{
 				//not our packet stop processing
 				SetError(XNELO::ERRORS::PACKET_PROTOCOL_NUMBER_INCORRECT, "Packet protocol number is incorrect. Not our packet.");

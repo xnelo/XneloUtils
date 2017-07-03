@@ -80,15 +80,24 @@ namespace XNELO
 
 			XNELO::CORE::uint32 _sequence;
 			XNELO::CORE::uint32 _remoteSequence;
-		public:
-			static const XNELO::CORE::uint32 PROTOCOL_ID = 1;
 
-			XNELO_API PacketManager();
+			XNELO::CORE::uint32 _protocolID;
+		public:
+			//static const XNELO::CORE::uint32 PROTOCOL_ID = 1;
+
+			/**
+			 * Constructor
+			 * @param protocolID An integer with the protocol ID this manager will create/interpret
+			 *						(default value is 1).
+			 */
+			XNELO_API PacketManager(XNELO::CORE::uint32 protocolID = 1);
 			XNELO_API virtual ~PacketManager();
 
 			XNELO_API virtual XneloPacket * CreateCorrectPacket(XNELO::CORE::uint32 packetType) = 0;
 
 			XNELO_API std::vector<XNELO::CORE::uint32> GetAcknowledgedList();
+
+			XNELO_API XNELO::CORE::uint32 GetProtocolID();
 
 			XNELO_API bool MarkAcknowledged(XNELO::CORE::uint32 sequenceNumber);
 
@@ -141,6 +150,11 @@ namespace XNELO
 		};
 	}//end namespace NETWORK
 }//end namespace XNELO
+
+inline XNELO::CORE::uint32 XNELO::NETWORK::PacketManager::GetProtocolID()
+{
+	return _protocolID;
+}
 
 inline void XNELO::NETWORK::PacketManager::SavePacket(std::list<XNELO::NETWORK::PacketManager::SavePacketData*>& container, XNELO::CORE::uint32 sequenceNumber, XNELO::CORE::uint8 * packetData, XNELO::CORE::uint32 dataSize)
 {

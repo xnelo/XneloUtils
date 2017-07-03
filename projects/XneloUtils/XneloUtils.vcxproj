@@ -150,8 +150,10 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\..\src\Core\Fallible.cpp" />
+    <ClCompile Include="..\..\src\Core\SystemFunctions.cpp" />
     <ClCompile Include="..\..\src\Logging\Logging.cpp" />
     <ClCompile Include="..\..\src\Network\Address.cpp" />
+    <ClCompile Include="..\..\src\Network\BroadcastSocket.cpp" />
     <ClCompile Include="..\..\src\Network\Network.cpp" />
     <ClCompile Include="..\..\src\Network\PacketManager.cpp" />
     <ClCompile Include="..\..\src\Network\XneloSocket.cpp" />
@@ -172,8 +174,11 @@
     <ClInclude Include="..\..\include\XneloUtils\Core\BitwiseOperators.hpp" />
     <ClInclude Include="..\..\include\XneloUtils\Core\Errors.hpp" />
     <ClInclude Include="..\..\include\XneloUtils\Core\Fallible.hpp" />
+    <ClInclude Include="..\..\include\XneloUtils\Core\StringUtils.hpp" />
+    <ClInclude Include="..\..\include\XneloUtils\Core\SystemFunctions.hpp" />
     <ClInclude Include="..\..\include\XneloUtils\Logging\Logging.hpp" />
     <ClInclude Include="..\..\include\XneloUtils\Network\Address.hpp" />
+    <ClInclude Include="..\..\include\XneloUtils\Network\BroadcastSocket.hpp" />
     <ClInclude Include="..\..\include\XneloUtils\Network\Network.hpp" />
     <ClInclude Include="..\..\include\XneloUtils\Network\PacketManager.hpp" />
     <ClInclude Include="..\..\include\XneloUtils\Network\UDPSocket.hpp" />

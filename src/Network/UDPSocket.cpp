@@ -130,7 +130,7 @@ namespace XNELO
 
 			if (bytesReceived <= 0)
 			{
-				XNELO_LOG_DEBUG("UDPSocket(0x%x) -- no bytes recieved", this);
+				//XNELO_LOG_DEBUG("UDPSocket(0x%x) -- no bytes recieved", this);
 				return 0;
 			}
 
