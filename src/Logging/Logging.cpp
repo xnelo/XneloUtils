@@ -78,7 +78,7 @@ namespace XNELO
 
 		char * _LOG_INTERNAL(const char * message, va_list args)
 		{
-			size_t size = XNELO_LOGGING_BUFFER_SIZE;
+			int size = XNELO_LOGGING_BUFFER_SIZE;
 
 			int charsPrinted;
 			char * buffer = NULL;

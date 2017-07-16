@@ -89,7 +89,7 @@ namespace XNELO
 						//newDir += ent->d_name;
 						//GetFiles(newDir.c_str(), recursive);
 						std::vector<std::string> recFiles = GetFiles(newPath.c_str(), recursive);
-						for (int i = 0; i < recFiles.size(); i++)
+						for (unsigned int i = 0; i < recFiles.size(); i++)
 						{
 							foundFiles.push_back(recFiles[i]);
 						}
@@ -112,7 +112,7 @@ namespace XNELO
 			std::vector<std::string> returnedFiles = GetFiles(directory, recursive);
 			std::vector<std::string> answer;
 
-			for (int i = 0; i < returnedFiles.size(); ++i)
+			for (unsigned int i = 0; i < returnedFiles.size(); ++i)
 			{
 				std::string ext = GetExtension(std::string(returnedFiles[i]));
 				if (std::strcmp(ext.c_str(), extension) == 0)
