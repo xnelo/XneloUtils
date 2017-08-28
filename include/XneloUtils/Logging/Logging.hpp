@@ -73,6 +73,25 @@ namespace XNELO
 {
 	namespace LOGGING
 	{
+		typedef int LogLevel;
+
+		const LogLevel Emergency = XNELO_LOGGING_EMERGENCY;
+		const LogLevel Alert = XNELO_LOGGING_ALERT;
+		const LogLevel Critical = XNELO_LOGGING_CRITICAL;
+		const LogLevel Error = XNELO_LOGGING_ERROR;
+		const LogLevel Warning = XNELO_LOGGING_WARNING;
+		const LogLevel Notice = XNELO_LOGGING_NOTICE;
+		const LogLevel Info = XNELO_LOGGING_INFO;
+		const LogLevel Informational = XNELO_LOGGING_INFORMATIONAL;
+		const LogLevel Debug = XNELO_LOGGING_DEBUG;
+		const LogLevel Debug1 = XNELO_LOGGING_DEBUG1;
+		const LogLevel Debug2 = XNELO_LOGGING_DEBUG2;
+		const LogLevel Debug3 = XNELO_LOGGING_DEBUG3;
+		const LogLevel Debug4 = XNELO_LOGGING_DEBUG4;
+
+		void SetLogLevel(LogLevel newLevel);
+		LogLevel GetLogLevel();
+
 		void Log(int level, const char * message, ...);
 	} //namespace LOGGING
 } //namespace XNELO

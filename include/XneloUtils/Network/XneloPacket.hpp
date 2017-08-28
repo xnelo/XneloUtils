@@ -36,7 +36,7 @@
 #ifndef ___XNELO_NETWORK_XNELOPACKET__HPP__02_08_2017___
 #define ___XNELO_NETWORK_XNELOPACKET__HPP__02_08_2017___
 
-#include "Network.hpp"
+#include "NetworkCore.hpp"
 #include "../Core/BasicTypes.hpp"
 #include "../Core/Errors.hpp"
 #include "../Stream/IBufferStreamReader.hpp"

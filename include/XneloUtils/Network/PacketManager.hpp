@@ -36,7 +36,7 @@
 #ifndef ___XNELO_NETWORK_PACKETMANAGER_HPP__1_15_2017___
 #define ___XNELO_NETWORK_PACKETMANAGER_HPP__1_15_2017___
 
-#include "Network.hpp"
+#include "NetworkCore.hpp"
 #include "XneloUtils/Core/BasicTypes.hpp"
 #include "XneloUtils/Core/Errors.hpp"
 #include "XneloUtils/Core/Fallible.hpp"

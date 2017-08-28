@@ -1,5 +1,5 @@
 /**
-* @file Network.hpp
+* @file NetworkCore.hpp
 * @author Spencer Hoffa
 *
 * @copyright 2017 Spencer Hoffa
@@ -33,15 +33,42 @@
 * This liscense can also be found at: http://opensource.org/licenses/Zlib
 */
 
-#ifndef ___XNELO_NETWORK_INCLUDES__HPP__11_5_2016___
-#define ___XNELO_NETWORK_INCLUDES__HPP__11_5_2016___
+#ifndef ___XNELO_NETWORK_NETWORKCORE_HPP__7_16_2017___
+#define ___XNELO_NETWORK_NETWORKCORE_HPP__7_16_2017___
 
-#include "Address.hpp"
-#include "BroadcastSocket.hpp"
-#include "NetworkCore.hpp"
-#include "PacketManager.hpp"
-#include "UDPSocket.hpp"
-#include "XneloPacket.hpp"
-#include "XneloSocket.hpp"
+#include "../Config.hpp"
 
-#endif //___XNELO_NETWORK_INCLUDES__HPP__11_5_2016___
+#if PLATFORM == XNELO_PLATFORM_WINDOWS
+
+#define _WINSOCK_DEPRECATED_NO_WARNINGS
+#include <winsock2.h>
+#pragma comment(lib, "wsock32.lib")
+
+#elif PLATFORM == XNELO_PLATFORM_MAC || PLATFORM == XNELO_PLATFORM_UNIX
+
+#include <sys/socket.h>
+#include <netinet/in.h>
+#include <fcntl.h>
+
+#endif
+
+namespace XNELO
+{
+	namespace NETWORK
+	{
+		/**
+		* Any initialization code to execute before any networking sockets are created.
+		*
+		* @return A boolean value, true if initialization succeded and false if an error occured.
+		*/
+		bool InitializeNetworking();
+
+		/**
+		* Shutdown any networking.
+		*/
+		void ShutdownNetworking();
+	}//end namespace network
+}//end namespace xnelo
+
+#endif // !___XNELO_NETWORK_NETWORKCORE_HPP__7_16_2017___
+

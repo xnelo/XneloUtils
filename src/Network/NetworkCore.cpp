@@ -1,15 +1,15 @@
 /**
-* @file Network.hpp
+* @file NetworkCore.cpp
 * @author Spencer Hoffa
 *
-* @copyright 2017 Spencer Hoffa
+* @copyright 2016 Spencer Hoffa
 *
-* Includes information for all Xnelo network classes.
+* Implementation of network functions.
 */
 /*
 * The zlib/libpng License
 *
-* Copyright (c) 2017 Spencer Hoffa
+* Copyright (c) 2016 Spencer Hoffa
 *
 * This software is provided 'as-is', without any express or implied warranty.
 * In no event will the authors be held liable for any damages arising from the
@@ -33,15 +33,43 @@
 * This liscense can also be found at: http://opensource.org/licenses/Zlib
 */
 
-#ifndef ___XNELO_NETWORK_INCLUDES__HPP__11_5_2016___
-#define ___XNELO_NETWORK_INCLUDES__HPP__11_5_2016___
+#include "XneloUtils/Network/NetworkCore.hpp"
 
-#include "Address.hpp"
-#include "BroadcastSocket.hpp"
-#include "NetworkCore.hpp"
-#include "PacketManager.hpp"
-#include "UDPSocket.hpp"
-#include "XneloPacket.hpp"
-#include "XneloSocket.hpp"
+namespace XNELO
+{
+	namespace NETWORK
+	{
+		bool networking_initialized = false;
 
-#endif //___XNELO_NETWORK_INCLUDES__HPP__11_5_2016___
+		bool InitializeNetworking()
+		{
+			if (networking_initialized)
+				return true;
+
+		#if PLATFORM == XNELO_PLATFORM_WINDOWS
+			WSADATA WsaData;
+
+			if (WSAStartup(MAKEWORD(2, 2), &WsaData) != NO_ERROR)
+			{
+				networking_initialized = false;
+				return false;
+			}
+
+			networking_initialized = true;
+		#else
+			networking_initialized = true;
+		#endif
+
+			return networking_initialized;
+		}
+
+		void ShutdownNetworking()
+		{
+		#if PLATFORM == XNELO_PLATFORM_WINDOWS
+			WSACleanup();
+		#endif
+
+			networking_initialized = false;
+		}
+	}//end namespace network
+}//end namespace xnelo

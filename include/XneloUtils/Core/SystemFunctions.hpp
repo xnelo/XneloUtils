@@ -45,7 +45,6 @@
 
 #include <Windows.h>
 
-
 #elif PLATFORM == XNELO_PLATFORM_MAC || PLATFORM == XNELO_PLATFORM_UNIX
 
 #include <unistd.h>

@@ -1,10 +1,10 @@
 /**
-* @file Network.hpp
+* @file Stream.hpp
 * @author Spencer Hoffa
 *
 * @copyright 2017 Spencer Hoffa
 *
-* Includes information for all Xnelo network classes.
+* Define a TankControllerServer class.
 */
 /*
 * The zlib/libpng License
@@ -33,15 +33,8 @@
 * This liscense can also be found at: http://opensource.org/licenses/Zlib
 */
 
-#ifndef ___XNELO_NETWORK_INCLUDES__HPP__11_5_2016___
-#define ___XNELO_NETWORK_INCLUDES__HPP__11_5_2016___
-
-#include "Address.hpp"
-#include "BroadcastSocket.hpp"
-#include "NetworkCore.hpp"
-#include "PacketManager.hpp"
-#include "UDPSocket.hpp"
-#include "XneloPacket.hpp"
-#include "XneloSocket.hpp"
-
-#endif //___XNELO_NETWORK_INCLUDES__HPP__11_5_2016___
+#include "BufferStreamReader.hpp"
+#include "BufferStreamWriter.hpp"
+#include "IBufferStream.hpp"
+#include "IBufferStreamReader.hpp"
+#include "IBufferStreamWriter.hpp"

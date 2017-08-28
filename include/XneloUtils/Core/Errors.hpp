@@ -62,6 +62,8 @@ namespace XNELO
 		const Error ERROR_READING_DATA = 14;
 		const Error PACKET_ERROR_NO_PACKET_MATCHING_TYPE = 15;
 		const Error SOCKET_FAILED_TO_ENABLE_BROADCAST = 16;
+
+		const Error END_CORE_ERROR_VALUE = 1000;
 	}//end namespace ERROR
 }//end namespace XNELO
 

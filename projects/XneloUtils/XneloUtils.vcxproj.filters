@@ -66,9 +66,6 @@
     <ClCompile Include="..\..\src\Network\UDPSocket.cpp">
       <Filter>Source Files\Network</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\src\Network\Network.cpp">
-      <Filter>Source Files\Network</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\src\Network\XneloSocket.cpp">
       <Filter>Source Files\Network</Filter>
     </ClCompile>
@@ -98,6 +95,9 @@
     </ClCompile>
     <ClCompile Include="..\..\src\Core\SystemFunctions.cpp">
       <Filter>Source Files\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\Network\NetworkCore.cpp">
+      <Filter>Source Files\Network</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -181,6 +181,12 @@
     </ClInclude>
     <ClInclude Include="..\..\include\XneloUtils\Core\StringUtils.hpp">
       <Filter>Header Files\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\XneloUtils\Network\NetworkCore.hpp">
+      <Filter>Header Files\Network</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\XneloUtils\Stream\Stream.hpp">
+      <Filter>Header Files\Stream</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

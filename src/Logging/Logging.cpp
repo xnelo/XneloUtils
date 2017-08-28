@@ -43,6 +43,8 @@ namespace XNELO
 {
 	namespace LOGGING
 	{
+		LogLevel _logLevel = XNELO_LOGGING_DEBUG4;
+
 		inline const char * _GET_LOGGING_LEVEL_STRING(int level)
 		{
 			switch (level)
@@ -98,8 +100,15 @@ namespace XNELO
 			return buffer;
 		}
 
+		LogLevel GetLogLevel()
+		{
+			return _logLevel;
+		}
+
 		void Log(int level, const char * message, ...)
 		{
+			if (level > _logLevel) return;
+
 			char * buffer = NULL;
 
 			va_list args;
@@ -115,6 +124,12 @@ namespace XNELO
 
 				delete buffer;
 			}
+		}
+
+		void SetLogLevel(LogLevel newLevel)
+		{
+			if (newLevel < 0) return;
+			_logLevel = newLevel;
 		}
 	}//namespace LOGGING
 }//namespace XNELO

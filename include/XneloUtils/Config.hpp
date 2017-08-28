@@ -50,6 +50,14 @@
 	#else
 		#define ENVIRONMENT XNELO_ENVIRONMENT32
 	#endif
+
+	//Define win32 lean and mean
+#if defined(WIN32) || defined(_WIN32) || defined(__WIN32)
+#ifndef WIN32_LEAN_AND_MEAN
+#define WIN32_LEAN_AND_MEAN
+#endif // !WIN32_LEAN_AND_MEAN
+#endif // _WIN32
+
 #elif defined(__APPLE__)
 	#define PLATFORM XNELO_PLATFORM_MAC
 #else
@@ -86,7 +94,5 @@
 		#define NULL ((void *)0)
 	#endif
 #endif //!NULL
-
-
 
 #endif //___XNELO_CONFIG__HPP___10_2016___

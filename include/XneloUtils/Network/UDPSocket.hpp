@@ -36,7 +36,7 @@
 #ifndef ___XNELO_NETWORK_UDPSOCKET__HPP__11_10_2016___
 #define ___XNELO_NETWORK_UDPSOCKET__HPP__11_10_2016___
 
-#include "Network.hpp"
+#include "NetworkCore.hpp"
 #include "XneloSocket.hpp"
 
 namespace XNELO

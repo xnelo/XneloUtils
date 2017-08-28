@@ -35,6 +35,7 @@
 
 #include "XneloUtils/Network/Address.hpp"
 #include "XneloUtils/Logging/Logging.hpp"
+#include <stdlib.h>
 
 #if PLATFORM == XNELO_PLATFORM_WINDOWS
 #include <IPHlpApi.h>
