@@ -64,6 +64,7 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Core\NotifyPropertyChangedImpl.cs" />
     <Compile Include="IOC\IAutoDisposable.cs" />
     <Compile Include="IOC\ServiceLocator.cs" />
     <Compile Include="MVVM\IWindow.cs" />
@@ -79,7 +80,9 @@
     <Compile Include="WPFUtils\Themes\ThemesDictionary.cs" />
     <Compile Include="WPFUtils\Validators\TextValidator.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="WPFUtils\Resources\" />
+  </ItemGroup>
   <ItemGroup>
     <Page Include="WPFUtils\Themes\IG\IG.MSControls.Core.Implicit.xaml">
       <Generator>MSBuild:Compile</Generator>
