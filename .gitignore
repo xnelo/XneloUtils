@@ -1,5 +1,5 @@
 *.user
-projects/.vs
+cpp/projects/.vs
 *.sdf
 *.opendb
 obj/

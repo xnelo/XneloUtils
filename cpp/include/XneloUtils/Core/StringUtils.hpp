@@ -34,6 +34,35 @@ namespace XNELO
 {
 	namespace CORE
 	{
+		/// <summary>
+		/// Convert a character into an integer type. This function assumes you passed in a valid 
+		/// character [0-9] || [A-F]. If an invalid character is passed in then 0 is returned. If 
+		/// error checking is desired see the overloaded version of this function.
+		/// 
+		/// This function is a modified version from: Niels Keurentjes and Lysann Schlegel
+		/// <see cref="https://stackoverflow.com/questions/17261798/converting-a-hex-string-to-a-byte-array"/>
+		/// </summary>
+		/// <param name="input">A single character to convert to a number.</param>
+		/// <returns>An integer with the integer.</returns>
+		int char2int(char input);
+
+		/// <summary>
+		/// Convert a character into an integer type. This function assumes you passed in a valid 
+		/// character [0-9] || [A-F]. If an invalid character is passed in then 0 is returned. Upon
+		/// completion the success argument will have true if the character was converted and false
+		/// if the character wasn't converted.
+		/// 
+		/// This function is a modified version from: Niels Keurentjes and Lysann Schlegel
+		/// <see cref="https://stackoverflow.com/questions/17261798/converting-a-hex-string-to-a-byte-array"/>
+		/// </summary>
+		/// <param name="input">A single character to convert to a number.</param>
+		/// <param name="success">
+		/// A pointer to a boolean variable that will contain if the conversion was successful or 
+		/// not.
+		/// </param>
+		/// <returns>An integer with the integer.</returns>
+		int char2int(char input, bool * success);
+
 		/**
 		* String Compare Case Insensitive. Compare two c-strings to see if they are the same 
 		* without case sensitivity. A == a in this function. This function checks the entire string 
@@ -80,6 +109,33 @@ namespace XNELO
 		const char * BoolToString(bool boolean);
 	}//end namespace STRING
 }//end namespace BIO
+
+inline int XNELO::CORE::char2int(char input)
+{
+	if (input >= '0' && input <= '9')
+		return input - '0';
+	if (input >= 'A' && input <= 'F')
+		return input - 'A' + 10;
+	if (input >= 'a' && input <= 'f')
+		return input - 'a' + 10;
+
+	return 0;
+}
+
+inline int XNELO::CORE::char2int(char input, bool * success)
+{
+	(*success) = true;
+
+	if (input >= '0' && input <= '9')
+		return input - '0';
+	if (input >= 'A' && input <= 'F')
+		return input - 'A' + 10;
+	if (input >= 'a' && input <= 'f')
+		return input - 'a' + 10;
+
+	(*success) = false;
+	return 0;
+}
 
 inline int XNELO::CORE::strcmpCI(char const *a, char const *b)
 {

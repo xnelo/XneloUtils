@@ -99,6 +99,9 @@
     <ClCompile Include="..\..\src\Network\NetworkCore.cpp">
       <Filter>Source Files\Network</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\src\Core\UUID.cpp">
+      <Filter>Source Files\Core</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\include\XneloUtils\Config.hpp">
@@ -187,6 +190,9 @@
     </ClInclude>
     <ClInclude Include="..\..\include\XneloUtils\Stream\Stream.hpp">
       <Filter>Header Files\Stream</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\XneloUtils\Core\UUID.hpp">
+      <Filter>Header Files\Core</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
