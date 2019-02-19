@@ -75,14 +75,13 @@
     <Compile Include="WPFUtils\Converters\BooleanToVisibilityConverter.cs" />
     <Compile Include="WPFUtils\Converters\NotBooleanConverter.cs" />
     <Compile Include="WPFUtils\Converters\NotBooleanToVisibilityConverter.cs" />
+    <Compile Include="WPFUtils\Resources\IResourceDictionaryProvider.cs" />
     <Compile Include="WPFUtils\Themes\ThemeData.cs" />
     <Compile Include="WPFUtils\Themes\MKThemeSelector.cs" />
     <Compile Include="WPFUtils\Themes\ThemesDictionary.cs" />
     <Compile Include="WPFUtils\Validators\TextValidator.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="WPFUtils\Resources\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Page Include="WPFUtils\Themes\IG\IG.MSControls.Core.Implicit.xaml">
       <Generator>MSBuild:Compile</Generator>
