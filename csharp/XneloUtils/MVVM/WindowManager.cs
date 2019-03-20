@@ -74,6 +74,19 @@ namespace XneloUtils.MVVM
 			}
 		}
 
+		/// <summary>
+		/// Check if a window with the passed in name has already been opened.
+		/// </summary>
+		/// <param name="windowName">
+		/// The name of the window for future lookup. This should be the same value passed into 
+		/// <see cref="OpenWindow(string, Window, ViewModelBase, bool)"/>.
+		/// </param>
+		/// <returns>True if the window exists in this manager. False if it doesnt.</returns>
+		public static bool WindowExists(string windowName)
+		{
+			return m_Windows.ContainsKey(windowName);
+		}
+
 		private static void OnClosing(object sender, CancelEventArgs e)
 		{
 			Window win = sender as Window;
