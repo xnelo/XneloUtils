@@ -81,7 +81,7 @@ inline void XNELO::CORE::XneloSleep(XNELO::CORE::uint32 milliseconds)
 {
 #if PLATFORM == XNELO_PLATFORM_WINDOWS
 	Sleep((DWORD)milliseconds);
-#elif PLATFORM == XNELO_PLATFORM_MAX || PLATFORM == XNELO_PLATFORM_UNIX
+#elif PLATFORM == XNELO_PLATFORM_MAC || PLATFORM == XNELO_PLATFORM_UNIX
 	usleepf(milliseconds * 1000);
 #endif
 }
