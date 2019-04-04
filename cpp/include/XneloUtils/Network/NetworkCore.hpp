@@ -44,8 +44,9 @@
 #include <winsock2.h>
 #pragma comment(lib, "wsock32.lib")
 
-#elif PLATFORM == XNELO_PLATFORM_MAC || PLATFORM == XNELO_PLATFORM_UNIX
+#elif PLATFORM == XNELO_PLATFORM_MAC || PLATFORM == XNELO_PLATFORM_LINUX
 
+#include <arpa/inet.h>
 #include <sys/socket.h>
 #include <netinet/in.h>
 #include <fcntl.h>

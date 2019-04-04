@@ -45,9 +45,10 @@
 
 #include <Windows.h>
 
-#elif PLATFORM == XNELO_PLATFORM_MAC || PLATFORM == XNELO_PLATFORM_UNIX
+#elif PLATFORM == XNELO_PLATFORM_MAC || PLATFORM == XNELO_PLATFORM_LINUX
 
 #include <unistd.h>
+#include <time.h>
 
 #endif
 
@@ -55,7 +56,11 @@ namespace XNELO
 {
 	namespace CORE
 	{
+#if PLATFORM == XNELO_PLATFORM_WINDOWS
 		typedef LARGE_INTEGER LargeInt;
+#elif PLATFORM == XNELO_PLATFORM_LINUX || PLATFORM == XNELO_PLATFORM_MAC
+		typedef uint64 LargeInt;
+#endif
 		/**
 		* Sleep the threads execution for certain number of milliseconds. This calls the underlying
 		* system sleep command. Windows: Sleep() Unix: usleep()
@@ -81,8 +86,8 @@ inline void XNELO::CORE::XneloSleep(XNELO::CORE::uint32 milliseconds)
 {
 #if PLATFORM == XNELO_PLATFORM_WINDOWS
 	Sleep((DWORD)milliseconds);
-#elif PLATFORM == XNELO_PLATFORM_MAC || PLATFORM == XNELO_PLATFORM_UNIX
-	usleepf(milliseconds * 1000);
+#elif PLATFORM == XNELO_PLATFORM_MAC || PLATFORM == XNELO_PLATFORM_LINUX
+	usleep(milliseconds * 1000);
 #endif
 }
 
@@ -98,16 +103,26 @@ inline std::vector<std::string> XNELO::CORE::GetFilesWithExtension(std::string d
 
 inline XNELO::CORE::LargeInt XNELO::CORE::GetFrequency()
 {
+#if PLATFORM == XNELO_PLATFORM_WINDOWS
 	LargeInt frequency;
 	QueryPerformanceFrequency(&frequency);
 	return frequency;
+#elif PLATFORM == XNELO_PLATFORM_LINUX
+	return 1000000000;
+#endif
 }
 
 inline XNELO::CORE::LargeInt XNELO::CORE::GetTicks()
 {
+#if PLATFORM == XNELO_PLATFORM_WINDOWS
 	LargeInt ticks;
 	QueryPerformanceCounter(&ticks);
 	return ticks;
+#elif PLATFORM == XNELO_PLATFORM_LINUX
+	struct timespec now;   
+	clock_gettime(CLOCK_MONOTONIC, &now);
+	return now.tv_sec + now.tv_nsec;
+#endif
 }
 
 inline double XNELO::CORE::GetTime()
@@ -120,7 +135,11 @@ inline double XNELO::CORE::GetTime()
 
 inline double XNELO::CORE::GetTime(XNELO::CORE::LargeInt frequency)
 {
+#if PLATFORM == XNELO_PLATFORM_WINDOWS
 	return (GetTicks().QuadPart * 1000.0) / frequency.QuadPart;
+#elif PLATFORM == XNELO_PLATFORM_LINUX
+	return GetTicks() / frequency;
+#endif
 }
 
 #endif //___XNELOUTILS_SYSTEMFUNCTIONS_HPP__3_24_2017___

@@ -33,8 +33,9 @@
 * This liscense can also be found at: http://opensource.org/licenses/Zlib
 */
 
-#include "XneloUtils\Stream\BufferStreamWriter.hpp"
-#include "XneloUtils\Logging\Logging.hpp"
+#include "XneloUtils/Stream/BufferStreamWriter.hpp"
+
+#include <cstring>
 
 #define __XNELO_STREAM_DEFAULT_BUFFER_SIZE__ 1024
 
@@ -84,7 +85,6 @@ namespace XNELO
 		{
 			if (toWrite == NULL)
 			{
-				XNELO_LOG_NOTICE("toWrite argument input was NULL");
 				SetError(XNELO::ERRORS::BUFFER_STREAM_WRITER_WRITE_FAILED_NULL_INPUT, 
 					"Input buffer is NULL");
 				return -1;
@@ -92,7 +92,6 @@ namespace XNELO
 
 			if (sizeInBytes <= 0)
 			{
-				XNELO_LOG_NOTICE("sizeInBytes argument less than 0: %d", sizeInBytes);
 				SetError(XNELO::ERRORS::BUFFER_STREAM_WRITER_WRITE_FAILED_INVALID_SIZE, 
 					"Input Size invalid");
 				return -2;
@@ -106,7 +105,6 @@ namespace XNELO
 				}
 				else
 				{
-					XNELO_LOG_NOTICE("Buffer too small to write %d bytes of data.", sizeInBytes);
 					SetError(XNELO::ERRORS::BUFFER_TOO_SMALL, "Buffer not big enough to write data");
 					return -3;
 				}

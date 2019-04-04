@@ -1,38 +1,38 @@
-/**
-* @file PacketManager.hpp
-* @author Spencer Hoffa
-*
-* @copyright 2017 Spencer Hoffa
-*
-* Manages packets for a program.
-*/
+//
+// @file PacketManager.hpp
+// @author Spencer Hoffa
+//
+// @copyright 2017 Spencer Hoffa
+//
+// Manages packets for a program.
+//
+//
+// The zlib/libpng License
+//
+// Copyright (c) 2016 Spencer Hoffa
+//
+// This software is provided 'as-is', without any express or implied warranty.
+// In no event will the authors be held liable for any damages arising from the
+// use of this software.
+//
+// Permission is granted to anyone to use this software for any purpose,
+// including commercial applications, and to alter it and redistribute it
+// freely, subject to the following restrictions:
+//
+//		1. The origin of this software must not be misrepresented; you must not
+//		claim that you wrote the original software. If you use this software in
+//		a product, an acknowledgment in the product documentation would be
+//		appreciated but is not required.
+//
+//		2. Altered source versions must be plainly marked as such, and must not
+//		be misrepresented as being the original software.
+//
+//		3. This notice may not be removed or altered from any source
+//		distribution.
+//
+// This liscense can also be found at: http://opensource.org/licenses/Zlib
+//
 /*
-* The zlib/libpng License
-*
-* Copyright (c) 2016 Spencer Hoffa
-*
-* This software is provided 'as-is', without any express or implied warranty.
-* In no event will the authors be held liable for any damages arising from the
-* use of this software.
-*
-* Permission is granted to anyone to use this software for any purpose,
-* including commercial applications, and to alter it and redistribute it
-* freely, subject to the following restrictions:
-*
-*		1. The origin of this software must not be misrepresented; you must not
-*		claim that you wrote the original software. If you use this software in
-*		a product, an acknowledgment in the product documentation would be
-*		appreciated but is not required.
-*
-*		2. Altered source versions must be plainly marked as such, and must not
-*		be misrepresented as being the original software.
-*
-*		3. This notice may not be removed or altered from any source
-*		distribution.
-*
-* This liscense can also be found at: http://opensource.org/licenses/Zlib
-*/
-
 #ifndef ___XNELO_NETWORK_PACKETMANAGER_HPP__1_15_2017___
 #define ___XNELO_NETWORK_PACKETMANAGER_HPP__1_15_2017___
 
@@ -85,11 +85,11 @@ namespace XNELO
 		public:
 			//static const XNELO::CORE::uint32 PROTOCOL_ID = 1;
 
-			/**
-			 * Constructor
-			 * @param protocolID An integer with the protocol ID this manager will create/interpret
-			 *						(default value is 1).
-			 */
+			//
+			// Constructor
+			// @param protocolID An integer with the protocol ID this manager will create/interpret
+			//						(default value is 1).
+			//
 			XNELO_API PacketManager(XNELO::CORE::uint32 protocolID = 1);
 			XNELO_API virtual ~PacketManager();
 
@@ -101,45 +101,45 @@ namespace XNELO
 
 			XNELO_API bool MarkAcknowledged(XNELO::CORE::uint32 sequenceNumber);
 
-			/**
-			* @return A newly created XneloPacket with the data from the stream read into it. This
-			*			object is created on the heap and must be deleted by whomever calls this
-			*			function.
-			*/
+			//
+			// @return A newly created XneloPacket with the data from the stream read into it. This
+			//			object is created on the heap and must be deleted by whomever calls this
+			//			function.
+			//
 			XNELO_API XneloPacket * ReadPacket(XNELO::STREAM::IBufferStreamReader * reader);
 
-			/**
-			* Read the data from the stream into the passed in packet structure. The passed in 
-			* packet object must be the correct one passed in from the start of the function
-			*
-			* @NOTE This function is intended for internal use or cases where the packet type is 
-			* predictable beforehand.
-			*
-			* @param reader An IBufferStreamReader class object that contains the stream data to 
-			* read.
-			* @param packet An XneloPacket subclass that is the appropriate packet type to hold 
-			* the data.
-			*
-			* @return A type of XNELO::ERRORS::Error value is returned (wich is just an integer 
-			* value). If XNELO::ERRORS::OK is returned then the data was read successfully. 
-			* Otherwise one of the following values is returned:
-			* PACKET_POINTER_IS_NULL: returned when the packeta argument is NULL.
-			* ERROR_READING_DATA: An error occurred while reading data. The reader will have more 
-			* details.
-			* PACKET_PROTOCOL_NUMBER_INCORRECT: The packet protocol was not the same as defined in
-			* this class instance. The packet was ignored.
-			*/
+			//
+			// Read the data from the stream into the passed in packet structure. The passed in 
+			// packet object must be the correct one passed in from the start of the function
+			//
+			// @NOTE This function is intended for internal use or cases where the packet type is 
+			// predictable beforehand.
+			//
+			// @param reader An IBufferStreamReader class object that contains the stream data to 
+			// read.
+			// @param packet An XneloPacket subclass that is the appropriate packet type to hold 
+			// the data.
+			//
+			// @return A type of XNELO::ERRORS::Error value is returned (wich is just an integer 
+			// value). If XNELO::ERRORS::OK is returned then the data was read successfully. 
+			// Otherwise one of the following values is returned:
+			// PACKET_POINTER_IS_NULL: returned when the packeta argument is NULL.
+			// ERROR_READING_DATA: An error occurred while reading data. The reader will have more 
+			// details.
+			// PACKET_PROTOCOL_NUMBER_INCORRECT: The packet protocol was not the same as defined in
+			// this class instance. The packet was ignored.
+			//
 			//XNELO_API XNELO::ERRORS::Error ReadPacket(XNELO::STREAM::IBufferStreamReader * reader, XneloPacket * packet);
 
-			/**
-			* Write the data from the packet object into the passed in writer object. When this 
-			* function is completed then the writer will have the packet ready to send over the
-			* network.
-			*
-			* @param writer A pointer to an object that implements the IBufferStreamWriter object.
-			* @param packet A pointer to a packet object. This object must implement the 
-			* XneloPacket interface.
-			*/
+			//
+			// Write the data from the packet object into the passed in writer object. When this 
+			// function is completed then the writer will have the packet ready to send over the
+			// network.
+			//
+			// @param writer A pointer to an object that implements the IBufferStreamWriter object.
+			// @param packet A pointer to a packet object. This object must implement the 
+			// XneloPacket interface.
+			//
 			XNELO_API void WritePacket(XNELO::STREAM::IBufferStreamWriter * writer, XneloPacket * packet);
 		private:
 			XNELO_API void CheckAcks(XNELO::CORE::uint32 ackNumber, XNELO::CORE::uint32 ackBitmap);
@@ -181,3 +181,4 @@ inline void XNELO::NETWORK::PacketManager::SaveReceivedPacket(XNELO::CORE::uint3
 }
 
 #endif //___XNELO_NETWORK_PACKETMANAGER_HPP__1_15_2017___
+*/

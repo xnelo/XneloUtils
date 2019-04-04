@@ -33,7 +33,7 @@
 * This liscense can also be found at: http://opensource.org/licenses/Zlib
 */
 
-#include "XneloUtils\Stream\IBufferStreamWriter.hpp"
+#include "XneloUtils/Stream/IBufferStreamWriter.hpp"
 
 namespace XNELO
 {

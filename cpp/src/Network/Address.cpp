@@ -42,7 +42,7 @@
 #include <WS2tcpip.h>
 #pragma comment(lib, "IPHLPAPI.lib")
 #pragma comment(lib, "ws2_32.lib")
-#elif PLATFORM == XNELO_PLATFORM_MAC || PLATFORM == XNELO_PLATFORM_UNIX
+#elif PLATFORM == XNELO_PLATFORM_MAC || PLATFORM == XNELO_PLATFORM_LINUX
 
 #endif
 
@@ -56,6 +56,7 @@ namespace XNELO
 	{
 		Address Address::GetCurrentIPAddress()
 		{
+			/*
 			IP_ADAPTER_ADDRESSES* adapterAddresses(NULL);
 			IP_ADAPTER_ADDRESSES* adapter(NULL);
 
@@ -122,7 +123,7 @@ namespace XNELO
 			// Cleanup
 			free(adapterAddresses);
 			adapterAddresses = NULL;
-
+			*/
 			return Address(127, 0, 0, 1, 1025);
 		}
 

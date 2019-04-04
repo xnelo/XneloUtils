@@ -36,6 +36,8 @@
 #include "XneloUtils/Network/XneloSocket.hpp"
 #include "XneloUtils/Logging/Logging.hpp"
 
+#include <unistd.h>
+
 namespace XNELO
 {
 	namespace NETWORK

@@ -41,6 +41,7 @@
 	#include <Shlwapi.h>
 	#pragma comment(lib, "Shlwapi.lib")
 #else
+	#include <cstring>
 	#include <dirent.h>
 #endif
 
@@ -59,13 +60,25 @@ namespace XNELO
 			else
 				return std::string("");
 #else //linux
+			std::size_t pos = filePath.rfind('.');
+
+			if (pos != std::string::npos &&
+				pos != 0 &&
+				(filePath[pos - 1] != '/' || filePath[pos - 1] != '\\'))
+			{
+				return filePath.substr(pos);
+			}
+			else
+			{
+				return std::string("");
+			}
 #endif
 		}
 
 		std::vector<std::string> GetFiles(const char * directory, bool recursive)
 		{
 			std::vector<std::string> foundFiles;
-
+#if PLATFORM == XNELO_PLATFORM_WINDOWS
 			DIR * dir;
 			struct dirent * ent;
 			if ((dir = opendir(directory)) != NULL)
@@ -104,6 +117,7 @@ namespace XNELO
 			}
 			else
 			{ }
+#endif
 			return foundFiles;
 		}
 

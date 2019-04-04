@@ -76,7 +76,7 @@ namespace XNELO
 			//set as non-blocking
 #if PLATFORM == XNELO_PLATFORM_MAC || PLATFORM == XNELO_PLATFORM_LINUX
 			int nonBlocking = 1;
-			if (fcntl(_socket, F_SETFL, O_NONBLOCK, nonblocking) == -1)
+			if (fcntl(_socket, F_SETFL, O_NONBLOCK, nonBlocking) == -1)
 			{
 				XNELO_LOG_ERROR("UDPSocket(0x%x) -- Error Setting socket to non-blocking", this);
 				SetError(XNELO::ERRORS::FAILED_TO_CREATE_SOCKET, "Error Setting socket to non-blocking");
