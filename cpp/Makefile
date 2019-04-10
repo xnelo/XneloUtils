@@ -37,18 +37,31 @@ CXXFLAGS = -Iinclude/
 SRCS	=	$(wildcard src/Core/*.cpp) \
 			$(wildcard src/Logging/*.cpp) \
 			$(wildcard src/Network/*.cpp) \
-			$(wildcard src/Stream/*.cpp)
+			$(wildcard src/Stream/*.cpp) \
+			$(wildcard src/Testing/*.cpp)
 
 OBJS	=	$(SRCS:.cpp=.o)
 DEPS	=	$(OBJS:.o=.d)
 
 LIB_DIR = ./lib
-LIB_NAME = XneloUtils.a
-LIB_FULLPATH= $(LIB_DIR)/$(LIB_NAME)
+LIB_NAME = XneloUtils
+LIB_FILENAME= lib$(LIB_NAME).a
+LIB_FULLPATH= $(LIB_DIR)/$(LIB_FILENAME)
+
+TEST_SRCS = TestCases/TestMain.cpp
+TEST_OBJS = $(TEST_SRCS:.cpp=.o)
+TEST_DEPS = $(TEST_OBJS:.o=.d)
+
+TEST_DIR = ./test
+TEST_EXE = Test
+TEST_FULLPATH = $(TEST_DIR)/$(TEST_EXE)
 
 all: build
 
-build: $(LIB_FULLPATH)
+build: $(LIB_FULLPATH) $(TEST_FULLPATH)
+	$(Q)echo [Done]
+
+test: $(LIB_FULLPATH) $(TEST_FULLPATH)
 	$(Q)echo [Done]
 
 $(LIB_FULLPATH): $(OBJS)
@@ -56,6 +69,12 @@ $(LIB_FULLPATH): $(OBJS)
 	$(Q)mkdir -p $(LIB_DIR)
 	$(Q)echo [Build] $(LIB_FULLPATH)
 	$(Q)ar rvs $(LIB_FULLPATH) $(OBJS)
+
+$(TEST_FULLPATH): $(TEST_OBJS)
+	$(Q)echo [Create] Directory '$(TEST_DIR)'
+	$(Q)mkdir -p $(TEST_DIR)
+	$(Q)echo [Build] $(TEST_FULLPATH)
+	$(Q)$(CXX) $(TEST_OBJS) -L$(LIB_DIR) -l$(LIB_NAME) -o $(TEST_FULLPATH)
 
 -include $(DEPS)
 
@@ -79,10 +98,16 @@ $(LIB_FULLPATH): $(OBJS)
 
 .PHONY: clean
 clean:
-	$(Q)echo [Remove] .o files
+	$(Q)echo [Remove] Lib .o files
 	$(Q)rm -f $(OBJS)
-	$(Q)echo [Remove] .d files
+	$(Q)echo [Remove] Lib .d files
 	$(Q)rm -f $(DEPS)
-	$(Q)echo [Remove] $(LIB_NAME) and $(LIB_DIR)
+	$(Q)echo [Remove] $(LIB_NAME)$(LIB_EXT) and $(LIB_DIR)
 	$(Q)rm -rf $(LIB_DIR)
+	$(Q)echo [Remove] Test .o files
+	$(Q)rm -f $(TEST_OBJS)
+	$(Q)echo [Remove] Test .d files
+	$(Q)rm -f $(TEST_DEPS)
+	$(Q)echo [Remove] $(TEST_EXE) and $(TEST_DIR)
+	$(Q)rm -rf $(TEST_DIR)
 	$(Q)echo [Done]
