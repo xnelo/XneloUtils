@@ -8,3 +8,4 @@ lib/
 test/
 *.o
 *.d
+cpp/.vscode/ipch/
