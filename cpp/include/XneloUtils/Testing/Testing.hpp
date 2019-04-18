@@ -39,101 +39,102 @@
 #ifndef ___XNELO__TESTING_TESTING_HPP__4_7_2019___
 #define ___XNELO__TESTING_TESTING_HPP__4_7_2019___
 
+#include "TestResult.hpp"
+#include "TestMaster.hpp"
+#include "Test.hpp"
+
+#include <string>
+#include <sstream>
+
 namespace XNELO
 {
 	namespace TEST
 	{
-
 		template<typename T>
 		inline bool AssertEqual(T condition, T expected, std::string description)
 		{
-			return AssertEqual(condition, expected, description.c_str());
-		}
+			//TestResult * result;
+			//result = new TestResult((condition == expected),
+			//						description);
+			TestResult result((condition == expected), description);
 
-		template<typename T>
-		inline bool AssertEqual(T condition, T expected, const char * description)
-		{
-			XNELO::TESTING::TestResult * result;
-			result = XNELO::TESTING::TestMaster::CheckEqual<T>(condition, expected, description);
+			XNELO::TEST::TestMaster::GetInstance()->GetReportGenerator()->PrintTestResult(&result);
 
-			XNELO::TESTING::TestMaster::GetInstance()->GetReportGenerator()->PrintTestResult(result);
-
-			return result->passed;
+			return result.GetPassed();
 		}
 
 		template<typename T>
 		inline bool AssertNotEqual(T expression1, T expression2, std::string description)
 		{
-			return AssertNotEqual(expression1, expression2, description.c_str());
-		}
+			//TestResult * result;
+			//result = new TestResult((expression1 != expression2),
+			//						description);
+			TestResult result((expression1 != expression2), description);
 
-		template<typename T>
-		inline bool AssertNotEqual(T expression1, T expression2, const char * description)
-		{
-			XNELO::TESTING::TestResult * result;
-			result = XNELO::TESTING::TestMaster::CheckNotEqual<T>(expression1, expression2, description);
+			XNELO::TEST::TestMaster::GetInstance()->GetReportGenerator()->PrintTestResult(&result);
 
-			XNELO::TESTING::TestMaster::GetInstance()->GetReportGenerator()->PrintTestResult(result);
-
-			return result->passed;
-		}
-
-		inline bool AssertFalse(bool booleanValue, const char * description)
-		{
-			return AssertEqual<bool>(booleanValue, false, description);
+			return result.GetPassed();
 		}
 
 		inline bool AssertFalse(bool booleanValue, std::string description)
 		{
-			return AssertFalse(booleanValue, description.c_str());
-		}
-
-		inline bool AssertTrue(bool booleanValue, const char * description)
-		{
-			return AssertEqual<bool>(booleanValue, true, description);
+			return AssertEqual<bool>(booleanValue, false, description);
 		}
 
 		inline bool AssertTrue(bool booleanValue, std::string description)
 		{
-			return AssertTrue(booleanValue, description.c_str());
+			return AssertEqual<bool>(booleanValue, true, description);
 		}
-
 	} //!TEST
 } //!XNELO
 
 //Define the macros for this library
 #define XNELO_TEST_ASSERT_EQUAL(condition, expected, description) \
-if (!AssertEqual(condition, expected, description)) \
-{\
-	std::ostringstream oss; \
-	oss << __FILE__ << "(Line: " << __LINE__ << ")"; \
-	XNELO::TESTING::TestMaster::GetInstance()->GetReportGenerator()->PrintAdditionalString(oss.str().c_str()); \
-}
+	if (!XNELO::TEST::AssertEqual(condition, expected, description)) \
+	{\
+		std::ostringstream oss; \
+		oss << __FILE__ << "(Line: " << __LINE__ << ")"; \
+		XNELO::TEST::TestMaster::GetInstance()->GetReportGenerator()->PrintAdditionalString(oss.str()); \
+	}
 
 #define XNELO_TEST_ASSERT_NOT_EQUAL(condition, expected, description) \
-if (!AssertNotEqual(condition, expected, description)) \
-{\
-	std::ostringstream oss; \
-	oss << __FILE__ << "(Line: " << __LINE__ << ")"; \
-	XNELO::TESTING::TestMaster::GetInstance()->GetReportGenerator()->PrintAdditionalString(oss.str().c_str()); \
-}
+	if (!XNELO::TEST::AssertNotEqual(condition, expected, description)) \
+	{\
+		std::ostringstream oss; \
+		oss << __FILE__ << "(Line: " << __LINE__ << ")"; \
+		XNELO::TEST::TestMaster::GetInstance()->GetReportGenerator()->PrintAdditionalString(oss.str()); \
+	}
 
-#define XNELO_TEST_ASSERT_TRUE(booleanValue, description) XNELO_TEST_ASSERT_EQUAL(booleanValue, true, description)
-#define XNELO_TEST_ASSERT_FALSE(booleanValue, description) XNELO_TEST_ASSERT_EQUAL(booleanValue, false, description)
+#define XNELO_TEST_ASSERT_TRUE(booleanValue, description) \
+	XNELO_TEST_ASSERT_EQUAL(booleanValue, true, description)
 
-#define XNELO_CREATE_TESTCASE_CLASS_NAME(test_group, test_case_name) TestCase_Name_##test_group##_##test_case_name##_Class
+#define XNELO_TEST_ASSERT_FALSE(booleanValue, description) \
+	XNELO_TEST_ASSERT_EQUAL(booleanValue, false, description)
+
+
+/// <summary>
+/// This macro will create a Testcase's class name with an instance at the end.
+/// </summary>
+#define XNELO_CREATE_TESTCASE_CLASS_NAME_INSTANCE(test_group, test_case_name, instance) \
+	TestCase_Name_##test_group##_##test_case_name##_Class##instance
+
+/// <summary> 
+/// This macro will call the XNELO_CREATE_TESTCASE_CLASS_NAME_INSTANCE macro with a blank as the 
+/// Instance argument.
+/// </summary>
+#define XNELO_CREATE_TESTCASE_CLASS_NAME(test_group, test_case_name)\
+	XNELO_CREATE_TESTCASE_CLASS_NAME_INSTANCE(test_group, test_case_name, )
 
 #define XNELO_TEST_CASE(testCaseName, testName)\
-class XNELO_CREATE_TESTCASE_CLASS_NAME(testCaseName, testName) : public XNELO::TESTING::Test \
-{ \
-public: \
-	XNELO_CREATE_TESTCASE_CLASS_NAME(testCaseName, testName)() : XNELO::TESTING::Test (#testCaseName) \
+	class XNELO_CREATE_TESTCASE_CLASS_NAME(testCaseName, testName) : public XNELO::TEST::Test \
 	{ \
-		XNELO::TESTING::TestMaster::GetInstance()->AddTest(this); \
-	} \
-	void Run(); \
-} \
-XNELO_CREATE_TESTCASE_CLASS_NAME(testCaseName, testName)Instance; \
-void XNELO_CREATE_TESTCASE_CLASS_NAME(testCaseName, testName)::Run ()
+	public: \
+		XNELO_CREATE_TESTCASE_CLASS_NAME(testCaseName, testName)() : XNELO::TEST::Test (#testCaseName) \
+		{ \
+			XNELO::TEST::TestMaster::GetInstance()->AddTest(this); \
+		} \
+		void Run(); \
+	} XNELO_CREATE_TESTCASE_CLASS_NAME_INSTANCE(testCaseName, testName, Instance); \
+	void XNELO_CREATE_TESTCASE_CLASS_NAME(testCaseName, testName)::Run ()
 
 #endif // !___XNELO__TESTING_TESTING_HPP__4_7_2019___

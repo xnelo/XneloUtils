@@ -51,9 +51,8 @@ int main(int argc, char * argv[])
 		std::cout << "Networking not initialized. Some Networking tests will fail." << std::endl;
 	}
 
-	XNELO::TESTING::TestMaster * tst = XNELO::TESTING::TestMaster::GetInstance();
-	
-	//tst->RunAllTest();
+	XNELO::TEST::TestMaster * tst = XNELO::TEST::TestMaster::GetInstance();
+	tst->RunAllTest();
 
 	XNELO::NETWORK::ShutdownNetworking();
 

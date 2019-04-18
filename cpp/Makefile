@@ -29,10 +29,10 @@
 # This liscense can also be found at : http ://opensource.org/licenses/Zlib
 # </license>
 
-Q = @
+Q = 
 
 CXX = g++
-CXXFLAGS = -Iinclude/
+CXXFLAGS = -Iinclude/ -g
 
 SRCS	=	$(wildcard src/Core/*.cpp) \
 			$(wildcard src/Logging/*.cpp) \
@@ -48,7 +48,8 @@ LIB_NAME = XneloUtils
 LIB_FILENAME= lib$(LIB_NAME).a
 LIB_FULLPATH= $(LIB_DIR)/$(LIB_FILENAME)
 
-TEST_SRCS = TestCases/TestMain.cpp
+TEST_SRCS = TestCases/TestMain.cpp \
+			TestCases/Core/BitwiseOperators.cpp
 TEST_OBJS = $(TEST_SRCS:.cpp=.o)
 TEST_DEPS = $(TEST_OBJS:.o=.d)
 
