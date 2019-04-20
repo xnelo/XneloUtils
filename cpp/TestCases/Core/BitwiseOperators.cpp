@@ -56,7 +56,7 @@ XNELO_TEST_CASE(BitwiseOperatorTests, TestEverything)
 	XNELO_TEST_ASSERT_TRUE(XNELO::CORE::IsBitSetBitNumber(bits, 5), "Check bit 5 set");
 	XNELO_TEST_ASSERT_FALSE(XNELO::CORE::IsBitSetBitNumber(bits, 6), "Check bit 6 set");
 	XNELO_TEST_ASSERT_FALSE(XNELO::CORE::IsBitSetBitNumber(bits, 7), "Check bit 7 set");
-	//XNELO_TEST_ASSERT_FALSE(XNELO::CORE::IsBitSetBitNumber(bits, 8), "Check bit 8 set");
+	XNELO_TEST_ASSERT_FALSE(XNELO::CORE::IsBitSetBitNumber(bits, 8), "Check bit 8 set");
 	/*test->UnitTest(IsBitSetBitNumber(bits, 9) == false, "Check bit 9 set");
 	test->UnitTest(IsBitSetBitNumber(bits, 10) == false, "Check bit 10 set");
 	test->UnitTest(IsBitSetBitNumber(bits, 11) == false, "Check bit 11 set");

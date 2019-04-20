@@ -38,7 +38,6 @@
 #define ___XNELO_TEST_TESTMASTER_HPP__4_9_2019___
 
 #include "../Config.hpp"
-#include "Test.hpp"
 #include "IReportGenerator.hpp"
 
 #include <vector>
@@ -47,6 +46,9 @@ namespace XNELO
 {
 	namespace TEST
 	{
+		//forward declaration
+		class Test;
+
 		class TestMaster
 		{
 		private:

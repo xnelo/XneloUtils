@@ -38,6 +38,7 @@
 #define ___XNELO__CORE__UUID_HPP__2_13_2019___
 
 #include <string>
+#include <cstring>
 
 #include "../Config.hpp"
 #include "BasicTypes.hpp"

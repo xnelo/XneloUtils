@@ -32,6 +32,8 @@
 /// </license>
 
 #include "XneloUtils/Testing/OutStreamGenerator.hpp"
+#include "XneloUtils/Testing/Test.hpp"
+
 
 #include <iostream>
 

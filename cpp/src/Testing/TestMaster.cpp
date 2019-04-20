@@ -36,6 +36,7 @@
 
 #include "XneloUtils/Testing/TestMaster.hpp"
 #include "XneloUtils/Testing/OutStreamGenerator.hpp"
+#include "XneloUtils/Testing/Test.hpp"
 
 #include <stdlib.h>
 

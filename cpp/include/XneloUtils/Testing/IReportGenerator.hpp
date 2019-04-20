@@ -35,7 +35,6 @@
 #define ___XNELO_TEST_IREPORTGENERATOR_HPP__4_16_2019___
 
 #include "../Config.hpp"
-#include "Test.hpp"
 #include "TestResult.hpp"
 
 #include <string>
@@ -45,6 +44,9 @@ namespace XNELO
 {
 	namespace TEST
 	{
+		//forward declaration
+		class Test;
+
 		class IReportGenerator
 		{
 		protected:

@@ -36,6 +36,8 @@
 #include "XneloUtils/Testing/Testing.hpp"
 #include "XneloUtils/Stream/BufferStreamWriter.hpp"
 
+#include <cstring>
+
 XNELO_TEST_CASE(BufferStreamWriterTests, TestDefaultConstructor)
 {
 	XNELO::STREAM::BufferStreamWriter * buffer = new XNELO::STREAM::BufferStreamWriter();
@@ -68,6 +70,6 @@ XNELO_TEST_CASE(BufferStreamWriterTests, TestExpandBuffer)
 		                                 "Hello World this is a string copy test", 
 		                                 38), 0, "Buffer contains correct string");
 	XNELO_TEST_ASSERT_EQUAL(buffer->GetSize(), (XNELO::CORE::uint32)38, "Data buffer size correct");
-	std::cout << buffer->GetBuffer() << std::endl;
+	//std::cout << buffer->GetBuffer() << std::endl;
 	delete buffer;
 }

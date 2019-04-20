@@ -39,7 +39,6 @@
 #include "Address.hpp"
 #include "BroadcastSocket.hpp"
 #include "NetworkCore.hpp"
-#include "PacketManager.hpp"
 #include "UDPSocket.hpp"
 #include "XneloPacket.hpp"
 #include "XneloSocket.hpp"

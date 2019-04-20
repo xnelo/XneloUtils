@@ -1,38 +1,35 @@
-#pragma region Copyright 2018 Spencer Hoffa
 /// <file> UUID.cpp </file>
-/// <author> Spencer Hoffa </author>
-///
-/// <copyright> 2018 Spencer Hoffa </copyright>
+/// <author>Spencer Hoffa (spencer.hoffa@gmail.com)</author>
+/// <summary>  </summary>
 /// 
-/// <summary>
-/// </summary>
+/// <copyright> Copyright (c) 2019 </copyright>
 /// 
 /// <license>
 /// The zlib/libpng License
-/// Copyright(c) 2018 Spencer Hoffa
-///
+/// 
+/// Copyright (c) 2019 Spencer Hoffa
+/// 
 /// This software is provided 'as-is', without any express or implied warranty.
 /// In no event will the authors be held liable for any damages arising from the
 /// use of this software.
-///
+/// 
 /// Permission is granted to anyone to use this software for any purpose,
-///including commercial applications, and to alter it and redistribute it
-/// freely, subject to the following restrictions :
-///
-///		1. The origin of this software must not be misrepresented; you must not
-///		claim that you wrote the original software.If you use this software in
-///		a product, an acknowledgment in the product documentation would be
-///		appreciated but is not required.
-///
-///		2. Altered source versions must be plainly marked as such, and must not
-///		be misrepresented as being the original software.
-///
-///		3. This notice may not be removed or altered from any source
-///		distribution.
-///
-/// This liscense can also be found at : http ://opensource.org/licenses/Zlib
+/// including commercial applications, and to alter it and redistribute it
+/// freely, subject to the following restrictions:
+/// 
+/// 		1. The origin of this software must not be misrepresented; you must not
+/// 		claim that you wrote the original software. If you use this software in
+/// 		a product, an acknowledgment in the product documentation would be
+/// 		appreciated but is not required.
+/// 
+/// 		2. Altered source versions must be plainly marked as such, and must not
+/// 		be misrepresented as being the original software.
+/// 
+/// 		3. This notice may not be removed or altered from any source
+/// 		distribution.
+/// 
+/// This liscense can also be found at: http://opensource.org/licenses/Zlib
 /// </license>
-#pragma endregion
 
 #include <string>
 
@@ -143,12 +140,12 @@ XNELO_TEST_CASE(UUIDTests, UUIDToString)
 	std::string uuidString = "994EA474-E5AE-4281-B251-CA2B4BD8D563";
 	XNELO::CORE::UUID uuid;
 	XNELO::CORE::UUID::FromString(&uuid, uuidString);
-	std::cout << uuid.ToString() << std::endl;
+	//std::cout << uuid.ToString() << std::endl;
 	XNELO_TEST_ASSERT_EQUAL(uuid.ToString(), uuidString, "Check to String correct");
 
 	uuidString = "0940A474-E5AE-4281-B251-CA2B4BD8D563";
 	XNELO::CORE::UUID::FromString(&uuid, uuidString);
-	std::cout << uuid.ToString() << std::endl;
+	//std::cout << uuid.ToString() << std::endl;
 	XNELO_TEST_ASSERT_EQUAL(uuid.ToString(), uuidString, "Check to String correct 2");
 }
 
@@ -169,6 +166,6 @@ XNELO_TEST_CASE(UUIDTests, CheckHash)
 	std::string uuidString = "0940A474-E5AE-4281-B251-CA2B4BD8D563";
 	XNELO::CORE::UUID uuid;
 	XNELO::CORE::UUID::FromString(&uuid, uuidString);
-
+	
 	XNELO_TEST_ASSERT_EQUAL(uuid.GetHash(), (std::size_t)16327649465352458683, "Check hash calcualted correctly");
 }

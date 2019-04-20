@@ -46,12 +46,14 @@ namespace XNELO
 
 		Test::~Test()
 		{
-			//for (std::vector<TestResult*>::iterator it = _test_results.begin(); it != _test_results.end(); ++it)
-			//{
-			//	delete (*it);
-			//}
-			//
-			//_test_results.clear();
+			for (std::vector<TestResult*>::iterator it = m_TestResults.begin(); 
+				it != m_TestResults.end(); 
+				++it)
+			{
+				delete (*it);
+			}
+			
+			m_TestResults.clear();
 			m_TestName = "";
 			m_Success = 0;
 			m_Failed = 0;

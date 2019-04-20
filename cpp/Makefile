@@ -49,7 +49,9 @@ LIB_FILENAME= lib$(LIB_NAME).a
 LIB_FULLPATH= $(LIB_DIR)/$(LIB_FILENAME)
 
 TEST_SRCS = TestCases/TestMain.cpp \
-			TestCases/Core/BitwiseOperators.cpp
+			$(wildcard TestCases/Core/*.cpp) \
+			$(wildcard TestCases/Network/*.cpp) \
+			$(wildcard TestCases/Stream/*.cpp)
 TEST_OBJS = $(TEST_SRCS:.cpp=.o)
 TEST_DEPS = $(TEST_OBJS:.o=.d)
 

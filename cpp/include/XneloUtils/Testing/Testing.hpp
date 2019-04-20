@@ -45,7 +45,7 @@
 
 #include <string>
 #include <sstream>
-
+/*
 namespace XNELO
 {
 	namespace TEST
@@ -87,10 +87,10 @@ namespace XNELO
 		}
 	} //!TEST
 } //!XNELO
-
+*/
 //Define the macros for this library
 #define XNELO_TEST_ASSERT_EQUAL(condition, expected, description) \
-	if (!XNELO::TEST::AssertEqual(condition, expected, description)) \
+	if (!AssertEqual(condition, expected, description)) \
 	{\
 		std::ostringstream oss; \
 		oss << __FILE__ << "(Line: " << __LINE__ << ")"; \
@@ -98,7 +98,7 @@ namespace XNELO
 	}
 
 #define XNELO_TEST_ASSERT_NOT_EQUAL(condition, expected, description) \
-	if (!XNELO::TEST::AssertNotEqual(condition, expected, description)) \
+	if (!AssertNotEqual(condition, expected, description)) \
 	{\
 		std::ostringstream oss; \
 		oss << __FILE__ << "(Line: " << __LINE__ << ")"; \

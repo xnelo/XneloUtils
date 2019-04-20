@@ -36,16 +36,24 @@
 
 #include "../Config.hpp"
 #include "../Core/BasicTypes.hpp"
+#include "TestResult.hpp"
+#include "TestMaster.hpp" // Circular Dependency
+
 #include <string>
+#include <vector>
 
 namespace XNELO
 {
 	namespace TEST
 	{
+		//forward declaration
+		class TestMaster;
+
 		class Test
 		{
 		private:
 			std::string m_TestName;
+			std::vector<TestResult*> m_TestResults;
 			XNELO::CORE::uint32 m_Failed;
 			XNELO::CORE::uint32 m_Success;
 		public:
@@ -60,6 +68,13 @@ namespace XNELO
 			/// Destructor.
 			/// </summary>
 			XNELO_API ~Test();
+
+			template<typename T>
+			XNELO_API bool AssertEqual(T expression1, T expression2, std::string description);
+			XNELO_API bool AssertFalse(bool booleanValue, std::string description);
+			template<typename T>
+			XNELO_API bool AssertNotEqual(T expression1, T expression2, std::string description);
+			XNELO_API bool AssertTrue(bool booleanValue, std::string description);
 
 			/// <summary>
 			/// Get the number of tests (executed in the Run function), that failed. This value 
@@ -92,6 +107,40 @@ namespace XNELO
 		};
 	}// !TEST
 }// !XNELO
+
+template<typename T>
+inline bool XNELO::TEST::Test::AssertEqual(T expression1, T expression2, std::string description)
+{
+	TestResult * result = new TestResult((expression1 == expression2), description);
+
+	if (result->GetPassed())
+		++m_Success;
+	else
+		++m_Failed;
+
+	m_TestResults.push_back(result);
+
+	TestMaster::GetInstance()->GetReportGenerator()->PrintTestResult(result);
+
+	return result->GetPassed();
+}
+
+template<typename T>
+inline bool XNELO::TEST::Test::AssertNotEqual(T expression1, T expression2, std::string description)
+{
+	TestResult * result = new TestResult((expression1 != expression2), description);
+
+	if (result->GetPassed())
+		++m_Success;
+	else
+		++m_Failed;
+
+	m_TestResults.push_back(result);
+
+	TestMaster::GetInstance()->GetReportGenerator()->PrintTestResult(result);
+
+	return result->GetPassed();
+}
 
 inline int XNELO::TEST::Test::GetNumFailed()
 {
