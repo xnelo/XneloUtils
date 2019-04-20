@@ -1,6 +1,8 @@
 /// <file> StringUtils.hpp </file>
 /// <author>Spencer Hoffa (spencer.hoffa@gmail.com)</author>
-/// <summary>  </summary>
+/// <summary> 
+/// String modification and compare functions.
+/// </summary>
 /// 
 /// <copyright> Copyright (c) 2019 </copyright>
 /// 
