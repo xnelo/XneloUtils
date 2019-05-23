@@ -34,7 +34,8 @@ Q =
 CXX = g++
 CXXFLAGS = -Iinclude/ -g
 
-SRCS	=	$(wildcard src/Core/*.cpp) \
+SRCS	=	$(wildcard src/ArgParse/*.cpp) \
+			$(wildcard src/Core/*.cpp) \
 			$(wildcard src/Logging/*.cpp) \
 			$(wildcard src/Network/*.cpp) \
 			$(wildcard src/Stream/*.cpp) \
@@ -49,6 +50,7 @@ LIB_FILENAME= lib$(LIB_NAME).a
 LIB_FULLPATH= $(LIB_DIR)/$(LIB_FILENAME)
 
 TEST_SRCS = TestCases/TestMain.cpp \
+			$(wildcard TestCases/ArgParse/*.cpp) \
 			$(wildcard TestCases/Core/*.cpp) \
 			$(wildcard TestCases/Network/*.cpp) \
 			$(wildcard TestCases/Stream/*.cpp)

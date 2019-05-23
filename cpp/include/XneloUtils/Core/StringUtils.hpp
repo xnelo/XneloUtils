@@ -90,6 +90,21 @@ namespace XNELO
 		*/
 		int strcmpCI(char const *a, char const *b);
 
+		/// <summary> 
+		/// A safe fersion of <see ref="strcmpCI"/>. This will make sure the buffer is not checked 
+		/// beyond the size passed into the size parameters.
+		/// </summary>
+		/// 
+		/// <param name="a">Pointer to the first string.</param>
+		/// <param name="asize">Size of buffer for string A.</param>
+		/// <param name="b">Pointer to the second string.</param>
+		/// <param name="bsize">Size of buffer for string b.</param>
+		/// <returns>
+		/// Returns 0 if the two strings are equivalant. <0 is returned if a and b do not match and
+		/// a comes before b. >0 is returned if a and b do not match and b comes before a.
+		/// </returns>
+		int strcmpCI_s(char const *a, int asize, char const *b, int bsize);
+
 		/// <summary>
 		/// A safe version of strcmp. This will make sure the buffer is not checked beyond the size
 		/// passed into the size parameters.
@@ -176,6 +191,23 @@ inline int XNELO::CORE::strcmpCI(char const *a, char const *b)
 	return tolower(*a) - tolower(*b);
 }
 
+inline int XNELO::CORE::strcmpCI_s(char const *a, int asize, char const *b, int bsize)
+{
+	int numCheck = std::min(asize, bsize);
+
+	for (int i = 0; i < numCheck; a++, b++, i++)
+	{
+		if (a[0] == '\0' || b[0] == '\0')
+			break;
+		
+		int d = tolower(*a) - tolower(*b);
+		if (d != 0)
+			return d;
+	}
+	
+	return tolower(*a) - tolower(*b);
+}
+
 inline int XNELO::CORE::strcmp_s(char const *a, int asize, char const *b, int bsize)
 {
 	int numCheck = std::min(asize, bsize);
@@ -188,8 +220,6 @@ inline int XNELO::CORE::strcmp_s(char const *a, int asize, char const *b, int bs
 		int d = *a - *b;
 		if (d != 0)
 			return d;
-		a++;
-		b++;
 	}
 
 	return *a - *b;
