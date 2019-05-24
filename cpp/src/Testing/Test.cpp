@@ -37,7 +37,8 @@ namespace XNELO
 {
 	namespace TEST
 	{
-		Test::Test(std::string test_name): 
+		Test::Test(std::string test_group, std::string test_name):
+			m_TestGroup(test_group),
 			m_TestName(test_name), 
 			m_Success(0), 
 			m_Failed(0)
@@ -54,6 +55,7 @@ namespace XNELO
 			}
 			
 			m_TestResults.clear();
+			m_TestGroup = "";
 			m_TestName = "";
 			m_Success = 0;
 			m_Failed = 0;

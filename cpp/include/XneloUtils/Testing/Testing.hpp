@@ -125,16 +125,16 @@ namespace XNELO
 #define XNELO_CREATE_TESTCASE_CLASS_NAME(test_group, test_case_name)\
 	XNELO_CREATE_TESTCASE_CLASS_NAME_INSTANCE(test_group, test_case_name, )
 
-#define XNELO_TEST_CASE(testCaseName, testName)\
-	class XNELO_CREATE_TESTCASE_CLASS_NAME(testCaseName, testName) : public XNELO::TEST::Test \
+#define XNELO_TEST_CASE(testGroupName, testName)\
+	class XNELO_CREATE_TESTCASE_CLASS_NAME(testGroupName, testName) : public XNELO::TEST::Test \
 	{ \
 	public: \
-		XNELO_CREATE_TESTCASE_CLASS_NAME(testCaseName, testName)() : XNELO::TEST::Test (#testCaseName) \
+		XNELO_CREATE_TESTCASE_CLASS_NAME(testGroupName, testName)() : XNELO::TEST::Test (#testGroupName, #testName) \
 		{ \
 			XNELO::TEST::TestMaster::GetInstance()->AddTest(this); \
 		} \
 		void Run(); \
-	} XNELO_CREATE_TESTCASE_CLASS_NAME_INSTANCE(testCaseName, testName, Instance); \
-	void XNELO_CREATE_TESTCASE_CLASS_NAME(testCaseName, testName)::Run ()
+	} XNELO_CREATE_TESTCASE_CLASS_NAME_INSTANCE(testGroupName, testName, Instance); \
+	void XNELO_CREATE_TESTCASE_CLASS_NAME(testGroupName, testName)::Run ()
 
 #endif // !___XNELO__TESTING_TESTING_HPP__4_7_2019___

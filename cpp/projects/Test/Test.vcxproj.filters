@@ -22,6 +22,9 @@
     <Filter Include="Source Files\Stream">
       <UniqueIdentifier>{221dc6e4-230c-40d0-b1dc-783e61c9a12f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\ArgParse">
+      <UniqueIdentifier>{2c61ec10-a122-4c14-b466-2dc6bcb4da80}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\TestCases\TestMain.cpp">
@@ -51,14 +54,14 @@
     <ClCompile Include="..\..\TestCases\Stream\BufferStreamReader.cpp">
       <Filter>Source Files\Stream</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\TestCases\Network\PacketManager.cpp">
-      <Filter>Source Files\Network</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\TestCases\Core\BitwiseOperators.cpp">
       <Filter>Source Files\Core</Filter>
     </ClCompile>
     <ClCompile Include="..\..\TestCases\Core\UUID.cpp">
       <Filter>Source Files\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\TestCases\ArgParse\ArgParse.cpp">
+      <Filter>Source Files\ArgParse</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -34,7 +34,9 @@
 #include "XneloUtils/Network/XneloSocket.hpp"
 #include "XneloUtils/Logging/Logging.hpp"
 
+#if PLATFORM == XNELO_PLATFORM_MAC || PLATFORM == XNELO_PLATFORM_LINUX
 #include <unistd.h>
+#endif
 
 namespace XNELO
 {

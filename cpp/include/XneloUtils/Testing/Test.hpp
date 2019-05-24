@@ -52,6 +52,7 @@ namespace XNELO
 		class Test
 		{
 		private:
+			std::string m_TestGroup;
 			std::string m_TestName;
 			std::vector<TestResult*> m_TestResults;
 			XNELO::CORE::uint32 m_Failed;
@@ -61,8 +62,9 @@ namespace XNELO
 			/// Constructor
 			/// </summary>
 			/// 
+			/// <param name="test_group">The test group this test belongs to.</param>
 			/// <param name="test_name">The name of this test.</param>
-			XNELO_API Test(std::string test_name);
+			XNELO_API Test(std::string test_group, std::string test_name);
 
 			/// <summary>
 			/// Destructor.
@@ -91,6 +93,12 @@ namespace XNELO
 			/// 
 			/// <returns>An integer with the number of succeeded tests.</returns>
 			XNELO_API int GetNumSuccess();
+
+			/// <summary>
+			/// Get the name of the test group this test belongs to.
+			/// </summary>
+			/// <returns></returns>
+			XNELO_API std::string GetTestGroupName();
 
 			/// <summary> 
 			/// Get the name of this test.
@@ -150,6 +158,11 @@ inline int XNELO::TEST::Test::GetNumFailed()
 inline int XNELO::TEST::Test::GetNumSuccess()
 {
 	return m_Success;
+}
+
+inline std::string XNELO::TEST::Test::GetTestGroupName()
+{
+	return m_TestGroup;
 }
 
 inline std::string XNELO::TEST::Test::GetTestName()

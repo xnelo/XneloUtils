@@ -89,7 +89,8 @@ namespace XNELO
 
 		void OutStreamGenerator::StartTestCase(Test * test)
 		{
-			(*m_Stream) << std::endl << test->GetTestName() << std::endl;
+			(*m_Stream) << std::endl << test->GetTestName() 
+				<< "(" << test->GetTestGroupName() << ")" << std::endl;
 			(*m_Stream) << std::string(20, '-') << std::endl;
 			m_Indent += "   ";
 		}

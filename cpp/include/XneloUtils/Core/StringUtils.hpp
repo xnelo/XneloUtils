@@ -193,7 +193,7 @@ inline int XNELO::CORE::strcmpCI(char const *a, char const *b)
 
 inline int XNELO::CORE::strcmpCI_s(char const *a, int asize, char const *b, int bsize)
 {
-	int numCheck = std::min(asize, bsize);
+	int numCheck = std::min<int>(asize, bsize);
 
 	for (int i = 0; i < numCheck; a++, b++, i++)
 	{
@@ -210,7 +210,9 @@ inline int XNELO::CORE::strcmpCI_s(char const *a, int asize, char const *b, int 
 
 inline int XNELO::CORE::strcmp_s(char const *a, int asize, char const *b, int bsize)
 {
-	int numCheck = std::min(asize, bsize);
+	// The std:min needs the type specifier in 
+	// order to ompile in the windows codes.
+	int numCheck = std::min<int>(asize, bsize);
 
 	for (int i = 0; i < numCheck; a++, b++, i++)
 	{

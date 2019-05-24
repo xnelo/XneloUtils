@@ -149,6 +149,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\src\ArgParse\ArgParse.cpp" />
     <ClCompile Include="..\..\src\Core\Fallible.cpp" />
     <ClCompile Include="..\..\src\Core\SystemFunctions.cpp" />
     <ClCompile Include="..\..\src\Core\UUID.cpp" />
@@ -156,7 +157,6 @@
     <ClCompile Include="..\..\src\Network\Address.cpp" />
     <ClCompile Include="..\..\src\Network\BroadcastSocket.cpp" />
     <ClCompile Include="..\..\src\Network\NetworkCore.cpp" />
-    <ClCompile Include="..\..\src\Network\PacketManager.cpp" />
     <ClCompile Include="..\..\src\Network\XneloSocket.cpp" />
     <ClCompile Include="..\..\src\Network\UDPSocket.cpp" />
     <ClCompile Include="..\..\src\Stream\BufferStreamReader.cpp" />
@@ -167,9 +167,11 @@
     <ClCompile Include="..\..\src\Testing\Test.cpp" />
     <ClCompile Include="..\..\src\Testing\TestMaster.cpp" />
     <ClCompile Include="..\..\src\Testing\TestResult.cpp" />
-    <ClCompile Include="..\..\src\Testing\TestSuite.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\include\XneloUtils\ArgParse\ArgData.hpp" />
+    <ClInclude Include="..\..\include\XneloUtils\ArgParse\ArgDef.hpp" />
+    <ClInclude Include="..\..\include\XneloUtils\ArgParse\ArgParse.hpp" />
     <ClInclude Include="..\..\include\XneloUtils\Config.hpp" />
     <ClInclude Include="..\..\include\XneloUtils\Core\BasicTypes.hpp" />
     <ClInclude Include="..\..\include\XneloUtils\Core\BitwiseOperators.hpp" />
@@ -199,7 +201,6 @@
     <ClInclude Include="..\..\include\XneloUtils\Testing\Testing.hpp" />
     <ClInclude Include="..\..\include\XneloUtils\Testing\TestMaster.hpp" />
     <ClInclude Include="..\..\include\XneloUtils\Testing\TestResult.hpp" />
-    <ClInclude Include="..\..\include\XneloUtils\Testing\TestSuite.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
