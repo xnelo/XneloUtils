@@ -1,100 +1,67 @@
-// <file> Testing.hpp </file>
-// <author> Spencer Hoffa </author>
-//
-// <copyright> 2019 Spencer Hoffa </copyright>
-//
-// <summary>
-// This file includes all the header files needed to use the Xnelo Testing 
-// library. For ease just include this file and you have access to the entire
-// library.
-// </summary>
-//
-// <license>
-// The zlib/libpng License
-//
-// Copyright (c) 2019 Spencer Hoffa
-//
-// This software is provided 'as-is', without any express or implied warranty.
-// In no event will the authors be held liable for any damages arising from the
-// use of this software.
-//
-// Permission is granted to anyone to use this software for any purpose,
-// including commercial applications, and to alter it and redistribute it
-// freely, subject to the following restrictions:
-//
-//		1. The origin of this software must not be misrepresented; you must not
-//		claim that you wrote the original software. If you use this software in
-//		a product, an acknowledgment in the product documentation would be
-//		appreciated but is not required.
-//
-//		2. Altered source versions must be plainly marked as such, and must not
-//		be misrepresented as being the original software.
-//
-//		3. This notice may not be removed or altered from any source
-//		distribution.
-//
-// This liscense can also be found at: http://opensource.org/licenses/Zlib
-// </license>
+/// <file> Testing.hpp </file>
+/// <author>Spencer Hoffa (spencer.hoffa@gmail.com)</author>
+/// <summary>
+/// This defines the public interface for the Testing section of XneloUtils. 
+/// 
+/// ONLY INCLUDE THIS FILE.
+/// 
+/// This file will expose all the needed classes, structures, and macros. Any other files are for 
+/// internal implementation only.
+/// </summary>
+/// 
+/// <copyright> Copyright (c) 2019 </copyright>
+/// 
+/// <license>
+/// The zlib/libpng License
+/// 
+/// Copyright (c) 2019 Spencer Hoffa
+/// 
+/// This software is provided 'as-is', without any express or implied warranty.
+/// In no event will the authors be held liable for any damages arising from the
+/// use of this software.
+/// 
+/// Permission is granted to anyone to use this software for any purpose,
+/// including commercial applications, and to alter it and redistribute it
+/// freely, subject to the following restrictions:
+/// 
+/// 		1. The origin of this software must not be misrepresented; you must not
+/// 		claim that you wrote the original software. If you use this software in
+/// 		a product, an acknowledgment in the product documentation would be
+/// 		appreciated but is not required.
+/// 
+/// 		2. Altered source versions must be plainly marked as such, and must not
+/// 		be misrepresented as being the original software.
+/// 
+/// 		3. This notice may not be removed or altered from any source
+/// 		distribution.
+/// 
+/// This liscense can also be found at: http://opensource.org/licenses/Zlib
+/// </license>
 
 #ifndef ___XNELO__TESTING_TESTING_HPP__4_7_2019___
 #define ___XNELO__TESTING_TESTING_HPP__4_7_2019___
 
-#include "TestResult.hpp"
 #include "TestMaster.hpp"
 #include "Test.hpp"
 
 #include <string>
 #include <sstream>
-/*
-namespace XNELO
-{
-	namespace TEST
-	{
-		template<typename T>
-		inline bool AssertEqual(T condition, T expected, std::string description)
-		{
-			//TestResult * result;
-			//result = new TestResult((condition == expected),
-			//						description);
-			TestResult result((condition == expected), description);
 
-			XNELO::TEST::TestMaster::GetInstance()->GetReportGenerator()->PrintTestResult(&result);
-
-			return result.GetPassed();
-		}
-
-		template<typename T>
-		inline bool AssertNotEqual(T expression1, T expression2, std::string description)
-		{
-			//TestResult * result;
-			//result = new TestResult((expression1 != expression2),
-			//						description);
-			TestResult result((expression1 != expression2), description);
-
-			XNELO::TEST::TestMaster::GetInstance()->GetReportGenerator()->PrintTestResult(&result);
-
-			return result.GetPassed();
-		}
-
-		inline bool AssertFalse(bool booleanValue, std::string description)
-		{
-			return AssertEqual<bool>(booleanValue, false, description);
-		}
-
-		inline bool AssertTrue(bool booleanValue, std::string description)
-		{
-			return AssertEqual<bool>(booleanValue, true, description);
-		}
-	} //!TEST
-} //!XNELO
-*/
 //Define the macros for this library
+/// <summary>
+/// 
+/// </summary>
+/// <remarks>
+/// This must only be called from within a <see cref="XNELO_TEST_CASE"/> definition or from an 
+/// instance of a <see cref="TEST"/> class.
+/// </remarks>
 #define XNELO_TEST_ASSERT_EQUAL(condition, expected, description) \
 	if (!AssertEqual(condition, expected, description)) \
 	{\
 		std::ostringstream oss; \
 		oss << __FILE__ << "(Line: " << __LINE__ << ")"; \
-		XNELO::TEST::TestMaster::GetInstance()->GetReportGenerator()->PrintAdditionalString(oss.str()); \
+		if (m_ReportGenerator != NULL) \
+			m_ReportGenerator->PrintLine(oss.str()); \
 	}
 
 #define XNELO_TEST_ASSERT_NOT_EQUAL(condition, expected, description) \
@@ -102,7 +69,8 @@ namespace XNELO
 	{\
 		std::ostringstream oss; \
 		oss << __FILE__ << "(Line: " << __LINE__ << ")"; \
-		XNELO::TEST::TestMaster::GetInstance()->GetReportGenerator()->PrintAdditionalString(oss.str()); \
+		if (m_ReportGenerator != NULL) \
+			m_ReportGenerator->PrintLine(oss.str()); \
 	}
 
 #define XNELO_TEST_ASSERT_TRUE(booleanValue, description) \
@@ -136,5 +104,6 @@ namespace XNELO
 		void Run(); \
 	} XNELO_CREATE_TESTCASE_CLASS_NAME_INSTANCE(testGroupName, testName, Instance); \
 	void XNELO_CREATE_TESTCASE_CLASS_NAME(testGroupName, testName)::Run ()
+
 
 #endif // !___XNELO__TESTING_TESTING_HPP__4_7_2019___

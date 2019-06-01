@@ -35,9 +35,6 @@
 
 #include "XneloUtils/Network/Network.hpp"
 #include "XneloUtils/Testing/Testing.hpp"
-//#include "XneloUtils/Network/XneloSocket.hpp"
-//
-//#include "XneloUtils/Logging/Logging.hpp"
 
 //#include <vld.h>
 
@@ -49,7 +46,7 @@ int main(int argc, char * argv[])
 	}
 
 	XNELO::TEST::TestMaster * tst = XNELO::TEST::TestMaster::GetInstance();
-	tst->RunAllTest();
+	tst->RunAllTests();
 
 	XNELO::NETWORK::ShutdownNetworking();
 

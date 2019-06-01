@@ -37,6 +37,7 @@
 #include "XneloUtils/Testing/TestMaster.hpp"
 #include "XneloUtils/Testing/OutStreamGenerator.hpp"
 #include "XneloUtils/Testing/Test.hpp"
+#include "XneloUtils/Testing/TestGroup.hpp"
 
 #include <stdlib.h>
 
@@ -44,9 +45,9 @@ namespace XNELO
 {
 	namespace TEST	
 	{
+		// Static Methods -------------------------------------------------------------------------
 		TestMaster * instance = NULL;
 
-		// Static Methods -------------------------------------------------------------------------
 		void TestMasterExit()
 		{
 			if (instance != NULL)
@@ -68,9 +69,9 @@ namespace XNELO
 		}
 		// !Static Methods ------------------------------------------------------------------------
 
-		TestMaster::TestMaster():
-		m_AllTests(),
-		m_OutputGenerator(NULL)
+		TestMaster::TestMaster() :
+			m_OutputGenerator(NULL),
+			m_TestGroups()
 		{
 			m_OutputGenerator = new OutStreamGenerator();
 		}
@@ -80,13 +81,19 @@ namespace XNELO
 		/// </summary>
 		TestMaster::~TestMaster()
 		{
-			m_AllTests.clear();
-
 			if (m_OutputGenerator != NULL)
 			{
 				delete m_OutputGenerator;
 				m_OutputGenerator = NULL;
 			}
+
+			for (std::map<std::string, TestGroup*>::iterator it = m_TestGroups.begin();
+			it != m_TestGroups.end();
+				++it)
+			{
+				delete it->second;
+			}
+			m_TestGroups.clear();
 		}
 
 		/// <summary> 
@@ -99,34 +106,69 @@ namespace XNELO
 		{
 			if (newTest != NULL)
 			{
-				m_AllTests.push_back(newTest);
+				// add to appropriate group
+				std::map<std::string, TestGroup*>::iterator it;
+				it = m_TestGroups.find(newTest->GetTestGroupName());
+				if (it != m_TestGroups.end())
+				{
+					(it->second)->AddTest(newTest);
+				}
+				else
+				{
+					TestGroup * newGroup = new TestGroup(newTest->GetTestGroupName());
+					m_TestGroups[newTest->GetTestGroupName()] = newGroup;
+					newGroup->AddTest(newTest);
+				}
 			}
 		}
 
-		// <summary> 
-		/// Run all the tests that have been added.
-		/// </summary>
-		void TestMaster::RunAllTest()
+		void TestMaster::RunAllTests()
 		{
-			int numberPassed = 0;
-			int numberFailed = 0;
+			ResetStats();
 
-			for (std::vector<Test*>::iterator it = m_AllTests.begin(); it != m_AllTests.end(); ++it)
+			for (std::map<std::string, TestGroup*>::iterator it = m_TestGroups.begin();
+					it != m_TestGroups.end();
+					++it)
 			{
-				m_OutputGenerator->StartTestCase(*it);
-				(*it)->Run();
-				if ((*it)->GetNumFailed() > 0)
-					++numberFailed; 
-				else
-					++numberPassed;
-
-				m_OutputGenerator->EndTestCase(*it);
+				RunTestGroup(it->second);
 			}
 
-			m_OutputGenerator->FinalizeTestRun(numberPassed, numberFailed);
+			m_OutputGenerator->FinalizeTestRun(&m_Stats);
+		}
 
-			//this->PrintResults();
+		void TestMaster::RunGroupTests(std::string groupName)
+		{
+			std::map<std::string, TestGroup*>::iterator it;
+			it = m_TestGroups.find(groupName);
+			if (it != m_TestGroups.end())
+			{
+				RunTestGroup(it->second);
+			}
+		}
+
+		void TestMaster::RunTestGroup(TestGroup * grp)
+		{
+			++m_Stats.TestGroupRun;
+
+			m_OutputGenerator->StartTestGroup(grp);
+			grp->SetReportGenerator(m_OutputGenerator);
+			grp->RunAllTests();
+
+			// Update stats
+			if (grp->GetTestCasesFailed() > 0)
+				++m_Stats.TestGroupFailed;
+			else
+				++m_Stats.TestGroupPassed;
+
+			m_Stats.TestCasesRun += grp->GetTestCasesRun();
+			m_Stats.TestCasesFailed += grp->GetTestCasesFailed();
+			m_Stats.TestCasesPassed += grp->GetTestCasesPassed();
+
+			m_Stats.TotalAssertsFailed += grp->GetAssertsFailed();
+			m_Stats.TotalAssertsPassed += grp->GetAssertsPassed();
+			m_Stats.TotalAssertsRun += grp->GetAssertsRun();
+
+			m_OutputGenerator->EndTestGroup(grp);
 		}
 	} // !TEST
 } // !XNELO
-

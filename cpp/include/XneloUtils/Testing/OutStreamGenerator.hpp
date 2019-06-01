@@ -37,6 +37,7 @@
 #include "../Config.hpp"
 
 #include "IReportGenerator.hpp"
+#include "TestResult.hpp"
 
 namespace XNELO
 {
@@ -47,21 +48,64 @@ namespace XNELO
 		private:
 			std::string m_Indent;
 		public:
+			/// <summary>
+			/// Constructor
+			/// </summary>
+			/// <remarks>This will call IReportGenerator with the std::cout stream.</remarks>
 			XNELO_API OutStreamGenerator();
 
+			/// <summary>
+			/// Constructor
+			/// </summary>
+			/// <param name="stream">The stream to print data to.</param>
 			XNELO_API OutStreamGenerator(std::ostream * stream);
 
+			/// <summary>
+			/// Destructor
+			/// </summary>
 			XNELO_API virtual ~OutStreamGenerator();
 
-			XNELO_API virtual void StartTestCase(Test * test);
-
+			/// <summary>
+			/// Print any data for the end of a test.
+			/// </summary>
+			/// <param name="test">The test to use.</param>
 			XNELO_API virtual void EndTestCase(Test * test);
 
-			XNELO_API virtual void FinalizeTestRun(int runNumberSuccess, int runNumberFailures);
+			/// <summary>
+			/// Print any data for the end of a test group.
+			/// </summary>
+			/// <param name="testGroup">The test group to use.</param>
+			XNELO_API virtual void EndTestGroup(TestGroup * testGroup);
 
-			XNELO_API virtual void PrintAdditionalString(std::string to_print);
+			/// <summary>
+			/// Print any data after all the tests are executed.
+			/// </summary>
+			/// <param name="stats">A pointer to the object that holds stats.</param>
+			XNELO_API virtual void FinalizeTestRun(TestingStatistics * stats);
 
+			/// <summary>
+			/// Print a line of text to the file.
+			/// </summary>
+			/// <param name="to_print">The line to print.</param>
+			XNELO_API virtual void PrintLine(std::string to_print);
+
+			/// <summary>
+			/// Print the results from a test.
+			/// </summary>
+			/// <param name="test_result">The test result to print.</param>
 			XNELO_API virtual void PrintTestResult(TestResult * result);
+
+			/// <summary>
+			/// Print any data for the beginning of a test case
+			/// </summary>
+			/// <param name="test">The test to use.</param>
+			XNELO_API virtual void StartTestCase(Test * test);
+
+			/// <summary>
+			/// Print any data for the beginning of a test group.
+			/// </summary>
+			/// <param name="testGroup">The test group to start with.</param>
+			XNELO_API virtual void StartTestGroup(TestGroup * testGroup);
 		};
 	} // !TEST
 } // !XNELO

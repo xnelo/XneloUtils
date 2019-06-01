@@ -45,42 +45,80 @@ namespace XNELO
 		{
 		private:
 			bool m_Passed;
-			std::string m_Name;
+			std::string m_Description;
 		public:
+			/// <summary>
+			/// Constructor
+			/// </summary>
 			XNELO_API TestResult();
-			XNELO_API TestResult(bool passed, std::string name);
+
+			/// <summary>
+			/// Constructor
+			/// </summary>
+			/// <param name="passed">Is the result a success or failure.</param>
+			/// <param name="description">The description of the test.</param>
+			XNELO_API TestResult(bool passed, std::string description);
+
+			/// <summary>
+			/// Copy Constructor
+			/// </summary>
+			/// <param name="other">Instance to copy</param>
 			XNELO_API TestResult(const TestResult & other);
+
+			/// <summary>
+			/// Descrutor
+			/// </summary>
 			XNELO_API ~TestResult();
 
+			/// <summary>
+			/// Assignment operator
+			/// </summary>
+			/// <param name="other">Instance to copy</param>
+			/// <returns>A reference to the newyly created version.</returns>
 			XNELO_API TestResult& operator = (const TestResult & other);
 
-			XNELO_API bool GetPassed();
-			XNELO_API std::string GetName();
+			/// <summary>
+			/// Did is the result passing.
+			/// </summary>
+			/// <returns>
+			/// A boolean. If true then the result was passed, if false the result is failed.
+			/// </returns>
+			XNELO_API bool Passed();
 
-			XNELO_API void SetPassed(bool pass);
-			XNELO_API void SetName(std::string name);
+			/// <summary>
+			/// Get the description of the test this result is for.
+			/// </summary>
+			/// <returns>A string with the test description this result is for.</returns>
+			XNELO_API std::string GetDescription();
 		private:
+			/// <summary>
+			/// Deep copy of the passed in instance to this instance.
+			/// </summary>
+			/// <param name="other">The instance to copy</param>
 			XNELO_API void DeepCopy(const TestResult & other);
 		};
 	} // !TEST
 } // !XNELO
 
 inline XNELO::TEST::TestResult::TestResult(): 
-m_Passed(false), m_Name("")
+m_Passed(false), m_Description("")
 {}
 
-inline XNELO::TEST::TestResult::TestResult(bool passed, std::string name): 
-m_Passed(passed), m_Name(name)
+inline XNELO::TEST::TestResult::TestResult(bool passed, std::string description): 
+m_Passed(passed), m_Description(description)
 {}
 
 inline XNELO::TEST::TestResult::TestResult(const TestResult & other): 
-m_Passed(false), m_Name(NULL)
+m_Passed(false), m_Description(NULL)
 {
 	if (this != &other)
 	{
 		DeepCopy(other);
 	}
 }
+
+inline XNELO::TEST::TestResult::~TestResult()
+{}
 
 inline XNELO::TEST::TestResult& XNELO::TEST::TestResult::operator = (const TestResult & other)
 {
@@ -92,19 +130,20 @@ inline XNELO::TEST::TestResult& XNELO::TEST::TestResult::operator = (const TestR
 	return *this;
 }
 
-inline bool XNELO::TEST::TestResult::GetPassed()
+inline void XNELO::TEST::TestResult::DeepCopy(const TestResult & other)
+{
+	m_Description = other.m_Description;
+	m_Passed = other.m_Passed;
+}
+
+inline bool XNELO::TEST::TestResult::Passed()
 {
 	return m_Passed;
 }
 
-inline std::string XNELO::TEST::TestResult::GetName()
+inline std::string XNELO::TEST::TestResult::GetDescription()
 {
-	return m_Name;
-}
-
-inline void XNELO::TEST::TestResult::SetPassed(bool pass)
-{
-	m_Passed = pass;
+	return m_Description;
 }
 
 #endif //!___XNELO_TEST_TESTRESULT_HPP__4_16_2019___

@@ -36,8 +36,8 @@
 
 #include "../Config.hpp"
 #include "../Core/BasicTypes.hpp"
+#include "IReportGenerator.hpp"
 #include "TestResult.hpp"
-#include "TestMaster.hpp" // Circular Dependency
 
 #include <string>
 #include <vector>
@@ -46,17 +46,18 @@ namespace XNELO
 {
 	namespace TEST
 	{
-		//forward declaration
-		class TestMaster;
-
 		class Test
 		{
+		protected:
+			IReportGenerator * m_ReportGenerator;
 		private:
+			
+			XNELO::CORE::uint32 m_AssertsFailed;
+			XNELO::CORE::uint32 m_AssertsPassed;
+			XNELO::CORE::uint32 m_AssertsRun;
 			std::string m_TestGroup;
 			std::string m_TestName;
 			std::vector<TestResult*> m_TestResults;
-			XNELO::CORE::uint32 m_Failed;
-			XNELO::CORE::uint32 m_Success;
 		public:
 			/// <summary>
 			/// Constructor
@@ -71,12 +72,25 @@ namespace XNELO
 			/// </summary>
 			XNELO_API ~Test();
 
+			/// <summary>
+			/// Check that the two passed in esxpressions are equal.
+			/// </summary>
+			/// <param name="expression1">First value to check.</param>
+			/// <param name="expression2">Second value to Check.</param>
+			/// <param name="description">The description associated with this check.</param>
+			/// <returns>True if the two values are equal. False if they are NOT equal.</returns>
 			template<typename T>
 			XNELO_API bool AssertEqual(T expression1, T expression2, std::string description);
-			XNELO_API bool AssertFalse(bool booleanValue, std::string description);
+
+			/// <summary>
+			/// Check that the two passed in expressions are NOT equal
+			/// </summary>
+			/// <param name="expression1">First value to check.</param>
+			/// <param name="expression2">Second Value to Check.</param>
+			/// <param name="description">The description associated with this check.</param>
+			/// <returns>True if the two value are NOT equal. False if they ARE equal.</returns>
 			template<typename T>
 			XNELO_API bool AssertNotEqual(T expression1, T expression2, std::string description);
-			XNELO_API bool AssertTrue(bool booleanValue, std::string description);
 
 			/// <summary>
 			/// Get the number of tests (executed in the Run function), that failed. This value 
@@ -84,7 +98,7 @@ namespace XNELO
 			/// </summary>
 			/// 
 			/// <returns>An integer with the number of failed tests.</returns>
-			XNELO_API int GetNumFailed();
+			XNELO_API int GetAssertsFailed();
 
 			/// <summary>
 			/// Get the number of tests (exectued in the Run function), that succeeded. This value
@@ -92,7 +106,14 @@ namespace XNELO
 			/// </summary>
 			/// 
 			/// <returns>An integer with the number of succeeded tests.</returns>
-			XNELO_API int GetNumSuccess();
+			XNELO_API int GetAssertsPassed();
+
+			/// <summary>
+			/// Get the number of tests (executed in the Run function). This value will not be 
+			/// valid unless <see cref="Run()"/> has been executed.
+			/// </summary>
+			/// <returns>An unsigned int (32 bit) with the number of run tests.</returns>
+			XNELO_API int GetAssertsRun();
 
 			/// <summary>
 			/// Get the name of the test group this test belongs to.
@@ -112,52 +133,97 @@ namespace XNELO
 			/// execute and failures and successes will be tallied.
 			/// </summary>
 			XNELO_API virtual void Run() = 0;
+
+			/// <summary>
+			/// Set the report generator for this test to use.
+			/// </summary>
+			/// <param name="newReportGen">The report generator to use.</param>
+			XNELO_API void SetReportGenerator(IReportGenerator * newReportGen);
 		};
 	}// !TEST
 }// !XNELO
 
+inline XNELO::TEST::Test::Test(std::string test_group, std::string test_name) :
+	m_ReportGenerator(NULL),
+	m_AssertsFailed(0),
+	m_AssertsPassed(0),
+	m_AssertsRun(0),
+	m_TestGroup(test_group),
+	m_TestName(test_name),
+	m_TestResults()
+{ }
+
+inline XNELO::TEST::Test::~Test()
+{
+	for (std::vector<TestResult*>::iterator it = m_TestResults.begin();
+	it != m_TestResults.end();
+		++it)
+	{
+		delete (*it);
+	}
+
+	m_TestResults.clear();
+
+	m_TestGroup = "";
+	m_TestName = "";
+	m_AssertsPassed = 0;
+	m_AssertsFailed = 0;
+	m_AssertsRun = 0;
+	m_ReportGenerator = NULL;
+}
+
 template<typename T>
 inline bool XNELO::TEST::Test::AssertEqual(T expression1, T expression2, std::string description)
 {
+	++m_AssertsRun;
+
 	TestResult * result = new TestResult((expression1 == expression2), description);
 
-	if (result->GetPassed())
-		++m_Success;
+	if (result->Passed())
+		++m_AssertsPassed;
 	else
-		++m_Failed;
+		++m_AssertsFailed;
 
 	m_TestResults.push_back(result);
 
-	TestMaster::GetInstance()->GetReportGenerator()->PrintTestResult(result);
+	if (m_ReportGenerator != NULL)
+		m_ReportGenerator->PrintTestResult(result);
 
-	return result->GetPassed();
+	return result->Passed();
 }
 
 template<typename T>
 inline bool XNELO::TEST::Test::AssertNotEqual(T expression1, T expression2, std::string description)
 {
+	++m_AssertsRun;
+
 	TestResult * result = new TestResult((expression1 != expression2), description);
 
-	if (result->GetPassed())
-		++m_Success;
+	if (result->Passed())
+		++m_AssertsPassed;
 	else
-		++m_Failed;
+		++m_AssertsFailed;
 
 	m_TestResults.push_back(result);
+	if (m_ReportGenerator != NULL)
+		m_ReportGenerator->PrintTestResult(result);
 
-	TestMaster::GetInstance()->GetReportGenerator()->PrintTestResult(result);
-
-	return result->GetPassed();
+	return result->Passed();
 }
 
-inline int XNELO::TEST::Test::GetNumFailed()
+inline int XNELO::TEST::Test::GetAssertsFailed()
 {
-	return m_Failed;
+	return m_AssertsFailed;
 }
 
-inline int XNELO::TEST::Test::GetNumSuccess()
+inline int XNELO::TEST::Test::GetAssertsPassed()
 {
-	return m_Success;
+	return m_AssertsPassed;
+}
+
+inline int XNELO::TEST::Test::GetAssertsRun()
+{
+	return m_AssertsRun;
 }
 
 inline std::string XNELO::TEST::Test::GetTestGroupName()
@@ -168,6 +234,11 @@ inline std::string XNELO::TEST::Test::GetTestGroupName()
 inline std::string XNELO::TEST::Test::GetTestName()
 {
 	return m_TestName;
+}
+
+inline void XNELO::TEST::Test::SetReportGenerator(IReportGenerator * newReportGen)
+{
+	m_ReportGenerator = newReportGen;
 }
 
 #endif // !___XNELO_TEST_TEST_H__4_13_2019___
