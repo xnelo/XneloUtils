@@ -37,23 +37,49 @@
 #include "ArgDef.hpp"
 
 #include <string>
+#include <unordered_map>
 #include <vector>
 
 namespace XNELO
 {
 	namespace ARGS
 	{
+		/// <summary>
+		/// The value of an argument after it was parsed.
+		/// </summary>
 		struct ArgValue
 		{
+			/// <summary>
+			/// The name of the argument.
+			/// </summary>
 			std::string Name;
+
+			/// <summary>
+			/// The value.
+			/// </summary>
 			std::string Value;
+
+			/// <summary>
+			/// The type that value is supposed to be.
+			/// </summary>
 			ArgValueTypeEnum ValueType;
 		};
 
+		/// <summary>
+		/// A conglomeration of all the argument data that was parsed.
+		/// </summary>
 		struct ArgData
 		{
 		public:
+			/// <summary>
+			/// A vector of all the positional args that were parsed.
+			/// </summary>
 			std::vector<ArgValue> PositionalArgValues;
+
+			/// <summary>
+			/// A map of all the optional arguments.
+			/// </summary>
+			std::unordered_map<std::string, ArgValue> OptionalArgValues;
 		};
 	} // !ARGS
 } // !XNELO

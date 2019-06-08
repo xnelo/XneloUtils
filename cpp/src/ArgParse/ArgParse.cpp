@@ -57,6 +57,11 @@ namespace XNELO
 			return retVal;
 		}
 
+		bool IsArgOptional(std::string valToCheck)
+		{
+			return valToCheck.length() > 0 && valToCheck[0] == '-';
+		}
+
 		bool IsTypeCorrect(ArgValueTypeEnum expectedType, std::string valToCheck)
 		{
 			int valLen = valToCheck.length();
@@ -91,7 +96,7 @@ namespace XNELO
 		ArgParse::ArgParse(std::string progName, std::vector<ArgDef*> cliArgs):
 			Fallible(),
 			m_ArgumentsToParse(),
-			//m_OptionalArgs(),
+			m_OptionalArgs(),
 			m_PositionalArgs(),
 			Results()
 		{
@@ -103,10 +108,10 @@ namespace XNELO
 				{
 					m_PositionalArgs.push_back(static_cast<PositionalArgDef*>(tmpArg));
 				}
-				//else if (tmpArg->GetArgumentType() == ArgDefTypeEnum::OPTIONAL)
-				//{
-				//	m_OptionalArgs.push_back(static_cast<OptionalArgDef*>(tmpArg));
-				//}
+				else if (tmpArg->GetArgumentType() == ArgDefTypeEnum::OPTIONAL)
+				{
+					m_OptionalArgs.push_back(static_cast<OptionalArgDef*>(tmpArg));
+				}
 				else
 				{
 					// Some sort of wierd error here!
@@ -122,12 +127,49 @@ namespace XNELO
 		ArgParse::~ArgParse()
 		{
 			m_ArgumentsToParse.clear();
-			//m_OptionalArgs.clear();
+			m_OptionalArgs.clear();
 			m_PositionalArgs.clear();
 			Results.PositionalArgValues.clear();
 		}
 
-		XNELO_API bool ArgParse::Parse(const int argc, const char * argv[])
+		OptionalArgDef * ArgParse::FindOptionalArg(const std::string arg)
+		{
+			OptionalArgDef * retVal = NULL;
+
+			if (arg.length() == 2)
+			{
+				if (arg[0] == '-' && arg[1] != '-')
+				{
+					for (int i = 0; i < m_OptionalArgs.size(); ++i)
+					{
+						if (m_OptionalArgs[i]->GetShortArgChar() == arg[1])
+						{
+							retVal = m_OptionalArgs[i];
+							break;
+						}
+					}
+				}
+			}
+			else if (arg.length() > 2)
+			{
+				if (arg[0] == '-' && arg[1] == '-')
+				{
+					std::string strippedLongArg = arg.substr(2);
+					for (int i = 0; i < m_OptionalArgs.size(); ++i)
+					{
+						if (m_OptionalArgs[i]->GetLongArg() == strippedLongArg)
+						{
+							retVal = m_OptionalArgs[i];
+							break;
+						}
+					}
+				}
+			}
+
+			return retVal;
+		}
+
+		bool ArgParse::Parse(const int argc, const char * argv[])
 		{
 			Results.PositionalArgValues.clear();
 			// put elements into queue
@@ -142,17 +184,67 @@ namespace XNELO
 
 			while(!m_ArgumentsToParse.empty())
 			{
-				std::string arg = m_ArgumentsToParse.front();
+				std::string argRaw = m_ArgumentsToParse.front();
 				m_ArgumentsToParse.pop_front();
 
-				// if positional
+				if (IsArgOptional(argRaw))
+				{
+					std::string arg = "";
+					std::string val = "";
+
+					// Does this have a value in it.
+					size_t equalIndex = argRaw.find('=');
+					if (equalIndex != std::string::npos && 
+						equalIndex + 1 < argRaw.length())
+					{
+						arg = argRaw.substr(0, equalIndex);
+						val = argRaw.substr(equalIndex + 1);
+					}
+					else
+					{
+						arg = argRaw;
+					}
+
+					OptionalArgDef * argDef = FindOptionalArg(arg);
+					if (argDef == NULL)
+					{
+						std::ostringstream oss;
+						oss << "Optional argument '" << arg << "' is not recognized.";
+						SetError(XNELO::ERRORS::ARG_PARSER_OPTIONAL_ARG_NOT_FOUND, oss.str());
+						return false;
+					}
+					else
+					{
+						if (argDef->IsValueRequired())
+						{
+							if (val.length() <= 0)
+							{
+								val = m_ArgumentsToParse.front();
+								m_ArgumentsToParse.pop_front();
+							}
+
+							if (!ValidateArgument(argDef, val))
+							{
+								// Validate argument will set the error data.
+								return false;
+							}
+						}
+
+						ArgValue newVal;
+						newVal.Name = argDef->GetName();
+						newVal.Value = val;
+						newVal.ValueType = argDef->GetValueType();
+						Results.OptionalArgValues[newVal.Name] = newVal;
+					}
+				}
+				else
 				{
 					if (positionalCount < m_PositionalArgs.size())
 					{
 						PositionalArgDef* tmpPosArg = m_PositionalArgs[positionalCount];
-						if (!ValidateArgument(tmpPosArg, arg))
+						if (!ValidateArgument(tmpPosArg, argRaw))
 						{
-							/// Validate argument will set the error data.
+							// Validate argument will set the error data.
 							return false;
 						}
 						else 
@@ -160,7 +252,7 @@ namespace XNELO
 							// push the argument.
 							ArgValue newVal;
 							newVal.Name = tmpPosArg->GetName();
-							newVal.Value = arg;
+							newVal.Value = argRaw;
 							newVal.ValueType = tmpPosArg->GetValueType();
 							Results.PositionalArgValues.push_back(newVal);
 						}

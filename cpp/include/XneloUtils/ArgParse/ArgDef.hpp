@@ -57,6 +57,7 @@ namespace XNELO
 		enum ArgValueTypeEnum
 		{
 			UNKNOWN_VALUE_TYPE = 0,
+			NONE,
 			BOOLEAN,
 			INTEGER,
 			FLOAT,
@@ -67,6 +68,10 @@ namespace XNELO
 			STRING
 		};
 
+		/// <summary>
+		/// An abstract base class to hold common variables and functions between the argument 
+		/// types.
+		/// </summary>
 		class ArgDef
 		{
 		protected:
@@ -75,25 +80,95 @@ namespace XNELO
 			std::string m_Name;
 			ArgValueTypeEnum m_ValueType;
 		public:
+			/// <summary>
+			/// Constructor
+			/// </summary>
+			/// <param name="name">The name of this argument.</param>
+			/// <param name="valType">The type of value this argument represents.</param>
+			/// <param name="description">A description to be printed in the help.</param>
 			ArgDef(std::string name, ArgValueTypeEnum valType, std::string description);
+			
+			/// <summary>
+			/// Constructor
+			/// </summary>
+			/// <param name="name">The name of this argument.</param>
+			/// <param name="valType">The type of value this argument represents.</param>
+			/// <param name="description">A description to be printed in the help.</param>
+			/// <param name="choices">
+			/// A vector of strings representing the choices for this argument.
+			/// </param>
 			ArgDef(std::string name, ArgValueTypeEnum valType, std::string description, std::vector<std::string> choices);
+
+			/// <summary>
+			/// Destructor
+			/// </summary>
 			virtual ~ArgDef();
 			
+			/// <summary>
+			/// Get the type of argument this is. Optional or Positional.
+			/// </summary>
+			/// <returns>An ArgDefTypeEnum of the type of argument.</returns>
 			virtual ArgDefTypeEnum GetArgumentType() = 0;
+
+			/// <summary>
+			/// Get the choices for this argument.
+			/// </summary>
+			/// <returns>A vector of strings.</returns>
 			std::vector<std::string> GetChoices();
+
+			/// <summary>
+			/// Get the name of this argument.
+			/// </summary>
+			/// <returns>A string with the name.</returns>
 			std::string GetName();
+
+			/// <summary>
+			/// Get the type this value represents.
+			/// </summary>
+			/// <returns>The type enum.</returns>
 			ArgValueTypeEnum GetValueType();
 		};
 
+		/// <summary>
+		/// Define a positional argument.
+		/// </summary>
 		class PositionalArgDef: public ArgDef
 		{
 		public:
+			/// <summary>
+			/// Constructor.
+			/// </summary>
+			/// <param name="name">The name of this argument.</param>
+			/// <param name="valType">The type of value this argument should be.</param>
+			/// <param name="description">The description of the argument.</param>
 			PositionalArgDef(std::string name, ArgValueTypeEnum valType, std::string description);
+
+			/// <summary>
+			/// Constructor
+			/// </summary>
+			/// <param name="name">The name of this argument.</param>
+			/// <param name="valType">The type of value this argument should be.</param>
+			/// <param name="description">The description of the argument.</param>
+			/// <param name="choices">
+			/// A vector of strings with the choices this argument will accept.
+			/// </param>
 			PositionalArgDef(std::string name, ArgValueTypeEnum valType, std::string description, std::vector<std::string> choices);
+
+			/// <summary>
+			/// Destructor
+			/// </summary>
 			virtual ~PositionalArgDef();
+
+			/// <summary>
+			/// Get the type of argument this is. Optional or Positional.
+			/// </summary>
+			/// <returns>An ArgDefTypeEnum of the type of argument.</returns>
 			virtual ArgDefTypeEnum GetArgumentType();
 		};
 
+		/// <summary>
+		/// Defines an optional argument.
+		/// </summary>
 		class OptionalArgDef: public ArgDef
 		{
 		private:
@@ -101,22 +176,80 @@ namespace XNELO
 			char m_ShortArgument;
 			bool m_ValueRequired;
 		public:
-			XNELO_API OptionalArgDef(char shortArg, 
-										std::string longArg, 
-										std::string argName, 
-										ArgValueTypeEnum valType,
-										std::string description,
-										bool valRequired);
-			XNELO_API OptionalArgDef(char shortArg, 
-										std::string longArg, 
-										std::string argName, 
-										ArgValueTypeEnum valType,
-										std::string description,
-										bool valRequired,
-										std::vector<std::string> choices);
-			XNELO_API virtual ~OptionalArgDef();
-			XNELO_API virtual ArgDefTypeEnum GetArgumentType();
-			XNELO_API bool IsValueRequired();
+			/// <summary>
+			/// Constructor.
+			/// </summary>
+			/// <param name="shortArg">
+			/// The character that represents the short argument value for this definition.
+			/// </param>
+			/// <param name="longArg">
+			/// A string representing the long argument value for this definition.
+			/// </param>
+			/// <param name="argName">
+			/// The name of this argument. The value that will be in the map of results.
+			/// </param>
+			/// <param name="valType">The value type that is expected as input.</param>
+			/// <param name="description">The description of the argument.</param>
+			/// <param name="valRequired">Is a value required.</param>
+			OptionalArgDef(char shortArg, 
+							std::string longArg, 
+							std::string argName, 
+							ArgValueTypeEnum valType,
+							std::string description,
+							bool valRequired);
+
+			/// <summary>
+			/// Constructor
+			/// </summary>
+			/// <param name="shortArg">
+			/// The character that represents the short argument value for this definition.
+			/// </param>
+			/// <param name="longArg">
+			/// A string representing the long argument value for this definition.
+			/// </param>
+			/// <param name="argName">
+			/// The name of this argument. The value that will be in the map of results.
+			/// </param>
+			/// <param name="valType">The value type that is expected as input.</param>
+			/// <param name="description">The description of the argument.</param>
+			/// <param name="valRequired">Is a value required.</param>
+			/// <param name="choices">A list of possible valid values for the argument.</param>
+			OptionalArgDef(char shortArg, 
+							std::string longArg, 
+							std::string argName, 
+							ArgValueTypeEnum valType,
+							std::string description,
+							bool valRequired,
+							std::vector<std::string> choices);
+
+			/// <summary>
+			/// Destructor
+			/// </summary>
+			virtual ~OptionalArgDef();
+
+			/// <summary>
+			/// Get the type of argument this is. Optional or Positional.
+			/// </summary>
+			/// <returns>An ArgDefTypeEnum of the type of argument.</returns>
+			virtual ArgDefTypeEnum GetArgumentType();
+
+			/// <summary>
+			/// Get the string for the long for of the arguemtn.
+			/// </summary>
+			/// <returns>A string.</returns>
+			std::string GetLongArg();
+
+			/// <summary>
+			/// Get the character for the short form of the argument.
+			/// </summary>
+			/// <returns>A single charater.</returns>
+			char GetShortArgChar();
+
+			/// <summary>
+			/// Is a value required to follow this argument.
+			/// </summary>
+			/// <returns>True if a value must follow or false if one doesn't.</returns>
+			bool IsValueRequired();
 		};
 	} // !Args
 } // !XNELO
@@ -187,4 +320,55 @@ inline XNELO::ARGS::ArgDefTypeEnum XNELO::ARGS::PositionalArgDef::GetArgumentTyp
 	return ArgDefTypeEnum::POSITIONAL;
 }
 
+//  ================================================================================================
+// | OptionalArgDef Function definition
+//  ================================================================================================
+
+inline XNELO::ARGS::OptionalArgDef::OptionalArgDef(char shortArg,
+													std::string longArg,
+													std::string argName,
+													ArgValueTypeEnum valType,
+													std::string description,
+													bool valRequired):
+	ArgDef(argName, valType, description),
+	m_LongArgument(longArg),
+	m_ShortArgument(shortArg),
+	m_ValueRequired(valRequired)
+{}
+
+inline XNELO::ARGS::OptionalArgDef::OptionalArgDef(char shortArg,
+													std::string longArg,
+													std::string argName,
+													ArgValueTypeEnum valType,
+													std::string description,
+													bool valRequired,
+													std::vector<std::string> choices):
+	ArgDef(argName, valType, description, choices),
+	m_LongArgument(longArg),
+	m_ShortArgument(shortArg),
+	m_ValueRequired(valRequired)
+{}
+
+inline XNELO::ARGS::OptionalArgDef::~OptionalArgDef()
+{}
+
+inline XNELO::ARGS::ArgDefTypeEnum XNELO::ARGS::OptionalArgDef::GetArgumentType()
+{
+	return ArgDefTypeEnum::OPTIONAL;
+}
+
+inline std::string XNELO::ARGS::OptionalArgDef::GetLongArg()
+{
+	return m_LongArgument;
+}
+
+inline char XNELO::ARGS::OptionalArgDef::GetShortArgChar()
+{
+	return m_ShortArgument;
+}
+
+inline bool XNELO::ARGS::OptionalArgDef::IsValueRequired()
+{
+	return m_ValueRequired;
+}
 #endif //!___XNELO_ARGPARSER_ARGDEF_HPP__5_1_2019___

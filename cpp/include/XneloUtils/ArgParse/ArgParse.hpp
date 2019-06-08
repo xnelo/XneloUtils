@@ -47,11 +47,14 @@ namespace XNELO
 {
 	namespace ARGS
 	{
+		/// <summary>
+		/// The actual parser of the arguments.
+		/// </summary>
 		class ArgParse: public XNELO::CORE::Fallible
 		{
 		private:
 			std::deque<std::string> m_ArgumentsToParse;
-			//std::vector<OptionalArgDef*> m_OptionalArgs;
+			std::vector<OptionalArgDef*> m_OptionalArgs;
 			std::vector<PositionalArgDef*> m_PositionalArgs;
 		public:
 			/// <summary> 
@@ -79,6 +82,24 @@ namespace XNELO
 			/// Destructor
 			/// </summary>
 			XNELO_API ~ArgParse();
+
+			/// <summary>
+			/// Find an optional argument based on the passed in string. It can be a short format 
+			/// or the long format.
+			/// </summary>
+			/// <example>
+			/// Short:
+			/// -d
+			/// 
+			/// Long:
+			/// --debug
+			/// </example>
+			/// <param name="arg">The string to find the argument definition for.</param>
+			/// <returns>
+			/// A pointer to the OptionalArgDef object. Null if the passed in string doesn't match
+			/// any.
+			/// </returns>
+			XNELO_API OptionalArgDef * FindOptionalArg(const std::string arg);
 
 			/// <summary> 
 			/// Parse the command line arguments.
