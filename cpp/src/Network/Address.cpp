@@ -31,6 +31,7 @@
 /// This liscense can also be found at: http://opensource.org/licenses/Zlib
 /// </license>
 
+#include "XneloUtils/Core/StringUtils.hpp"
 #include "XneloUtils/Network/Address.hpp"
 #include "XneloUtils/Logging/Logging.hpp"
 #include <stdlib.h>
@@ -43,7 +44,6 @@
 #elif PLATFORM == XNELO_PLATFORM_MAC || PLATFORM == XNELO_PLATFORM_LINUX
 
 #endif
-
 
 #define KB(x) ((size_t) (x) << 10)
 #define MB(x) ((size_t) (x) << 20)
@@ -152,6 +152,28 @@ namespace XNELO
 		int Address::GetD()
 		{
 			return _GetAddressPart(0);
+		}
+
+		bool Address::Parse(std::string address)
+		{
+			std::vector<std::string> tokens = XNELO::CORE::Split(address, '.');
+			if (tokens.size() != 4)
+			{
+				return false;
+			}
+
+			XNELO::CORE::uint8 a, b, c, d;
+			if (!XNELO::CORE::StringToUint8(tokens[0], &a) ||
+				!XNELO::CORE::StringToUint8(tokens[1], &b) ||
+				!XNELO::CORE::StringToUint8(tokens[2], &c) ||
+				!XNELO::CORE::StringToUint8(tokens[3], &d))
+			{
+				XNELO_LOG_WARNING("Error parsing address: '%s'", address);
+				return false;
+			}
+			
+			SetAddress(a, b, c, d);
+			return true;
 		}
 	}// end namespace NETWORK
 } //end namespace XNELO

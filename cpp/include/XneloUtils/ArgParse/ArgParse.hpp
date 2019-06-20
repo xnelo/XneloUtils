@@ -52,10 +52,14 @@ namespace XNELO
 		/// </summary>
 		class ArgParse: public XNELO::CORE::Fallible
 		{
+		public:
+			static const std::string HELP_KEY_STRING;
 		private:
 			std::deque<std::string> m_ArgumentsToParse;
+			OptionalArgDef * m_HelpOption;
 			std::vector<OptionalArgDef*> m_OptionalArgs;
 			std::vector<PositionalArgDef*> m_PositionalArgs;
+			std::string m_ProgramName;
 		public:
 			/// <summary> 
 			/// This public variable will hold all the parsed arguments that this class parsed. 
@@ -76,7 +80,8 @@ namespace XNELO
 			/// </remarks>
 			/// <param name="progName">The name of the program this parser is for.</param>
 			/// <param name="cliArgs">Vector of argument definitions.</param>
-			XNELO_API ArgParse(std::string progName, std::vector<ArgDef*> cliArgs);
+			/// <param name="addHelp">Add a help optional arg to the list. Default = true;</param>
+			XNELO_API ArgParse(std::string progName, std::vector<ArgDef*> cliArgs, bool addHelp=true);
 
 			/// <summary> 
 			/// Destructor
@@ -107,12 +112,22 @@ namespace XNELO
 			/// 
 			/// <param name="argc">Number of arguments.</param>
 			/// <param name="argv">An array with the arguments.</param>
+			/// <param name="ignoreFirstArg">
+			/// Should the first arg be ignored. Usually the first argument is the name of the 
+			/// program, so it should be ignored. Default = true.
+			/// </param>
 			/// <returns>
 			/// True if the parsing was success. False if not. Upon success the parsed argument 
 			/// values will be contained in the 'Results' variable. If a failure occures then the
 			/// error number and message will be contained in GetError and GetMessage;
 			/// </returns>
-			XNELO_API bool Parse(const int argc, const char * argv[]);
+			XNELO_API bool Parse(const int argc, const char * argv[], bool ignoreFirstArg=true);
+
+			/// <summary>
+			/// Create a string to print the help string.
+			/// </summary>
+			/// <returns></returns>
+			XNELO_API std::string PrintHelp();
 
 		private:
 			/// <summary> 

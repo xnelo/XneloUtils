@@ -44,6 +44,9 @@ namespace XNELO
 {
 	namespace ARGS
 	{
+		// Define constants
+		const std::string ArgParse::HELP_KEY_STRING = "HELP";
+
 		//  =======================================================================================
 		// | Parse helper function private to this class
 		//  =======================================================================================
@@ -78,6 +81,7 @@ namespace XNELO
 				case ArgValueTypeEnum::FLOAT:
 				case ArgValueTypeEnum::INTEGER:
 				case ArgValueTypeEnum::LONG:
+				case ArgValueTypeEnum::SHORT:
 					XNELO_LOG_CRITICAL("%i Not Implemented", expectedType);
 					return false;
 				case ArgValueTypeEnum::STRING: // Intentional Fallthrough
@@ -85,30 +89,34 @@ namespace XNELO
 					// These always will be true
 					return true;
 				case ArgValueTypeEnum::UNSIGNED_INTEGER:
+					return XNELO::CORE::IsUnsignedInt(valToCheck);
 				case ArgValueTypeEnum::UNSIGNED_LONG:
-					XNELO_LOG_CRITICAL("%i Not Implemented", expectedType);
-					return false;
+					return XNELO::CORE::IsUnsignedLong(valToCheck);
+				case ArgValueTypeEnum::UNSIGNED_SHORT:
+					return XNELO::CORE::IsUnsignedShort(valToCheck);
 				default:
 					return false;
 			}
 		}
 		// ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-		ArgParse::ArgParse(std::string progName, std::vector<ArgDef*> cliArgs):
+		ArgParse::ArgParse(std::string progName, std::vector<ArgDef*> cliArgs, bool addHelp) :
 			Fallible(),
 			m_ArgumentsToParse(),
+			m_HelpOption(NULL),
 			m_OptionalArgs(),
 			m_PositionalArgs(),
+			m_ProgramName(progName),
 			Results()
 		{
 			SetError(XNELO::ERRORS::OK, "OK");
 			for (int i = 0; i < cliArgs.size(); ++i)
 			{
 				ArgDef* tmpArg = cliArgs[i];
-				if (tmpArg->GetArgumentType() == ArgDefTypeEnum::POSITIONAL)
+				if (tmpArg->GetArgumentType() == ArgDefTypeEnum::POSITIONAL_ARG_TYPE)
 				{
 					m_PositionalArgs.push_back(static_cast<PositionalArgDef*>(tmpArg));
 				}
-				else if (tmpArg->GetArgumentType() == ArgDefTypeEnum::OPTIONAL)
+				else if (tmpArg->GetArgumentType() == ArgDefTypeEnum::OPTIONAL_ARG_TYPE)
 				{
 					m_OptionalArgs.push_back(static_cast<OptionalArgDef*>(tmpArg));
 				}
@@ -122,6 +130,12 @@ namespace XNELO
 					SetError(XNELO::ERRORS::ARG_PARSER_UNKNOW_ARG_DEFINITION_TYPE, oss.str());
 				}
 			}
+
+			if (addHelp)
+			{
+				m_HelpOption = new XNELO::ARGS::OptionalArgDef('h', "help", ArgParse::HELP_KEY_STRING, XNELO::ARGS::ArgValueTypeEnum::NONE, "Displays this help menu.", false);
+				m_OptionalArgs.push_back(m_HelpOption);
+			}
 		}
 
 		ArgParse::~ArgParse()
@@ -130,6 +144,11 @@ namespace XNELO
 			m_OptionalArgs.clear();
 			m_PositionalArgs.clear();
 			Results.PositionalArgValues.clear();
+
+			if (m_HelpOption != NULL)
+			{
+				delete m_HelpOption;
+			}
 		}
 
 		OptionalArgDef * ArgParse::FindOptionalArg(const std::string arg)
@@ -169,12 +188,17 @@ namespace XNELO
 			return retVal;
 		}
 
-		bool ArgParse::Parse(const int argc, const char * argv[])
+		bool ArgParse::Parse(const int argc, const char * argv[], bool ignoreFirstArg)
 		{
 			Results.PositionalArgValues.clear();
 			// put elements into queue
 			m_ArgumentsToParse.clear();
-			for (int i=0; i < argc; ++i)
+
+			int i = 0;
+			if (ignoreFirstArg)
+				i = 1;
+
+			for (; i < argc; ++i)
 			{
 				m_ArgumentsToParse.push_back(std::string(argv[i]));
 			}
@@ -282,6 +306,33 @@ namespace XNELO
 			}
 			else
 				return true;
+		}
+
+		std::string ArgParse::PrintHelp()
+		{
+			std::ostringstream oss;
+
+			oss << m_ProgramName << std::endl;
+			
+			for (int i = 0; i < m_PositionalArgs.size(); ++i)
+			{
+				oss << m_PositionalArgs[i]->GetName() << m_PositionalArgs[i]->GetDescription() << std::endl;
+			}
+
+			for (int i = 0; i < m_OptionalArgs.size(); ++i)
+			{
+				OptionalArgDef * op = m_OptionalArgs[i];
+				oss << "-" << op->GetShortArgChar() << " --" << op->GetLongArg() << " ";
+				
+				if (op->IsValueRequired())
+				{
+					oss << op->GetName() << " ";
+				}
+				
+				oss << op->GetDescription() << std::endl;
+			}
+
+			return oss.str();
 		}
 
 		bool ArgParse::ValidateArgument(ArgDef* arg, std::string argVal)

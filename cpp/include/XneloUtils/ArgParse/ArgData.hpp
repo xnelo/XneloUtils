@@ -72,15 +72,39 @@ namespace XNELO
 		{
 		public:
 			/// <summary>
+			/// A map of all the optional arguments.
+			/// </summary>
+			std::unordered_map<std::string, ArgValue> OptionalArgValues;
+
+			/// <summary>
 			/// A vector of all the positional args that were parsed.
 			/// </summary>
 			std::vector<ArgValue> PositionalArgValues;
 
 			/// <summary>
-			/// A map of all the optional arguments.
+			/// Get the optional argument value data associated with the passed in key. If the key
+			/// has no value associated with it then NULL is returned. 
+			/// 
+			/// DO NOT DELETE THE RETURNED POINTER. This class will handle cleaning up the data.
 			/// </summary>
-			std::unordered_map<std::string, ArgValue> OptionalArgValues;
+			/// <param name="key">The key to look up data for.</param>
+			/// <returns>
+			/// A pointer to the argument data. If no data is associated with the 'key' then this returns NULL.
+			/// </returns>
+			ArgValue * GetOptionalArg(std::string key);
 		};
 	} // !ARGS
 } // !XNELO
+
+inline XNELO::ARGS::ArgValue * XNELO::ARGS::ArgData::GetOptionalArg(std::string key)
+{
+	std::unordered_map<std::string, ArgValue>::iterator it;
+	it = OptionalArgValues.find(key);
+
+	if (it == OptionalArgValues.end())
+		return NULL;
+	else
+		return &(it->second);
+}
+
 #endif // !___XNELO_ARGPARSE_ARGDATA_HPP__5_1_2019___

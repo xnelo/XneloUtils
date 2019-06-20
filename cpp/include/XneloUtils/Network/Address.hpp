@@ -37,6 +37,8 @@
 #include "NetworkCore.hpp"
 #include "../Core/BasicTypes.hpp"
 
+#include <string>
+
 namespace XNELO
 {
 	namespace NETWORK
@@ -130,6 +132,13 @@ namespace XNELO
 			* @return An integer with the first part of the ip address.
 			*/
 			XNELO_API XNELO::CORE::uint16 GetPort() const;
+
+			/// <summary>
+			/// Parse an address from a string.
+			/// </summary>
+			/// <param name="address">The address string to parse.</param>
+			/// <returns>Return true if the parse was successful. False if not.</returns>
+			XNELO_API bool Parse(std::string address);
 
 			/**
 			* Set the IPv4 address for this class.

@@ -47,8 +47,8 @@ namespace XNELO
 		enum ArgDefTypeEnum
 		{
 			UNKNOWN_ARG_TYPE = 0,
-			POSITIONAL,
-			OPTIONAL
+			POSITIONAL_ARG_TYPE,
+			OPTIONAL_ARG_TYPE
 		};
 
 		/// <summary> 
@@ -63,9 +63,11 @@ namespace XNELO
 			FLOAT,
 			DOUBLE,
 			LONG,
+			SHORT,
+			STRING,
 			UNSIGNED_INTEGER,
 			UNSIGNED_LONG,
-			STRING
+			UNSIGNED_SHORT
 		};
 
 		/// <summary>
@@ -115,6 +117,12 @@ namespace XNELO
 			/// </summary>
 			/// <returns>A vector of strings.</returns>
 			std::vector<std::string> GetChoices();
+
+			/// <summary>
+			/// Get the description for this argument's definition.
+			/// </summary>
+			/// <returns>A string with the definition.</returns>
+			std::string GetDescription();
 
 			/// <summary>
 			/// Get the name of this argument.
@@ -286,6 +294,11 @@ inline std::vector<std::string> XNELO::ARGS::ArgDef::GetChoices()
 	return m_Choices;
 }
 
+inline std::string XNELO::ARGS::ArgDef::GetDescription()
+{
+	return m_Description;
+}
+
 inline std::string XNELO::ARGS::ArgDef::GetName()
 {
 	return m_Name;
@@ -317,7 +330,7 @@ inline XNELO::ARGS::PositionalArgDef::~PositionalArgDef()
 
 inline XNELO::ARGS::ArgDefTypeEnum XNELO::ARGS::PositionalArgDef::GetArgumentType()
 {
-	return ArgDefTypeEnum::POSITIONAL;
+	return ArgDefTypeEnum::POSITIONAL_ARG_TYPE;
 }
 
 //  ================================================================================================
@@ -354,7 +367,7 @@ inline XNELO::ARGS::OptionalArgDef::~OptionalArgDef()
 
 inline XNELO::ARGS::ArgDefTypeEnum XNELO::ARGS::OptionalArgDef::GetArgumentType()
 {
-	return ArgDefTypeEnum::OPTIONAL;
+	return ArgDefTypeEnum::OPTIONAL_ARG_TYPE;
 }
 
 inline std::string XNELO::ARGS::OptionalArgDef::GetLongArg()

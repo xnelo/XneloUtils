@@ -36,8 +36,11 @@
 #ifndef ___XNELOUTILS_CORE_STRINGUTILS_HPP__2015___
 #define ___XNELOUTILS_CORE_STRINGUTILS_HPP__2015___
 
-#include <cctype>
+#include "XneloUtils/Core/BasicTypes.hpp"
+
 #include <algorithm>
+#include <cctype>
+#include <vector>
 
 namespace XNELO
 {
@@ -72,22 +75,68 @@ namespace XNELO
 		/// <returns>An integer with the integer.</returns>
 		int char2int(char input, bool * success);
 
-		/**
-		* String Compare Case Insensitive. Compare two c-strings to see if they are the same 
-		* without case sensitivity. A == a in this function. This function checks the entire string 
-		* and only stops when the null terminating('\0') character is reached. This function is the 
-		* same as standard C's strncmp except it is case insensitive.
-		*
-		* thanks to: larsmans
-		* @see http://stackoverflow.com/questions/5820810/case-insensitive-string-comp-in-c
-		*
-		* @param a A c-string of the first string.
-		* @param b A c-string for the second string.
-		*
-		* @returns Returns 0 if the two strings are equivalant. <0 is returned if a and b do not 
-		*			match and a comes before b. >0 is returned if a and b do not match and b comes 
-		*			before a.
-		*/
+		/// <summary>
+		/// Is the input string represent a valid unsigned integer.
+		/// 
+		/// Thanks to: James Kanze
+		/// see https://stackoverflow.com/questions/14893264/how-to-check-conversion-from-c-string-to-unsigned-int
+		/// Access on 6/9/2019
+		/// </summary>
+		/// <param name="input">The string to check.</param>
+		/// <returns>True if it can be converted to an unsigned integer. False if not.</returns>
+		bool IsUnsignedInt(std::string & input);
+
+		/// <summary>
+		/// Is the input string represent a valid unsigned integer.
+		/// 
+		/// Thanks to: James Kanze
+		/// see https://stackoverflow.com/questions/14893264/how-to-check-conversion-from-c-string-to-unsigned-int
+		/// Access on 6/9/2019
+		/// 
+		/// Slight modification by me to handle unsigned long.
+		/// </summary>
+		/// <param name="input">The string to check.</param>
+		/// <returns>True if it can be converted to an unsigned integer. False if not.</returns>
+		bool IsUnsignedLong(std::string & input);
+
+		/// <summary>
+		/// Is the input string representing a valid unsigned short.
+		/// 
+		/// /// Thanks to: James Kanze
+		/// see https://stackoverflow.com/questions/14893264/how-to-check-conversion-from-c-string-to-unsigned-int
+		/// Access on 6/9/2019
+		/// 
+		/// Slight modification by me to handle unsigned long.
+		/// </summary>
+		/// <param name="input">The string to check.</param>
+		/// <returns>True if it can be converted to an unsigned short. False if not.</returns>
+		bool IsUnsignedShort(std::string & input);
+
+		/// <summary>
+		/// Split a string byt a certain character. Return a list of all the found pieces.
+		/// </summary>
+		/// <param name="str">The string to split.</param>
+		/// <param name="delim">The character to separate on.</param>
+		/// <returns>A vector of the split tokens.</returns>
+		std::vector<std::string> Split(std::string& str, char delim);
+
+		/// <summary>
+		/// String Compare Case Insensitive. Compare two c-strings to see if they are the same 
+		/// without case sensitivity. A == a in this function. This function checks the entire string 
+		/// and only stops when the null terminating('\0') character is reached. This function is the 
+		/// same as standard C's strncmp except it is case insensitive.
+		/// </summary>
+		///
+		/// thanks to: larsmans
+		/// see http://stackoverflow.com/questions/5820810/case-insensitive-string-comp-in-c
+		///
+		/// <param name="a">A c-string of the first string.</param>
+		/// <param name="b">A c-string for the second string.</param>
+		///
+		/// <returns>
+		/// Returns 0 if the two strings are equivalant. <0 is returned if a and b do not match and
+		/// a comes before b. >0 is returned if a and b do not match and b comes before a.
+		/// </returns>
 		int strcmpCI(char const *a, char const *b);
 
 		/// <summary> 
@@ -120,31 +169,48 @@ namespace XNELO
 		/// </returns>
 		int strcmp_s(char const *a, int asize, char const *b, int bsize);
 
-		/**
-		* String Compare Case Insensitive. Compare two c-strings to see if they are the same 
-		* without case sensitivity. A == a in this function. Only num number of characters are 
-		* checked. This function is the same as standard C's strncmp except it is case insensitive.
-		*
-		* thanks to: larsmans
-		* @see http://stackoverflow.com/questions/5820810/case-insensitive-string-comp-in-c
-		*
-		* @param a A c-string of the first string.
-		* @param b A c-string for the second string.
-		* @param num The number of characters to check.
-		*
-		* @returns Returns 0 if the parts of the two strings are equivalant. <0 is returned if a 
-		*			and b do not match and a comes before b. >0 is returned if a and b do not match 
-		*			and b comes before a.
-		*/
+		/// <summary>
+		/// Convert a string to an unsigned short value.
+		/// </summary>
+		/// <param name="toConvert">The string to convert.</param>
+		/// <param name="outVal">A pointer to the variable to store the converted value in.</param>
+		/// <returns>True if the conversion is successful. False if not.</returns>
+		bool StringToUint16(std::string toConvert, XNELO::CORE::uint16 * outVal);
+
+		/// <summary>
+		/// Convert a string to an unsigned char value.
+		/// </summary>
+		/// <param name="toConvert">The string to convert</param>
+		/// <param name="outVal">A pointer to the variable to store the converted value in.</param>
+		/// <returns>True if the conversion is successful. False if not.</returns>
+		bool StringToUint8(std::string toConvert, XNELO::CORE::uint8 * outVal);
+
+		/// <summary>
+		/// String Compare Case Insensitive. Compare two c-strings to see if they are the same 
+		/// without case sensitivity. A == a in this function. Only num number of characters are 
+		/// checked. This function is the same as standard C's strncmp except it is case insensitive.
+		///
+		/// thanks to: larsmans
+		/// see http://stackoverflow.com/questions/5820810/case-insensitive-string-comp-in-c
+		/// </summary>
+		///
+		/// <param name="a"> A c-string of the first string.</param>
+		/// <param name="b"> A c-string for the second string.</param>
+		/// <param name="num"> The number of characters to check.</param>
+		///
+		/// <returns>
+		/// Returns 0 if the parts of the two strings are equivalant. <0 is returned if a and b do 
+		/// not match and a comes before b. >0 is returned if a and b do not match and b comes 
+		/// before a.
+		/// </returns>
+		///
 		int strncmpCI(const char *a, const char *b, int num);
 
-		/**
-		* Returns a the string value of the bool value passed in.
-		*
-		* @param boolean The bool value we want the string of.
-		*
-		* @returns Returns a string of the bool.
-		*/
+		/// <summary>
+		/// Returns a the string value of the bool value passed in.
+		/// </summary>
+		/// <param name="boolean">The bool value we want the string of.</param>
+		/// <returns>Returns a string of the bool.</returns>
 		const char * BoolToString(bool boolean);
 	}//end namespace STRING
 }//end namespace BIO
@@ -174,6 +240,65 @@ inline int XNELO::CORE::char2int(char input, bool * success)
 
 	(*success) = false;
 	return 0;
+}
+
+inline bool XNELO::CORE::IsUnsignedInt(std::string & input)
+{
+	char * end;
+	errno = 0;
+	unsigned long v = strtoul(input.c_str(), &end, 10);
+	return errno == 0 &&
+		*end == '\0' &&
+		end != input.c_str() &&
+		v <= UINT_MAX;
+}
+
+inline bool XNELO::CORE::IsUnsignedLong(std::string & input)
+{
+	char * end;
+	errno = 0;
+	unsigned long v = strtoul(input.c_str(), &end, 10);
+	return errno == 0 &&
+		*end == '\0' &&
+		end != input.c_str() &&
+		v <= ULONG_MAX;
+}
+
+inline bool XNELO::CORE::IsUnsignedShort(std::string & input)
+{
+	char * end;
+	errno = 0;
+	unsigned long v = strtoul(input.c_str(), &end, 10);
+	return errno == 0 &&
+		*end == '\0' &&
+		end != input.c_str() &&
+		v <= USHRT_MAX;
+}
+
+inline std::vector<std::string> XNELO::CORE::Split(std::string& str, char delim)
+{
+	std::vector<std::string> retVal;
+	std::string currString = "";
+	for (int i = 0; i < str.length(); ++i)
+	{
+		if (str[i] == delim)
+		{
+			if (currString.length() > 0)
+			{
+				retVal.push_back(currString);
+			}
+			currString = "";
+		}
+		else 
+		{
+			currString.push_back(str[i]);
+		}
+	}
+
+	if (currString.length() > 0)
+		retVal.push_back(currString);
+
+	return retVal;
 }
 
 inline int XNELO::CORE::strcmpCI(char const *a, char const *b)
@@ -225,6 +350,52 @@ inline int XNELO::CORE::strcmp_s(char const *a, int asize, char const *b, int bs
 	}
 
 	return *a - *b;
+}
+
+inline bool XNELO::CORE::StringToUint16(std::string toConvert, XNELO::CORE::uint16 * outVal)
+{
+	bool retVal = false;
+
+	if (outVal != NULL)
+	{
+		char * end;
+		errno = 0;
+		unsigned long v = strtoul(toConvert.c_str(), &end, 10);
+		retVal = errno == 0 &&
+					*end == '\0' &&
+					end != toConvert.c_str() &&
+					v <= USHRT_MAX;
+
+		if (retVal)
+		{
+			*outVal = (unsigned short)v;
+		}
+	}
+
+	return retVal;
+}
+
+inline bool XNELO::CORE::StringToUint8(std::string toConvert, XNELO::CORE::uint8 * outVal)
+{
+	bool retVal = false;
+
+	if (outVal != NULL)
+	{
+		char * end;
+		errno = 0;
+		unsigned long v = strtoul(toConvert.c_str(), &end, 10);
+		retVal = errno == 0 &&
+			*end == '\0' &&
+			end != toConvert.c_str() &&
+			v <= UCHAR_MAX;
+
+		if (retVal)
+		{
+			*outVal = (XNELO::CORE::uint8)v;
+		}
+	}
+
+	return retVal;
 }
 
 inline int XNELO::CORE::strncmpCI(const char *a, const char *b, int num)
