@@ -70,28 +70,28 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Static Lib Debug|Win32'">
     <OutDir>$(ProjectDir)..\..\lib\$(Platform)\$(Configuration)\</OutDir>
-    <IntDir>$(ProjectDir)..\..\obj\$(ProjectName)\$(Platform)\$(Configuration)</IntDir>
+    <IntDir>$(ProjectDir)..\..\obj\$(ProjectName)\$(Platform)\$(Configuration)\</IntDir>
     <SourcePath>$(ProjectDir)../../source;$(ProjectDir)../../source/Testing;$(SourcePath)</SourcePath>
     <IncludePath>$(ProjectDir)..\..\include;$(IncludePath)</IncludePath>
     <TargetExt>.lib</TargetExt>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Static Lib Release|Win32'">
     <OutDir>$(ProjectDir)..\..\lib\$(Platform)\$(Configuration)\</OutDir>
-    <IntDir>$(ProjectDir)..\..\obj\$(ProjectName)\$(Platform)\$(Configuration)</IntDir>
+    <IntDir>$(ProjectDir)..\..\obj\$(ProjectName)\$(Platform)\$(Configuration)\</IntDir>
     <SourcePath>$(ProjectDir)../../source;$(ProjectDir)../../source/Testing;$(SourcePath)</SourcePath>
     <IncludePath>$(ProjectDir)..\..\include;$(IncludePath)</IncludePath>
     <TargetExt>.lib</TargetExt>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Static Lib Debug|x64'">
     <OutDir>$(ProjectDir)..\..\lib\$(Platform)\$(Configuration)\</OutDir>
-    <IntDir>$(ProjectDir)..\..\obj\$(ProjectName)\$(Platform)\$(Configuration)</IntDir>
+    <IntDir>$(ProjectDir)..\..\obj\$(ProjectName)\$(Platform)\$(Configuration)\</IntDir>
     <SourcePath>$(ProjectDir)../../source;$(ProjectDir)../../source/Testing;$(SourcePath)</SourcePath>
     <IncludePath>$(ProjectDir)..\..\include;$(IncludePath)</IncludePath>
     <TargetExt>.lib</TargetExt>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Static Lib Release|x64'">
     <OutDir>$(ProjectDir)..\..\lib\$(Platform)\$(Configuration)\</OutDir>
-    <IntDir>$(ProjectDir)..\..\obj\$(ProjectName)\$(Platform)\$(Configuration)</IntDir>
+    <IntDir>$(ProjectDir)..\..\obj\$(ProjectName)\$(Platform)\$(Configuration)\</IntDir>
     <SourcePath>$(ProjectDir)../../source;$(ProjectDir)../../source/Testing;$(SourcePath)</SourcePath>
     <IncludePath>$(ProjectDir)..\..\include;$(IncludePath)</IncludePath>
     <TargetExt>.lib</TargetExt>

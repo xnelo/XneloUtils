@@ -82,19 +82,44 @@ namespace XNELO
 			std::vector<ArgValue> PositionalArgValues;
 
 			/// <summary>
+			/// Does the passed in key exist in the Optional argument value data. If the key exists
+			/// and contains a value then true is returned. If the key does not exist or does has
+			/// a value of NULL, Then false is returned.
+			/// </summary>
+			/// <remarks>
+			/// Use this function if you just need to know if the key exists. If you will need to 
+			/// access the element then use <see cref="GetOptionalArg"/>
+			/// </remarks>
+			/// <param name="key">The key to look up data for.</param>
+			/// <returns> True if the key exists and contains a value. If the key does NOT exist or
+			/// it has a value of NULL, then false is returned.
+			/// </returns>
+			bool ContainsOptionalArg(std::string key);
+
+			/// <summary>
 			/// Get the optional argument value data associated with the passed in key. If the key
 			/// has no value associated with it then NULL is returned. 
 			/// 
 			/// DO NOT DELETE THE RETURNED POINTER. This class will handle cleaning up the data.
 			/// </summary>
+			/// <remarks>
+			/// Use this function if you will need to access the element. If you just want to know 
+			/// if it is present in the data then use <see cref="ContainsOptionalArg"/>
+			/// </remarks>
 			/// <param name="key">The key to look up data for.</param>
 			/// <returns>
-			/// A pointer to the argument data. If no data is associated with the 'key' then this returns NULL.
+			/// A pointer to the argument data. If no data is associated with the 'key' then this 
+			/// returns NULL.
 			/// </returns>
 			ArgValue * GetOptionalArg(std::string key);
 		};
 	} // !ARGS
 } // !XNELO
+
+inline bool XNELO::ARGS::ArgData::ContainsOptionalArg(std::string key)
+{
+	return OptionalArgValues.count(key) >= 1;
+}
 
 inline XNELO::ARGS::ArgValue * XNELO::ARGS::ArgData::GetOptionalArg(std::string key)
 {
