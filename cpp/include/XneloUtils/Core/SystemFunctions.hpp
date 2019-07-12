@@ -61,12 +61,13 @@ namespace XNELO
 #elif PLATFORM == XNELO_PLATFORM_LINUX || PLATFORM == XNELO_PLATFORM_MAC
 		typedef uint64 LargeInt;
 #endif
-		/**
-		* Sleep the threads execution for certain number of milliseconds. This calls the underlying
-		* system sleep command. Windows: Sleep() Unix: usleep()
-		*
-		* @param milliseconds An integer with the number of seconds to sleep the process.
-		*/
+		/// <summary>
+		/// Sleep the threads execution for certain number of milliseconds. This calls the 
+		/// underlying system sleep command. Windows: Sleep() Unix: usleep()
+		/// </summary>
+		/// <param name="milliseconds">
+		/// An integer with the number of seconds to sleep the process.
+		/// </param>
 		XNELO_API void XneloSleep(XNELO::CORE::uint32 milliseconds);
 
 		XNELO_API std::string GetExtension(std::string filePath);
