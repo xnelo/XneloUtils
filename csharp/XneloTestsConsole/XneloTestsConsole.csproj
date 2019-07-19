@@ -68,9 +68,9 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\XneloUtils\XneloUtils.csproj">
+    <ProjectReference Include="..\XneloUtils\XneloUtils.CS.csproj">
       <Project>{20fc563c-665e-4edc-9ba7-3e3305f88ce7}</Project>
-      <Name>XneloUtils</Name>
+      <Name>XneloUtils.CS</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

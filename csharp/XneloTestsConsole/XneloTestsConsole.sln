@@ -5,7 +5,7 @@ VisualStudioVersion = 14.0.24720.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XneloTestsConsole", "XneloTestsConsole.csproj", "{3288D0AA-F2B6-4838-87D0-410A60AAF7C1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XneloUtils", "..\XneloUtils\XneloUtils.csproj", "{20FC563C-665E-4EDC-9BA7-3E3305F88CE7}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XneloUtils.CS", "..\XneloUtils\XneloUtils.CS.csproj", "{20FC563C-665E-4EDC-9BA7-3E3305F88CE7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
