@@ -72,7 +72,7 @@ namespace XNELO
 
 		const Error NOT_IMPLEMENTED = 999;
 
-		const Error END_CORE_ERROR_VALUE = 1000;
+		const Error END_CORE_ERROR_VALUES = NOT_IMPLEMENTED;
 	}//end namespace ERROR
 }//end namespace XNELO
 

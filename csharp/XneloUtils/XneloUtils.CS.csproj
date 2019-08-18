@@ -79,6 +79,7 @@
     <Compile Include="WPFUtils\Themes\ThemeData.cs" />
     <Compile Include="WPFUtils\Themes\MKThemeSelector.cs" />
     <Compile Include="WPFUtils\Themes\ThemesDictionary.cs" />
+    <Compile Include="WPFUtils\Validators\IPAddressValidator.cs" />
     <Compile Include="WPFUtils\Validators\TextValidator.cs" />
   </ItemGroup>
   <ItemGroup />
