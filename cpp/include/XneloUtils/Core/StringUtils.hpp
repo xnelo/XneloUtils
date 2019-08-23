@@ -39,7 +39,9 @@
 #include "XneloUtils/Core/BasicTypes.hpp"
 
 #include <algorithm>
+#include <climits>
 #include <cctype>
+#include <string>
 #include <vector>
 
 namespace XNELO
