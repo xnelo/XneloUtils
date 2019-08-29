@@ -67,7 +67,7 @@ namespace XNELO
 
 		bool IsTypeCorrect(ArgValueTypeEnum expectedType, std::string valToCheck)
 		{
-			int valLen = valToCheck.length();
+			int valLen = (int)valToCheck.length();
 			switch (expectedType)
 			{
 				case ArgValueTypeEnum::BOOLEAN:

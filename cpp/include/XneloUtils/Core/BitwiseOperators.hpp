@@ -35,10 +35,22 @@
 
 #include "BasicTypes.hpp"
 
+#ifndef ___XNELO_CORE_BITWISEOPERATORS_HPP__8_28_2019___
+#define ___XNELO_CORE_BITWISEOPERATORS_HPP__8_28_2019___
+
 namespace XNELO
 {
 	namespace CORE
 	{
+		/// <summary>
+		/// Clear a specific bit.
+		/// </summary>
+		/// <param name="toClear">The integer to clear a bit from.</param>
+		/// <param name="bitNumber">The bit number to clear.</param>
+		/// <returns>The new value after the bit is cleared.</returns>
+		template<typename Type>
+		Type ClearBit(Type toClear, uint8 bitNumber);
+
 		/**
 		* Check if a bit is set.
 		*
@@ -71,8 +83,23 @@ namespace XNELO
 		*/
 		template<typename Type>
 		bool IsBitSet(Type toCheck, Type bitNumber);
+
+		/// <summary>
+		/// Clear a specific bit.
+		/// </summary>
+		/// <param name="toSet">The integer to set a bit on.</param>
+		/// <param name="bitNumber">The bit number to set.</param>
+		/// <returns>The new value after the bit is set.</returns>
+		template<typename Type>
+		Type SetBit(Type toSet, uint8 bitNumber);
 	}//end namespace CORE
 }//end namespace XNELO
+
+template<typename Type>
+inline Type XNELO::CORE::ClearBit(Type toClear, uint8 bitNumber)
+{
+	return toClear & (~(1 << bitNumber));
+}
 
 template<typename Type>
 inline bool XNELO::CORE::IsBitSetBitNumber(Type toCheck, uint8 bitNumber)
@@ -85,3 +112,11 @@ inline bool XNELO::CORE::IsBitSet(Type toCheck, Type bitNumber)
 {
 	return (toCheck & bitNumber) != 0;
 }
+
+template<typename Type>
+inline Type XNELO::CORE::SetBit(Type toSet, uint8 bitNumber)
+{
+	return toSet | (1 << bitNumber);
+}
+
+#endif // !___XNELO_CORE_BITWISEOPERATORS_HPP__8_28_2019___

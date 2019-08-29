@@ -39,7 +39,7 @@
 #include "XneloUtils/Testing/Testing.hpp"
 #include "XneloUtils/Core/BitwiseOperators.hpp"
 
-XNELO_TEST_CASE(BitwiseOperatorTests, TestEverything)
+XNELO_TEST_CASE(BitwiseOperatorTests, TestIsSet)
 {
 	XNELO::CORE::uint32 bits = 0;
 	bits |= XNELO::CORE::bit3;
@@ -88,4 +88,27 @@ XNELO_TEST_CASE(BitwiseOperatorTests, TestEverything)
 	test->UnitTest(IsBitSet(bits, BIO::CORE::bit18) == false, "Check bit 17 set");
 	test->UnitTest(IsBitSet(bits, BIO::CORE::bit19) == false, "Check bit 18 set");
 	*/
+}
+
+XNELO_TEST_CASE(BitwiseOperatorTests, TestClear)
+{
+	XNELO::CORE::uint32 bits = 0;
+	bits |= XNELO::CORE::bit3;
+	bits |= XNELO::CORE::bit6;
+	bits |= XNELO::CORE::bit4;
+
+	XNELO_TEST_ASSERT_TRUE(XNELO::CORE::ClearBit(bits, 3) == 36, "Clear bit 3 worked");
+	XNELO_TEST_ASSERT_TRUE(XNELO::CORE::ClearBit(bits, 2) == 40, "Clear bit 2 worked");
+	XNELO_TEST_ASSERT_TRUE(XNELO::CORE::ClearBit(bits, 5) == 12, "Clear bit 5 worked");
+	XNELO_TEST_ASSERT_TRUE(XNELO::CORE::ClearBit(bits, 10) == bits, "Clear bit 10 does nothing");
+	XNELO_TEST_ASSERT_TRUE(XNELO::CORE::ClearBit(bits, 0) == bits, "Clear bit 0 does nothing");
+}
+
+XNELO_TEST_CASE(BitwiseOperatorTests, TestSet)
+{
+	XNELO::CORE::uint32 bits = 0;
+
+	XNELO_TEST_ASSERT_EQUAL(XNELO::CORE::SetBit(bits, 3), (XNELO::CORE::uint32)8, "Set bit 3 worked");
+	XNELO_TEST_ASSERT_EQUAL(XNELO::CORE::SetBit(bits, 2), (XNELO::CORE::uint32)4, "Set bit 2 worked");
+	XNELO_TEST_ASSERT_EQUAL(XNELO::CORE::SetBit(bits, 5), (XNELO::CORE::uint32)32, "Set bit 5 worked");
 }
