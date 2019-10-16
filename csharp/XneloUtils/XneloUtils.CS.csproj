@@ -65,6 +65,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Core\NotifyPropertyChangedImpl.cs" />
+    <Compile Include="Core\PidController.cs" />
     <Compile Include="IOC\IAutoDisposable.cs" />
     <Compile Include="IOC\ServiceLocator.cs" />
     <Compile Include="MVVM\IWindow.cs" />
